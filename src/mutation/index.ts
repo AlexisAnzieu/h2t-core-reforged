@@ -1,7 +1,7 @@
-import { mutationType } from "@nexus/schema"
+import { mutationType } from '@nexus/schema'
 
 export const Mutation = mutationType({
-    definition(t) {
-      t.crud.createOneEvent()
-    },
-  })
+  definition (t) {
+    t.crud.createOneEvent()
+  }
+})

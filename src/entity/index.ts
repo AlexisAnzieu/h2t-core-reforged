@@ -1,5 +1,5 @@
-import { Event } from './Event';
+import { Event } from './Event'
 
 export const Entity = {
-    Event
+  Event
 }

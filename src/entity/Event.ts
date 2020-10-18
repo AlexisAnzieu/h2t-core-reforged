@@ -5,7 +5,6 @@ import {
 export const Event = objectType({
   name: 'Event',
   definition (t) {
-    t.model.name()
-    t.model.author()
+    t.model.id()
   }
 })

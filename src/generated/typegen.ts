@@ -19,17 +19,54 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  BoolFilter: { // input type
+    equals?: boolean | null; // Boolean
+    not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
+  }
+  DateTimeFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
   EventCreateInput: { // input type
-    author: string; // String!
-    name: string; // String!
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    date: string; // String!
+    description: string; // String!
+    image: string; // String!
+    locations: string; // String!
+    published?: boolean | null; // Boolean
+    title: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  EventOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    date?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    description?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    image?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    locations?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    published?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    title?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   EventWhereInput: { // input type
     AND?: NexusGenInputs['EventWhereInput'][] | null; // [EventWhereInput!]
-    author?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    date?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    description?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    image?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    locations?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['EventWhereInput'][] | null; // [EventWhereInput!]
     OR?: NexusGenInputs['EventWhereInput'][] | null; // [EventWhereInput!]
+    published?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    title?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
   EventWhereUniqueInput: { // input type
     id?: number | null; // Int
@@ -43,6 +80,20 @@ export interface NexusGenInputs {
     lte?: number | null; // Int
     not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
     notIn?: number[] | null; // [Int!]
+  }
+  NestedBoolFilter: { // input type
+    equals?: boolean | null; // Boolean
+    not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
+  }
+  NestedDateTimeFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
   }
   NestedIntFilter: { // input type
     equals?: number | null; // Int
@@ -83,6 +134,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  SortOrder: "asc" | "desc"
 }
 
 export interface NexusGenScalars {
@@ -91,36 +143,42 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
 }
 
 export interface NexusGenRootTypes {
   Event: { // root type
-    author: string; // String!
-    name: string; // String!
+    id: number; // Int!
   }
   Mutation: {};
   Query: {};
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  BoolFilter: NexusGenInputs['BoolFilter'];
+  DateTimeFilter: NexusGenInputs['DateTimeFilter'];
   EventCreateInput: NexusGenInputs['EventCreateInput'];
+  EventOrderByInput: NexusGenInputs['EventOrderByInput'];
   EventWhereInput: NexusGenInputs['EventWhereInput'];
   EventWhereUniqueInput: NexusGenInputs['EventWhereUniqueInput'];
   IntFilter: NexusGenInputs['IntFilter'];
+  NestedBoolFilter: NexusGenInputs['NestedBoolFilter'];
+  NestedDateTimeFilter: NexusGenInputs['NestedDateTimeFilter'];
   NestedIntFilter: NexusGenInputs['NestedIntFilter'];
   NestedStringFilter: NexusGenInputs['NestedStringFilter'];
   StringFilter: NexusGenInputs['StringFilter'];
+  SortOrder: NexusGenEnums['SortOrder'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
   Boolean: NexusGenScalars['Boolean'];
   ID: NexusGenScalars['ID'];
+  DateTime: NexusGenScalars['DateTime'];
 }
 
 export interface NexusGenFieldTypes {
   Event: { // field return type
-    author: string; // String!
-    name: string; // String!
+    id: number; // Int!
   }
   Mutation: { // field return type
     createOneEvent: NexusGenRootTypes['Event']; // Event!
@@ -146,6 +204,7 @@ export interface NexusGenArgTypes {
       before?: NexusGenInputs['EventWhereUniqueInput'] | null; // EventWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['EventOrderByInput'][] | null; // [EventOrderByInput!]
       where?: NexusGenInputs['EventWhereInput'] | null; // EventWhereInput
     }
   }
@@ -158,13 +217,13 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Event" | "Mutation" | "Query";
 
-export type NexusGenInputNames = "EventCreateInput" | "EventWhereInput" | "EventWhereUniqueInput" | "IntFilter" | "NestedIntFilter" | "NestedStringFilter" | "StringFilter";
+export type NexusGenInputNames = "BoolFilter" | "DateTimeFilter" | "EventCreateInput" | "EventOrderByInput" | "EventWhereInput" | "EventWhereUniqueInput" | "IntFilter" | "NestedBoolFilter" | "NestedDateTimeFilter" | "NestedIntFilter" | "NestedStringFilter" | "StringFilter";
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "SortOrder";
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 

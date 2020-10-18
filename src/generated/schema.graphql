@@ -2,23 +2,64 @@
 ### Do not make changes to this file directly
 
 
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+scalar DateTime
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
 type Event {
-  author: String!
-  name: String!
+  id: Int!
 }
 
 input EventCreateInput {
-  author: String!
-  name: String!
+  createdAt: DateTime
+  date: String!
+  description: String!
+  image: String!
+  locations: String!
+  published: Boolean
+  title: String!
+  updatedAt: DateTime
+}
+
+input EventOrderByInput {
+  createdAt: SortOrder
+  date: SortOrder
+  description: SortOrder
+  id: SortOrder
+  image: SortOrder
+  locations: SortOrder
+  published: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
 }
 
 input EventWhereInput {
   AND: [EventWhereInput!]
-  author: StringFilter
+  createdAt: DateTimeFilter
+  date: StringFilter
+  description: StringFilter
   id: IntFilter
-  name: StringFilter
+  image: StringFilter
+  locations: StringFilter
   NOT: [EventWhereInput!]
   OR: [EventWhereInput!]
+  published: BoolFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input EventWhereUniqueInput {
@@ -38,6 +79,22 @@ input IntFilter {
 
 type Mutation {
   createOneEvent(data: EventCreateInput!): Event!
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
 }
 
 input NestedIntFilter {
@@ -67,7 +124,12 @@ input NestedStringFilter {
 
 type Query {
   event(where: EventWhereUniqueInput!): Event
-  events(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, where: EventWhereInput): [Event!]!
+  events(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, orderBy: [EventOrderByInput!], where: EventWhereInput): [Event!]!
+}
+
+enum SortOrder {
+  asc
+  desc
 }
 
 input StringFilter {

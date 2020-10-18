@@ -6,7 +6,8 @@ export const events = extendType({
   type: 'Query',
   definition (t) {
     t.crud.events({
-      filtering: true
+      filtering: true,
+      ordering: true
     })
   }
 })

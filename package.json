@@ -1,0 +1,38 @@
+{
+  "name": "h2t-core-reforged",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node-dev src/index.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint --fix --ext .ts src/"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nexus/schema": "^0.16.0",
+    "@prisma/client": "^2.9.0",
+    "apollo-server": "^2.18.2",
+    "graphql": "^15.3.0",
+    "husky": "^4.3.0",
+    "nexus-plugin-prisma": "^0.22.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.9.0",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "eslint": "^7.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}

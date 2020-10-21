@@ -148,7 +148,12 @@ export interface NexusGenScalars {
 
 export interface NexusGenRootTypes {
   Event: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    date: string; // String!
+    description: string; // String!
     id: number; // Int!
+    image: string; // String!
+    published: boolean; // Boolean!
   }
   Mutation: {};
   Query: {};
@@ -178,7 +183,12 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Event: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    date: string; // String!
+    description: string; // String!
     id: number; // Int!
+    image: string; // String!
+    published: boolean; // Boolean!
   }
   Mutation: { // field return type
     createOneEvent: NexusGenRootTypes['Event']; // Event!

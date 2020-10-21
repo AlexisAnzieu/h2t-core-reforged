@@ -1,3 +1,4 @@
+import './generated/typegen'
 import { makeSchema } from '@nexus/schema'
 import { ApolloServer } from 'apollo-server'
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
@@ -12,13 +13,13 @@ const prisma = new PrismaClient()
 const schema = makeSchema({
   plugins: [
     nexusSchemaPrisma({
-      experimentalCRUD: true
+      experimentalCRUD: true,
     })
   ],
   types: [Query, Entity, Mutation],
   outputs: {
     typegen: join(__dirname, 'generated', 'typegen.ts'),
-    schema: join(__dirname, 'generated', 'schema.graphql') // 3
+    schema: join(__dirname, 'generated', 'schema.graphql')
   }
 })
 
@@ -27,6 +28,8 @@ const server = new ApolloServer({
   schema
 })
 
-server.listen().then(({ url }) => {
+server.listen({
+  port: 4001,
+}).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`)
 })

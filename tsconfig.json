@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "target": "esnext",
+      "module": "commonjs",
+      "strict": true,
+      "outDir": "build"
+    },
+    "exclude": ["src/generated"]
+  }

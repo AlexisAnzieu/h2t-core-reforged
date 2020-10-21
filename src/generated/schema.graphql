@@ -21,7 +21,12 @@ input DateTimeFilter {
 }
 
 type Event {
+  createdAt: DateTime!
+  date: String!
+  description: String!
   id: Int!
+  image: String!
+  published: Boolean!
 }
 
 input EventCreateInput {

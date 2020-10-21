@@ -13,7 +13,7 @@ const prisma = new PrismaClient()
 const schema = makeSchema({
   plugins: [
     nexusSchemaPrisma({
-      experimentalCRUD: true,
+      experimentalCRUD: true
     })
   ],
   types: [Query, Entity, Mutation],
@@ -29,7 +29,7 @@ const server = new ApolloServer({
 })
 
 server.listen({
-  port: 4001,
+  port: 4001
 }).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`)
 })

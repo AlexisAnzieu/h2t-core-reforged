@@ -2,6 +2,82 @@
 ### Do not make changes to this file directly
 
 
+type Ad {
+  author: User
+  authorId: Int
+  categories: AdCategory!
+  createdAt: DateTime!
+  description: String!
+  id: Int!
+  title: String!
+  updatedAt: DateTime!
+  zipCode: String!
+}
+
+enum AdCategory {
+  AUTRE
+  CUISINE
+  ELECTRONIQUE
+  MAISON
+  SERVICE
+  VETEMENT
+}
+
+input AdCreateManyWithoutAuthorInput {
+  connect: [AdWhereUniqueInput!]
+  create: [AdCreateWithoutAuthorInput!]
+}
+
+input AdCreateWithoutAuthorInput {
+  categories: AdCategory
+  createdAt: DateTime
+  description: String!
+  title: String!
+  updatedAt: DateTime
+  zipCode: String!
+}
+
+input AdListRelationFilter {
+  every: AdWhereInput
+  none: AdWhereInput
+  some: AdWhereInput
+}
+
+input AdOrderByInput {
+  authorId: SortOrder
+  categories: SortOrder
+  createdAt: SortOrder
+  description: SortOrder
+  id: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  zipCode: SortOrder
+}
+
+input AdWhereInput {
+  AND: [AdWhereInput!]
+  author: UserWhereInput
+  authorId: IntNullableFilter
+  categories: EnumAdCategoryFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: IntFilter
+  NOT: [AdWhereInput!]
+  OR: [AdWhereInput!]
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  zipCode: StringFilter
+}
+
+input AdWhereUniqueInput {
+  id: Int
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
 input BoolFilter {
   equals: Boolean
   not: NestedBoolFilter
@@ -20,13 +96,34 @@ input DateTimeFilter {
   notIn: [DateTime!]
 }
 
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input EnumAdCategoryFilter {
+  equals: AdCategory
+  in: [AdCategory!]
+  not: NestedEnumAdCategoryFilter
+  notIn: [AdCategory!]
+}
+
 type Event {
   createdAt: DateTime!
   date: String!
   description: String!
   id: Int!
   image: String!
+  locations: String!
   published: Boolean!
+  title: String!
+  updatedAt: DateTime!
 }
 
 input EventCreateInput {
@@ -82,8 +179,32 @@ input IntFilter {
   notIn: [Int!]
 }
 
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type MessagePayload {
+  message: String!
+}
+
 type Mutation {
+  accountActivation(token: String!): MessagePayload!
   createOneEvent(data: EventCreateInput!): Event!
+  createOnePoem(data: PoemCreateInput!): Poem!
+  login(loginInput: LoginInput!): AuthPayload!
+  signup(signupInput: SignupInput!): MessagePayload!
 }
 
 input NestedBoolFilter {
@@ -102,6 +223,24 @@ input NestedDateTimeFilter {
   notIn: [DateTime!]
 }
 
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input NestedEnumAdCategoryFilter {
+  equals: AdCategory
+  in: [AdCategory!]
+  not: NestedEnumAdCategoryFilter
+  notIn: [AdCategory!]
+}
+
 input NestedIntFilter {
   equals: Int
   gt: Int
@@ -110,6 +249,17 @@ input NestedIntFilter {
   lt: Int
   lte: Int
   not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
   notIn: [Int!]
 }
 
@@ -127,9 +277,88 @@ input NestedStringFilter {
   startsWith: String
 }
 
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+type Poem {
+  author: User
+  authorId: Int
+  createdAt: DateTime!
+  description: String!
+  id: Int!
+  title: String!
+  updatedAt: DateTime!
+}
+
+input PoemCreateInput {
+  author: UserCreateOneWithoutPoemsInput
+  createdAt: DateTime
+  description: String!
+  title: String!
+  updatedAt: DateTime
+}
+
+input PoemListRelationFilter {
+  every: PoemWhereInput
+  none: PoemWhereInput
+  some: PoemWhereInput
+}
+
+input PoemOrderByInput {
+  authorId: SortOrder
+  createdAt: SortOrder
+  description: SortOrder
+  id: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+}
+
+input PoemWhereInput {
+  AND: [PoemWhereInput!]
+  author: UserWhereInput
+  authorId: IntNullableFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: IntFilter
+  NOT: [PoemWhereInput!]
+  OR: [PoemWhereInput!]
+  title: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input PoemWhereUniqueInput {
+  id: Int
+}
+
 type Query {
+  ad(where: AdWhereUniqueInput!): Ad
+  ads(after: AdWhereUniqueInput, before: AdWhereUniqueInput, first: Int, last: Int, orderBy: [AdOrderByInput!], where: AdWhereInput): [Ad!]!
   event(where: EventWhereUniqueInput!): Event
   events(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, orderBy: [EventOrderByInput!], where: EventWhereInput): [Event!]!
+  poem(where: PoemWhereUniqueInput!): Poem
+  poems(after: PoemWhereUniqueInput, before: PoemWhereUniqueInput, first: Int, last: Int, orderBy: [PoemOrderByInput!], where: PoemWhereInput): [Poem!]!
+  user(where: UserWhereUniqueInput!): User
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): [User!]!
+}
+
+input SignupInput {
+  birthday: String
+  email: String!
+  facebookUrl: String
+  firstName: String!
+  lastName: String
+  password: String!
 }
 
 enum SortOrder {
@@ -149,4 +378,91 @@ input StringFilter {
   not: NestedStringFilter
   notIn: [String!]
   startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+type User {
+  ads(after: AdWhereUniqueInput, before: AdWhereUniqueInput, first: Int, last: Int): [Ad!]!
+  birthday: DateTime
+  createdAt: DateTime!
+  email: String!
+  facebookUrl: String
+  firstName: String!
+  id: Int!
+  lastName: String!
+  loggedCount: Int!
+  password: String!
+  picture: String
+  poems(after: PoemWhereUniqueInput, before: PoemWhereUniqueInput, first: Int, last: Int): [Poem!]!
+  updatedAt: DateTime!
+}
+
+input UserCreateOneWithoutPoemsInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutPoemsInput
+}
+
+input UserCreateWithoutPoemsInput {
+  ads: AdCreateManyWithoutAuthorInput
+  birthday: DateTime
+  createdAt: DateTime
+  email: String!
+  facebookUrl: String
+  firstName: String!
+  lastName: String!
+  loggedCount: Int
+  password: String!
+  picture: String
+  updatedAt: DateTime
+}
+
+input UserOrderByInput {
+  birthday: SortOrder
+  createdAt: SortOrder
+  email: SortOrder
+  facebookUrl: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  lastName: SortOrder
+  loggedCount: SortOrder
+  password: SortOrder
+  picture: SortOrder
+  updatedAt: SortOrder
+}
+
+input UserWhereInput {
+  ads: AdListRelationFilter
+  AND: [UserWhereInput!]
+  birthday: DateTimeNullableFilter
+  createdAt: DateTimeFilter
+  email: StringFilter
+  facebookUrl: StringNullableFilter
+  firstName: StringFilter
+  id: IntFilter
+  lastName: StringFilter
+  loggedCount: IntFilter
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  password: StringFilter
+  picture: StringNullableFilter
+  poems: PoemListRelationFilter
+  updatedAt: DateTimeFilter
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: Int
 }

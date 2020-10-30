@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+    h2t-core-reforged:
+        container_name: h2t-core-reforged-container
+        build:
+            context: .
+        ports:
+        - "4000:4000"
+        volumes:
+        - /code/node_modules
+        - .:/code
+        command: npm start

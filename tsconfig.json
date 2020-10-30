@@ -4,7 +4,10 @@
       "target": "esnext",
       "module": "commonjs",
       "strict": true,
-      "outDir": "build"
+      "outDir": "build",
+      "forceConsistentCasingInFileNames": true,
+      "importHelpers": true,
+      "removeComments": true  
     },
     "exclude": ["src/generated"]
   }

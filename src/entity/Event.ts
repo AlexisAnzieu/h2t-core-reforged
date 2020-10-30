@@ -11,5 +11,8 @@ export const Event = objectType({
     t.model.description()
     t.model.image()
     t.model.published()
+    t.model.updatedAt()
+    t.model.title()
+    t.model.locations()
   }
 })

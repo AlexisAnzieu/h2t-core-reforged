@@ -19,6 +19,50 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AdCreateManyWithoutAuthorInput: { // input type
+    connect?: NexusGenInputs['AdWhereUniqueInput'][] | null; // [AdWhereUniqueInput!]
+    create?: NexusGenInputs['AdCreateWithoutAuthorInput'][] | null; // [AdCreateWithoutAuthorInput!]
+  }
+  AdCreateWithoutAuthorInput: { // input type
+    categories?: NexusGenEnums['AdCategory'] | null; // AdCategory
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description: string; // String!
+    title: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    zipCode: string; // String!
+  }
+  AdListRelationFilter: { // input type
+    every?: NexusGenInputs['AdWhereInput'] | null; // AdWhereInput
+    none?: NexusGenInputs['AdWhereInput'] | null; // AdWhereInput
+    some?: NexusGenInputs['AdWhereInput'] | null; // AdWhereInput
+  }
+  AdOrderByInput: { // input type
+    authorId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    categories?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    description?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    title?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    zipCode?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  AdWhereInput: { // input type
+    AND?: NexusGenInputs['AdWhereInput'][] | null; // [AdWhereInput!]
+    author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    authorId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
+    categories?: NexusGenInputs['EnumAdCategoryFilter'] | null; // EnumAdCategoryFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    description?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['AdWhereInput'][] | null; // [AdWhereInput!]
+    OR?: NexusGenInputs['AdWhereInput'][] | null; // [AdWhereInput!]
+    title?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    zipCode?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  AdWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
   BoolFilter: { // input type
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
@@ -32,6 +76,22 @@ export interface NexusGenInputs {
     lte?: NexusGenScalars['DateTime'] | null; // DateTime
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
+  DateTimeNullableFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeNullableFilter'] | null; // NestedDateTimeNullableFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
+  EnumAdCategoryFilter: { // input type
+    equals?: NexusGenEnums['AdCategory'] | null; // AdCategory
+    in?: NexusGenEnums['AdCategory'][] | null; // [AdCategory!]
+    not?: NexusGenInputs['NestedEnumAdCategoryFilter'] | null; // NestedEnumAdCategoryFilter
+    notIn?: NexusGenEnums['AdCategory'][] | null; // [AdCategory!]
   }
   EventCreateInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -81,6 +141,20 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
     notIn?: number[] | null; // [Int!]
   }
+  IntNullableFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntNullableFilter'] | null; // NestedIntNullableFilter
+    notIn?: number[] | null; // [Int!]
+  }
+  LoginInput: { // input type
+    email: string; // String!
+    password: string; // String!
+  }
   NestedBoolFilter: { // input type
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
@@ -95,6 +169,22 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
   }
+  NestedDateTimeNullableFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeNullableFilter'] | null; // NestedDateTimeNullableFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
+  NestedEnumAdCategoryFilter: { // input type
+    equals?: NexusGenEnums['AdCategory'] | null; // AdCategory
+    in?: NexusGenEnums['AdCategory'][] | null; // [AdCategory!]
+    not?: NexusGenInputs['NestedEnumAdCategoryFilter'] | null; // NestedEnumAdCategoryFilter
+    notIn?: NexusGenEnums['AdCategory'][] | null; // [AdCategory!]
+  }
   NestedIntFilter: { // input type
     equals?: number | null; // Int
     gt?: number | null; // Int
@@ -103,6 +193,16 @@ export interface NexusGenInputs {
     lt?: number | null; // Int
     lte?: number | null; // Int
     not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    notIn?: number[] | null; // [Int!]
+  }
+  NestedIntNullableFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntNullableFilter'] | null; // NestedIntNullableFilter
     notIn?: number[] | null; // [Int!]
   }
   NestedStringFilter: { // input type
@@ -118,6 +218,62 @@ export interface NexusGenInputs {
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
+  NestedStringNullableFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: NexusGenInputs['NestedStringNullableFilter'] | null; // NestedStringNullableFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
+  PoemCreateInput: { // input type
+    author?: NexusGenInputs['UserCreateOneWithoutPoemsInput'] | null; // UserCreateOneWithoutPoemsInput
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description: string; // String!
+    title: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  PoemListRelationFilter: { // input type
+    every?: NexusGenInputs['PoemWhereInput'] | null; // PoemWhereInput
+    none?: NexusGenInputs['PoemWhereInput'] | null; // PoemWhereInput
+    some?: NexusGenInputs['PoemWhereInput'] | null; // PoemWhereInput
+  }
+  PoemOrderByInput: { // input type
+    authorId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    description?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    title?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  PoemWhereInput: { // input type
+    AND?: NexusGenInputs['PoemWhereInput'][] | null; // [PoemWhereInput!]
+    author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    authorId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    description?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['PoemWhereInput'][] | null; // [PoemWhereInput!]
+    OR?: NexusGenInputs['PoemWhereInput'][] | null; // [PoemWhereInput!]
+    title?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  PoemWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
+  SignupInput: { // input type
+    birthday?: string | null; // String
+    email: string; // String!
+    facebookUrl?: string | null; // String
+    firstName: string; // String!
+    lastName?: string | null; // String
+    password: string; // String!
+  }
   StringFilter: { // input type
     contains?: string | null; // String
     endsWith?: string | null; // String
@@ -131,9 +287,75 @@ export interface NexusGenInputs {
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
+  StringNullableFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: NexusGenInputs['NestedStringNullableFilter'] | null; // NestedStringNullableFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
+  UserCreateOneWithoutPoemsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutPoemsInput'] | null; // UserCreateWithoutPoemsInput
+  }
+  UserCreateWithoutPoemsInput: { // input type
+    ads?: NexusGenInputs['AdCreateManyWithoutAuthorInput'] | null; // AdCreateManyWithoutAuthorInput
+    birthday?: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
+    facebookUrl?: string | null; // String
+    firstName: string; // String!
+    lastName: string; // String!
+    loggedCount?: number | null; // Int
+    password: string; // String!
+    picture?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UserOrderByInput: { // input type
+    birthday?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    email?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    facebookUrl?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    firstName?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    lastName?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    loggedCount?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    password?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    picture?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  UserWhereInput: { // input type
+    ads?: NexusGenInputs['AdListRelationFilter'] | null; // AdListRelationFilter
+    AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    birthday?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    email?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    facebookUrl?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    firstName?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    lastName?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    loggedCount?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    password?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    picture?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    poems?: NexusGenInputs['PoemListRelationFilter'] | null; // PoemListRelationFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  UserWhereUniqueInput: { // input type
+    email?: string | null; // String
+    id?: number | null; // Int
+  }
 }
 
 export interface NexusGenEnums {
+  AdCategory: "AUTRE" | "CUISINE" | "ELECTRONIQUE" | "MAISON" | "SERVICE" | "VETEMENT"
   SortOrder: "asc" | "desc"
 }
 
@@ -147,31 +369,99 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenRootTypes {
+  Ad: { // root type
+    authorId?: number | null; // Int
+    categories: NexusGenEnums['AdCategory']; // AdCategory!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string; // String!
+    id: number; // Int!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    zipCode: string; // String!
+  }
+  AuthPayload: { // root type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
   Event: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     date: string; // String!
     description: string; // String!
     id: number; // Int!
     image: string; // String!
+    locations: string; // String!
     published: boolean; // Boolean!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  MessagePayload: { // root type
+    message: string; // String!
   }
   Mutation: {};
+  Poem: { // root type
+    authorId?: number | null; // Int
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string; // String!
+    id: number; // Int!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Query: {};
+  User: { // root type
+    birthday?: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    email: string; // String!
+    facebookUrl?: string | null; // String
+    firstName: string; // String!
+    id: number; // Int!
+    lastName: string; // String!
+    loggedCount: number; // Int!
+    password: string; // String!
+    picture?: string | null; // String
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  AdCreateManyWithoutAuthorInput: NexusGenInputs['AdCreateManyWithoutAuthorInput'];
+  AdCreateWithoutAuthorInput: NexusGenInputs['AdCreateWithoutAuthorInput'];
+  AdListRelationFilter: NexusGenInputs['AdListRelationFilter'];
+  AdOrderByInput: NexusGenInputs['AdOrderByInput'];
+  AdWhereInput: NexusGenInputs['AdWhereInput'];
+  AdWhereUniqueInput: NexusGenInputs['AdWhereUniqueInput'];
   BoolFilter: NexusGenInputs['BoolFilter'];
   DateTimeFilter: NexusGenInputs['DateTimeFilter'];
+  DateTimeNullableFilter: NexusGenInputs['DateTimeNullableFilter'];
+  EnumAdCategoryFilter: NexusGenInputs['EnumAdCategoryFilter'];
   EventCreateInput: NexusGenInputs['EventCreateInput'];
   EventOrderByInput: NexusGenInputs['EventOrderByInput'];
   EventWhereInput: NexusGenInputs['EventWhereInput'];
   EventWhereUniqueInput: NexusGenInputs['EventWhereUniqueInput'];
   IntFilter: NexusGenInputs['IntFilter'];
+  IntNullableFilter: NexusGenInputs['IntNullableFilter'];
+  LoginInput: NexusGenInputs['LoginInput'];
   NestedBoolFilter: NexusGenInputs['NestedBoolFilter'];
   NestedDateTimeFilter: NexusGenInputs['NestedDateTimeFilter'];
+  NestedDateTimeNullableFilter: NexusGenInputs['NestedDateTimeNullableFilter'];
+  NestedEnumAdCategoryFilter: NexusGenInputs['NestedEnumAdCategoryFilter'];
   NestedIntFilter: NexusGenInputs['NestedIntFilter'];
+  NestedIntNullableFilter: NexusGenInputs['NestedIntNullableFilter'];
   NestedStringFilter: NexusGenInputs['NestedStringFilter'];
+  NestedStringNullableFilter: NexusGenInputs['NestedStringNullableFilter'];
+  PoemCreateInput: NexusGenInputs['PoemCreateInput'];
+  PoemListRelationFilter: NexusGenInputs['PoemListRelationFilter'];
+  PoemOrderByInput: NexusGenInputs['PoemOrderByInput'];
+  PoemWhereInput: NexusGenInputs['PoemWhereInput'];
+  PoemWhereUniqueInput: NexusGenInputs['PoemWhereUniqueInput'];
+  SignupInput: NexusGenInputs['SignupInput'];
   StringFilter: NexusGenInputs['StringFilter'];
+  StringNullableFilter: NexusGenInputs['StringNullableFilter'];
+  UserCreateOneWithoutPoemsInput: NexusGenInputs['UserCreateOneWithoutPoemsInput'];
+  UserCreateWithoutPoemsInput: NexusGenInputs['UserCreateWithoutPoemsInput'];
+  UserOrderByInput: NexusGenInputs['UserOrderByInput'];
+  UserWhereInput: NexusGenInputs['UserWhereInput'];
+  UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
+  AdCategory: NexusGenEnums['AdCategory'];
   SortOrder: NexusGenEnums['SortOrder'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
@@ -182,30 +472,108 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Ad: { // field return type
+    author: NexusGenRootTypes['User'] | null; // User
+    authorId: number | null; // Int
+    categories: NexusGenEnums['AdCategory']; // AdCategory!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string; // String!
+    id: number; // Int!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    zipCode: string; // String!
+  }
+  AuthPayload: { // field return type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
   Event: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     date: string; // String!
     description: string; // String!
     id: number; // Int!
     image: string; // String!
+    locations: string; // String!
     published: boolean; // Boolean!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  MessagePayload: { // field return type
+    message: string; // String!
   }
   Mutation: { // field return type
+    accountActivation: NexusGenRootTypes['MessagePayload']; // MessagePayload!
     createOneEvent: NexusGenRootTypes['Event']; // Event!
+    createOnePoem: NexusGenRootTypes['Poem']; // Poem!
+    login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    signup: NexusGenRootTypes['MessagePayload']; // MessagePayload!
+  }
+  Poem: { // field return type
+    author: NexusGenRootTypes['User'] | null; // User
+    authorId: number | null; // Int
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string; // String!
+    id: number; // Int!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Query: { // field return type
+    ad: NexusGenRootTypes['Ad'] | null; // Ad
+    ads: NexusGenRootTypes['Ad'][]; // [Ad!]!
     event: NexusGenRootTypes['Event'] | null; // Event
     events: NexusGenRootTypes['Event'][]; // [Event!]!
+    poem: NexusGenRootTypes['Poem'] | null; // Poem
+    poems: NexusGenRootTypes['Poem'][]; // [Poem!]!
+    user: NexusGenRootTypes['User'] | null; // User
+    users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  User: { // field return type
+    ads: NexusGenRootTypes['Ad'][]; // [Ad!]!
+    birthday: NexusGenScalars['DateTime'] | null; // DateTime
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    email: string; // String!
+    facebookUrl: string | null; // String
+    firstName: string; // String!
+    id: number; // Int!
+    lastName: string; // String!
+    loggedCount: number; // Int!
+    password: string; // String!
+    picture: string | null; // String
+    poems: NexusGenRootTypes['Poem'][]; // [Poem!]!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
+    accountActivation: { // args
+      token: string; // String!
+    }
     createOneEvent: { // args
       data: NexusGenInputs['EventCreateInput']; // EventCreateInput!
     }
+    createOnePoem: { // args
+      data: NexusGenInputs['PoemCreateInput']; // PoemCreateInput!
+    }
+    login: { // args
+      loginInput: NexusGenInputs['LoginInput']; // LoginInput!
+    }
+    signup: { // args
+      signupInput: NexusGenInputs['SignupInput']; // SignupInput!
+    }
   }
   Query: {
+    ad: { // args
+      where: NexusGenInputs['AdWhereUniqueInput']; // AdWhereUniqueInput!
+    }
+    ads: { // args
+      after?: NexusGenInputs['AdWhereUniqueInput'] | null; // AdWhereUniqueInput
+      before?: NexusGenInputs['AdWhereUniqueInput'] | null; // AdWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['AdOrderByInput'][] | null; // [AdOrderByInput!]
+      where?: NexusGenInputs['AdWhereInput'] | null; // AdWhereInput
+    }
     event: { // args
       where: NexusGenInputs['EventWhereUniqueInput']; // EventWhereUniqueInput!
     }
@@ -217,6 +585,42 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenInputs['EventOrderByInput'][] | null; // [EventOrderByInput!]
       where?: NexusGenInputs['EventWhereInput'] | null; // EventWhereInput
     }
+    poem: { // args
+      where: NexusGenInputs['PoemWhereUniqueInput']; // PoemWhereUniqueInput!
+    }
+    poems: { // args
+      after?: NexusGenInputs['PoemWhereUniqueInput'] | null; // PoemWhereUniqueInput
+      before?: NexusGenInputs['PoemWhereUniqueInput'] | null; // PoemWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['PoemOrderByInput'][] | null; // [PoemOrderByInput!]
+      where?: NexusGenInputs['PoemWhereInput'] | null; // PoemWhereInput
+    }
+    user: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    users: { // args
+      after?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+      before?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['UserOrderByInput'][] | null; // [UserOrderByInput!]
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+  }
+  User: {
+    ads: { // args
+      after?: NexusGenInputs['AdWhereUniqueInput'] | null; // AdWhereUniqueInput
+      before?: NexusGenInputs['AdWhereUniqueInput'] | null; // AdWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    poems: { // args
+      after?: NexusGenInputs['PoemWhereUniqueInput'] | null; // PoemWhereUniqueInput
+      before?: NexusGenInputs['PoemWhereUniqueInput'] | null; // PoemWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
   }
 }
 
@@ -225,11 +629,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Event" | "Mutation" | "Query";
+export type NexusGenObjectNames = "Ad" | "AuthPayload" | "Event" | "MessagePayload" | "Mutation" | "Poem" | "Query" | "User";
 
-export type NexusGenInputNames = "BoolFilter" | "DateTimeFilter" | "EventCreateInput" | "EventOrderByInput" | "EventWhereInput" | "EventWhereUniqueInput" | "IntFilter" | "NestedBoolFilter" | "NestedDateTimeFilter" | "NestedIntFilter" | "NestedStringFilter" | "StringFilter";
+export type NexusGenInputNames = "AdCreateManyWithoutAuthorInput" | "AdCreateWithoutAuthorInput" | "AdListRelationFilter" | "AdOrderByInput" | "AdWhereInput" | "AdWhereUniqueInput" | "BoolFilter" | "DateTimeFilter" | "DateTimeNullableFilter" | "EnumAdCategoryFilter" | "EventCreateInput" | "EventOrderByInput" | "EventWhereInput" | "EventWhereUniqueInput" | "IntFilter" | "IntNullableFilter" | "LoginInput" | "NestedBoolFilter" | "NestedDateTimeFilter" | "NestedDateTimeNullableFilter" | "NestedEnumAdCategoryFilter" | "NestedIntFilter" | "NestedIntNullableFilter" | "NestedStringFilter" | "NestedStringNullableFilter" | "PoemCreateInput" | "PoemListRelationFilter" | "PoemOrderByInput" | "PoemWhereInput" | "PoemWhereUniqueInput" | "SignupInput" | "StringFilter" | "StringNullableFilter" | "UserCreateOneWithoutPoemsInput" | "UserCreateWithoutPoemsInput" | "UserOrderByInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = "SortOrder";
+export type NexusGenEnumNames = "AdCategory" | "SortOrder";
 
 export type NexusGenInterfaceNames = never;
 

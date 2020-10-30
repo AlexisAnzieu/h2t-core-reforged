@@ -1,13 +1,14 @@
 import {
-  queryType
+  extendType
 } from '@nexus/schema'
 
-export default queryType({
+export default extendType({
+  type: 'Query',
   definition (t) {
-    t.crud.event()
-    t.crud.events({
+    t.crud.poems({
       filtering: true,
       ordering: true
     })
+    t.crud.poem()
   }
 })

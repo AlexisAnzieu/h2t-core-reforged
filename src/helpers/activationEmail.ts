@@ -1,11 +1,13 @@
 import { createTransport } from 'nodemailer'
+import dotenv from 'dotenv'
 type Token = string;
+dotenv.config()
 
 const transport = createTransport({
   service: 'gmail',
   auth: {
-    user: 'soundmotionlabel@gmail.com',
-    pass: '(versailles78)'
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASSWORD
   }
 })
 
@@ -18,7 +20,7 @@ export const activationEmail = (token: Token) => {
       Please verify your email by clicking the following link:
       <br/>
       On the following page:
-      <a target="_blank" href="http://localhost:4000/auth/activate/${token}">http://localhost:4000/auth/activate/${token}</a>
+      <a target="_blank" href="http://localhost:3000/validation?token=${token}">Ici</a>
       <br/><br/>
       Have a pleasant day.`
   return html

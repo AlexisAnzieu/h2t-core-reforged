@@ -29,7 +29,6 @@ const server = new ApolloServer({
   context: async ({ req }) => {
     const token = req.headers.authorization
     const user = token ? await getUser(token) : null
-    console.log(user)
     return { prisma, user }
   },
   schema
@@ -44,10 +43,5 @@ server.listen({
 const getUser = async (token: string) => {
   const cleanedToken = token.replace('Bearer ', '')
   const verifiedToken = verify(cleanedToken, PRIVATE_KEY)
-  console.log(verifiedToken)
   return verifiedToken
-
-  // await prisma.user.findOne({
-  //   where
-  // })
 }

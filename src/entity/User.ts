@@ -57,5 +57,6 @@ export const MessagePayload = objectType({
   name: 'MessagePayload',
   definition (t) {
     t.string('message', { nullable: false })
+    t.int('code', { nullable: true })
   }
 })

@@ -22,7 +22,10 @@ export const signup = extendType({
             }
           })
           if (isUserExist) {
-            throw new Error('Email is already associated with another user')
+            return {
+              message: 'Cette adresse mail a déjà été enregistrée sur un autre compte',
+              code: 409
+            }
           }
           const hashPassword = await generateHashPassword(password)
           const token = sign(
@@ -47,7 +50,8 @@ export const signup = extendType({
             html
           )
           return {
-            message: `Afin de nous assurer que ${email} est bien ton email, va dans ta boite mail et suis les instructions`
+            message: `Afin de nous assurer que ${email} est bien ton email, va dans ta boite mail et suis les instructions`,
+            code: 200
           }
         } catch (error) {
           throw new Error(error.message)
@@ -67,6 +71,7 @@ export const accountActivation = extendType({
         token: stringArg({ required: true })
       },
       resolve: async (_, { token }, ctx) => {
+        console.log(token)
         try {
           verify(token, 'OKOK')
           const { firstName, email, password, lastName, birthday, facebookUrl } = decode(token) as {
@@ -88,9 +93,21 @@ export const accountActivation = extendType({
             }
           })
           return {
-            message: 'Signup success. Please signin.'
+            message: 'Signup success. Please signin.',
+            code: 200
           }
         } catch (error) {
+          if (error.message.includes('Unique constraint failed on the constraint: `email_unique`')) {
+            return {
+              message: 'Cette adresse mail a déjà été enregistrée sur un autre compte',
+              code: 409
+            }
+          } else if (error.message.includes('jwt expired')) {
+            return {
+              message: 'Cette tentative d\'inscription est périmée, veuillez vous réinscrire',
+              code: 401
+            }
+          }
           throw new Error(error.message)
         }
       }
@@ -109,14 +126,16 @@ export const login = extendType({
       },
       resolve: async (_, { loginInput: { email, password } }, ctx) => {
         const user = await ctx.prisma.user.findOne({
-          where: email
+          where: {
+            email
+          }
         })
         if (!user) {
-          throw new Error('User not exist')
+          throw new Error('This user does not exist')
         }
         const isPasswordMatch = await compare(password, user.password)
         if (!isPasswordMatch) {
-          throw new Error('Password not correct')
+          throw new Error('The password is incorrect')
         }
         return {
           user,

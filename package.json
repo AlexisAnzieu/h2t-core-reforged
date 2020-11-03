@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --transpile-only ./src/index",
+    "start": "NODE_ENV=prod ts-node-dev --transpile-only ./src/index",
     "dev:typecheck": "tsc --watch --noEmit",
     "dev:migrate": "prisma migrate save --experimental -c && prisma migrate up --experimental -c",
     "build": "npm nexus:reflect && tsc",
@@ -26,6 +26,7 @@
     "@types/nodemailer": "^6.4.0",
     "apollo-server": "^2.18.2",
     "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "install": "^0.13.0",

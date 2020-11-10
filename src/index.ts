@@ -1,16 +1,17 @@
 import './generated/typegen'
 import { makeSchema } from '@nexus/schema'
-import { ApolloServer } from 'apollo-server'
+import { ApolloServer, AuthenticationError } from 'apollo-server'
 import { verify } from 'jsonwebtoken'
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
 import { join } from 'path'
 import { PrismaClient } from '@prisma/client'
+import dotenv from 'dotenv'
 import { Query } from './query'
 import { Entity } from './entity'
 import { Authentification, Mutation } from './mutation'
+dotenv.config()
 
 const prisma = new PrismaClient()
-const PRIVATE_KEY: string = 'h@TLAWIN'
 
 const schema = makeSchema({
   plugins: [
@@ -41,7 +42,14 @@ server.listen({
 })
 
 const getUser = async (token: string) => {
-  const cleanedToken = token.replace('Bearer ', '')
-  const verifiedToken = verify(cleanedToken, PRIVATE_KEY)
-  return verifiedToken
+  try {
+    const cleanedToken = token.replace('Bearer ', '')
+    const verifiedToken = verify(cleanedToken, process.env.LOGIN_TOKEN as string)
+    return verifiedToken
+  } catch (error) {
+    if (error.message === 'jwt expired') {
+      throw new AuthenticationError('jwt token expired')
+    }
+    console.log(error.message)
+  }
 }

@@ -1,7 +1,7 @@
 import { createTransport } from 'nodemailer'
 import dotenv from 'dotenv'
-type Token = string;
 dotenv.config()
+type Token = string;
 
 const transport = createTransport({
   service: 'gmail',

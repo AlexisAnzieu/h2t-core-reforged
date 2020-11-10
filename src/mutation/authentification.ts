@@ -1,9 +1,11 @@
 import { arg, extendType, stringArg } from '@nexus/schema'
+import { decode, verify } from 'jsonwebtoken'
+import { compare } from 'bcrypt'
+import dotenv from 'dotenv'
+import generateToken from '../helpers/generateToken'
 import { sendEmail, activationEmail } from '../helpers/activationEmail'
 import generateHashPassword from '../helpers/generateHasPassword'
-import { decode, sign, verify } from 'jsonwebtoken'
-import generateToken from '../helpers/generateToken'
-import { compare } from 'bcrypt'
+dotenv.config()
 
 export const signup = extendType({
   type: 'Mutation',
@@ -28,25 +30,19 @@ export const signup = extendType({
             }
           }
           const hashPassword = await generateHashPassword(password)
-          const token = sign(
-            {
-              firstName,
-              email,
-              lastName,
-              password: hashPassword,
-              birthday,
-              facebookUrl
-            },
-            'OKOK',
-            {
-              expiresIn: '10m'
-            }
-          )
+          const token = generateToken({
+            firstName,
+            email,
+            lastName,
+            password: hashPassword,
+            birthday,
+            facebookUrl
+          }, 'signup')
           const html = activationEmail(token)
           await sendEmail(
-            '"H2T CLUB 👻" <foo@example.com>',
+            '"H2T.CLUB 👻" <foo@example.com>',
             email,
-            'Account activation',
+            'Activation du compte',
             html
           )
           return {
@@ -73,7 +69,7 @@ export const accountActivation = extendType({
       resolve: async (_, { token }, ctx) => {
         console.log(token)
         try {
-          verify(token, 'OKOK')
+          verify(token, process.env.SIGNUP_TOKEN as string )
           const { firstName, email, password, lastName, birthday, facebookUrl } = decode(token) as {
                   firstName: string;
                   lastName: string;
@@ -131,15 +127,23 @@ export const login = extendType({
           }
         })
         if (!user) {
-          throw new Error('This user does not exist')
+          return {
+            message: 'Cet utilisateur n\'existe pas chez nous!',
+            code: 404
+          }
         }
-        const isPasswordMatch = await compare(password, user.password)
+        const isPasswordMatch = compare(password, user.password)
         if (!isPasswordMatch) {
-          throw new Error('The password is incorrect')
+          return {
+            message: 'Le mot de passe ne correspond pas avec cette adresse mail',
+            code: 404
+          }
         }
         return {
+          code: 200,
+          message: 'Bienvenue sur la plateforme!',
           user,
-          token: generateToken(user.id)
+          token: generateToken({ id: user.id }, 'login')
         }
       }
     })

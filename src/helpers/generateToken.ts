@@ -1,15 +1,10 @@
 import { sign } from 'jsonwebtoken'
-const generateToken = (userId: string) => {
-  const token = sign(
+export default (payload: any, method: string): string => {
+  return sign(
+    payload,
+    (method === 'login' ? process.env.LOGIN_TOKEN : process.env.SIGNUP_TOKEN) as string,
     {
-      userId
-    },
-    'OLA',
-    {
-      expiresIn: '7d'
+      expiresIn: method === 'login' ? '1y' : '1d'
     }
   )
-  return token
 }
-
-export default generateToken

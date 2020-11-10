@@ -45,10 +45,12 @@ export const LoginInput = inputObjectType({
 export const AuthPayload = objectType({
   name: 'AuthPayload',
   definition (t) {
-    t.string('token', { nullable: false })
+    t.string('token', { nullable: true })
+    t.string('message', { nullable: false })
+    t.int('code', { nullable: true })
     t.field('user', {
       type: 'User',
-      nullable: false
+      nullable: true
     })
   }
 })

@@ -2,22 +2,22 @@
   "name": "h2t-core-reforged",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=prod ts-node-dev --transpile-only ./src/index",
-    "dev:typecheck": "tsc --watch --noEmit",
-    "dev:migrate": "prisma migrate save --experimental -c && prisma migrate up --experimental -c",
     "build": "npm nexus:reflect && tsc",
-    "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS=true ts-node --transpile-only ./src/index"
+    "dev:migrate": "prisma migrate save --experimental -c && prisma migrate up --experimental -c",
+    "dev:typecheck": "tsc --watch --noEmit",
+    "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS=true ts-node --transpile-only ./src/index",
+    "start": "NODE_ENV=prod ts-node-dev --transpile-only ./src/index"
   },
   "husky": {
     "hooks": {
       "pre-commit": "eslint --fix --ext .ts src/ && npx sort-package-json"
     }
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@nexus/schema": "^0.16.0",
     "@prisma/client": "^2.10.2",

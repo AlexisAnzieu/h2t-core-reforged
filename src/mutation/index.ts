@@ -6,6 +6,7 @@ export const Authentification = auth
 export const Mutation = mutationType({
   definition (t) {
     t.crud.createOneEvent()
+    t.crud.createOneAd()
     t.crud.createOnePoem({
       async resolve (root: any, args: any, ctx: any, info: any, originalResolve: any) {
         if (!args.data.author?.connect?.id) {

@@ -25,32 +25,31 @@ export const User = objectType({
 export const SignupInput = inputObjectType({
   name: 'SignupInput',
   definition (t) {
-    t.string('firstName', { nullable: false })
-    t.string('email', { nullable: false })
-    t.string('password', { nullable: false })
-    t.string('facebookUrl', { nullable: true })
-    t.string('birthday', { nullable: true })
-    t.string('lastName', { nullable: true })
+    t.nonNull.string('firstName')
+    t.nonNull.string('email')
+    t.nonNull.string('password')
+    t.string('facebookUrl')
+    t.string('birthday')
+    t.string('lastName')
   }
 })
 
 export const LoginInput = inputObjectType({
   name: 'LoginInput',
   definition (t) {
-    t.string('email', { nullable: false })
-    t.string('password', { nullable: false })
+    t.nonNull.string('email')
+    t.nonNull.string('password')
   }
 })
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
   definition (t) {
-    t.string('token', { nullable: true })
-    t.string('message', { nullable: false })
-    t.int('code', { nullable: true })
+    t.string('token')
+    t.nonNull.string('message')
+    t.int('code')
     t.field('user', {
-      type: 'User',
-      nullable: true
+      type: 'User'
     })
   }
 })
@@ -58,7 +57,7 @@ export const AuthPayload = objectType({
 export const MessagePayload = objectType({
   name: 'MessagePayload',
   definition (t) {
-    t.string('message', { nullable: false })
-    t.int('code', { nullable: true })
+    t.nonNull.string('message')
+    t.int('code')
   }
 })

@@ -9,6 +9,8 @@ import dotenv from 'dotenv'
 import { Query } from './query'
 import { Entity } from './entity'
 import { Authentification, Mutation } from './mutation'
+import { Upload } from './entity/Upload'
+
 dotenv.config()
 
 const prisma = new PrismaClient()
@@ -19,7 +21,7 @@ const schema = makeSchema({
       experimentalCRUD: true
     })
   ],
-  types: [Query, Entity, Mutation, Authentification],
+  types: [Upload, Query, Entity, Mutation, Authentification],
   outputs: {
     typegen: join(__dirname, 'generated', 'typegen.ts'),
     schema: join(__dirname, 'generated', 'schema.graphql')
@@ -27,6 +29,7 @@ const schema = makeSchema({
 })
 
 const server = new ApolloServer({
+  uploads: false,
   context: async ({ req }) => {
     const token = req.headers.authorization
     const user = token ? await getUser(token) : null

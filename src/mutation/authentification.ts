@@ -1,4 +1,4 @@
-import { arg, extendType, stringArg } from '@nexus/schema'
+import { arg, extendType, nonNull, stringArg } from '@nexus/schema'
 import { decode, verify } from 'jsonwebtoken'
 import { compare } from 'bcrypt'
 import dotenv from 'dotenv'
@@ -10,15 +10,14 @@ dotenv.config()
 export const signup = extendType({
   type: 'Mutation',
   definition (t) {
-    t.field('signup', {
+    t.nonNull.field('signup', {
       type: 'MessagePayload',
-      nullable: false,
       args: {
-        signupInput: arg({ type: 'SignupInput', required: true })
+        signupInput: nonNull(arg({ type: 'SignupInput' }))
       },
       resolve: async (_, { signupInput: { firstName, lastName, email, password, birthday, facebookUrl } }, ctx) => {
         try {
-          const isUserExist = await ctx.prisma.user.findOne({
+          const isUserExist = await ctx.prisma.user.findUnique({
             where: {
               email
             }
@@ -60,11 +59,10 @@ export const signup = extendType({
 export const accountActivation = extendType({
   type: 'Mutation',
   definition (t) {
-    t.field('accountActivation', {
+    t.nonNull.field('accountActivation', {
       type: 'MessagePayload',
-      nullable: false,
       args: {
-        token: stringArg({ required: true })
+        token: nonNull(stringArg())
       },
       resolve: async (_, { token }, ctx) => {
         console.log(token)
@@ -114,14 +112,13 @@ export const accountActivation = extendType({
 export const login = extendType({
   type: 'Mutation',
   definition (t) {
-    t.field('login', {
+    t.nonNull.field('login', {
       type: 'AuthPayload',
-      nullable: false,
       args: {
-        loginInput: arg({ type: 'LoginInput', required: true })
+        loginInput: nonNull(arg({ type: 'LoginInput' }))
       },
       resolve: async (_, { loginInput: { email, password } }, ctx) => {
-        const user = await ctx.prisma.user.findOne({
+        const user = await ctx.prisma.user.findUnique({
           where: {
             email
           }

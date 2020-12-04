@@ -18,7 +18,7 @@ export const User = objectType({
     t.model.picture()
     t.model.poems()
     t.model.ads()
-    t.model.loggedCount()
+    t.model.level()
   }
 })
 

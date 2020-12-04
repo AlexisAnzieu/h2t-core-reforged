@@ -1,0 +1,29 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateEnum",
+      "enum": "AdCategory",
+      "createdValues": [
+        "DIVERS"
+      ],
+      "deletedValues": [
+        "AUTRE"
+      ]
+    },
+    {
+      "tag": "UpdateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Ad",
+          "field": "categories"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "newValue": "DIVERS"
+    }
+  ]
+}

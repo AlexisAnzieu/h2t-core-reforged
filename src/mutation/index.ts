@@ -1,4 +1,4 @@
-import { arg, intArg, mutationType, nonNull } from '@nexus/schema'
+import { arg, intArg, mutationType, nonNull, stringArg } from '@nexus/schema'
 import { ForbiddenError } from 'apollo-server'
 import dotenv from 'dotenv'
 import { MessagePayload } from '../entity/User'
@@ -21,20 +21,22 @@ export const Mutation = mutationType({
         file: nonNull(arg({
           type: 'Upload'
         })),
-        userId: nonNull(intArg())
+        userId: nonNull(intArg()),
+        type: stringArg()
       },
       resolve: async (root: any, args: any, ctx: any, info: any) => {
         const data = await args.file
         return await cloudinary.v2.uploader.upload(data, {
-          public_id: `${args.userId}`,
-          folder: 'H2T/profile_picture',
+          folder: args.type === 'ads' ? `H2T/ads/${args.userId}` : 'H2T/profile_picture',
           overwrite: true
         }).then(async (resp) => {
           try {
-            await ctx.prisma.user.update({
-              data: { picture: resp.url },
-              where: { id: args.userId }
-            })
+            if (args.type !== 'ads') {
+              await ctx.prisma.user.update({
+                data: { picture: resp.url },
+                where: { id: args.userId }
+              })
+            }
             return {
               code: 200,
               message: resp.url

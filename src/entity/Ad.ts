@@ -14,5 +14,6 @@ export const Ad = objectType({
     t.model.categories()
     t.model.title()
     t.model.updatedAt()
+    t.model.picture()
   }
 })

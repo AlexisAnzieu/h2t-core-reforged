@@ -33,6 +33,7 @@ model User {
   picture String?
   poems Poem[]
   ads Ad[]
+  invitations Invitation[] @relation("InviteSent")
 }
 
 model Poem {
@@ -43,6 +44,17 @@ model Poem {
   updatedAt DateTime @updatedAt
   title String
   description String
+}
+
+model Invitation {
+  id Int @id @default(autoincrement())
+  sender User @relation("InviteSent", fields: [senderId], references: [id])
+  senderId Int
+  receiver User? @relation(fields: [receiverId], references: [id])
+  receiverId Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  uid String
 }
 
 model Ad {
@@ -59,9 +71,11 @@ model Ad {
 }
 
 enum AdCategory {
-  DIVERS
+  BOARDGAME
   CUISINE
+  DIVERS
   ELECTRONIQUE
+  LIVRE
   MAISON
   SERVICE
   VETEMENT

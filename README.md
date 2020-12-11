@@ -2,8 +2,4 @@
 
 update `schema.prisma`
 
-`npx prisma migrate save --experimental`
-
-`npx prisma migrate up --experimental`
-
-`npx prisma generate`
+`npx prisma migrate dev --preview-feature`

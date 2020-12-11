@@ -65,7 +65,6 @@ export const accountActivation = extendType({
         token: nonNull(stringArg())
       },
       resolve: async (_, { token }, ctx) => {
-        console.log(token)
         try {
           verify(token, process.env.SIGNUP_TOKEN as string)
           const { firstName, email, password, lastName, birthday, facebookUrl } = decode(token) as {

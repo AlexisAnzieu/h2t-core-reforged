@@ -20,7 +20,7 @@ export const activationEmail = (token: Token) => {
       Please verify your email by clicking the following link:
       <br/>
       On the following page:
-      <a target="_blank" href="http://localhost:3000/validation?token=${token}">Ici</a>
+      <a target="_blank" href="http://localhost:3000/login?token=${token}">Ici</a>
       <br/><br/>
       Have a pleasant day.`
   return html

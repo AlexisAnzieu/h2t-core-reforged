@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import generateToken from '../helpers/generateToken'
 import { sendEmail, activationEmail } from '../helpers/activationEmail'
 import generateHashPassword from '../helpers/generateHasPassword'
+import { generateInviteUid } from '../helpers/generateInviteUid'
 dotenv.config()
 
 export const signup = extendType({
@@ -15,8 +16,14 @@ export const signup = extendType({
       args: {
         signupInput: nonNull(arg({ type: 'SignupInput' }))
       },
-      resolve: async (_, { signupInput: { firstName, lastName, email, password, birthday, facebookUrl } }, ctx) => {
+      resolve: async (_, { signupInput: { firstName, lastName, email, password, birthday, facebookUrl, invitation } }, ctx) => {
         try {
+          if (invitation !== '1234') {
+            return {
+              message: 'Cette invitation n\'est pas valide',
+              code: 409
+            }
+          }
           const isUserExist = await ctx.prisma.user.findUnique({
             where: {
               email
@@ -28,14 +35,15 @@ export const signup = extendType({
               code: 409
             }
           }
-          const hashPassword = await generateHashPassword(password)
+          const hashedPassword = await generateHashPassword(password)
           const token = generateToken({
             firstName,
             email,
             lastName,
-            password: hashPassword,
+            password: hashedPassword,
             birthday,
-            facebookUrl
+            facebookUrl,
+            invitation
           }, 'signup')
           const html = activationEmail(token)
           await sendEmail(
@@ -67,26 +75,39 @@ export const accountActivation = extendType({
       resolve: async (_, { token }, ctx) => {
         try {
           verify(token, process.env.SIGNUP_TOKEN as string)
-          const { firstName, email, password, lastName, birthday, facebookUrl } = decode(token) as {
+          const { firstName, email, password, lastName, facebookUrl, invitation } = decode(token) as {
                   firstName: string;
                   lastName: string;
                   email: string;
                   password: string;
                   birthday: string;
                   facebookUrl: string;
+                  invitation: string;
                 }
+
           await ctx.prisma.user.create({
             data: {
               firstName,
               lastName,
               password,
               email,
-              birthday,
-              facebookUrl
+              facebookUrl,
+              Invitation: {
+                connect: { uid: invitation }
+              },
+              invitations: {
+                create: [
+                  { uid: generateInviteUid() },
+                  { uid: generateInviteUid() },
+                  { uid: generateInviteUid() },
+                  { uid: generateInviteUid() },
+                  { uid: generateInviteUid() }
+                ]
+              }
             }
           })
           return {
-            message: 'Signup success. Please signin.',
+            message: email,
             code: 200
           }
         } catch (error) {
@@ -97,7 +118,7 @@ export const accountActivation = extendType({
             }
           } else if (error.message.includes('jwt expired')) {
             return {
-              message: 'Cette tentative d\'inscription est périmée, veuillez vous réinscrire',
+              message: 'Cette tentative d\'inscription est périmée, essaye de te réinscrire',
               code: 401
             }
           }

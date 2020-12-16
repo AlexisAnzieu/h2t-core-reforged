@@ -38,6 +38,15 @@ export const resetPassword = (token: Token) => {
   return html
 }
 
+export const invitationEmail = (uid: string, senderFirstName: string, receiverEmail: string) => {
+  const html = `
+    <h1>Tu as été convié par ${senderFirstName} à rejoindre H2T</h1>
+    <a target="_blank" href="http://localhost:3000/login?invitation=${uid}&email=${receiverEmail}">Ici</a>
+    <br/><br/>
+    `
+  return html
+}
+
 export const sendEmail = (from: string, to: string, subject: string, html: string) => {
   return new Promise((resolve, reject) => {
     transport.sendMail({ from, subject, to, html }, (err, info) => {

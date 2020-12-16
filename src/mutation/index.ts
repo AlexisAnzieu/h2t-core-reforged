@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { MessagePayload } from '../entity/User'
 import * as auth from './authentification'
 import cloudinary from 'cloudinary'
+import { invitationEmail, sendEmail } from '../helpers/activationEmail'
 dotenv.config()
 
 cloudinary.v2.config({
@@ -56,7 +57,26 @@ export const Mutation = mutationType({
       }
     })
     t.crud.updateOneUser()
+    t.crud.createOneUser()
     t.crud.createOneEvent()
+    t.crud.createOneInvitation()
+    t.crud.updateOneInvitation({
+      async resolve (root: any, args: any, ctx: any, info: any, originalResolve: any) {
+        const senderEmail = await ctx.prisma.user.findUnique({
+          where: {
+            id: ctx.user.id
+          }
+        })
+        const html = invitationEmail(args.data.uid.set, senderEmail.firstName, args.data.sent.set)
+        await sendEmail(
+          '"H2T.CLUB 👻" <foo@example.com>',
+          args.data.sent.set,
+          'Activation du compte',
+          html
+        )
+        return await originalResolve(root, args, ctx, info)
+      }
+    })
     t.crud.createOneAd()
     t.crud.createOnePoem({
       async resolve (root: any, args: any, ctx: any, info: any, originalResolve: any) {

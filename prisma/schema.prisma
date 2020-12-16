@@ -24,6 +24,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   password String
+  description String?
   email String @unique
   facebookUrl String?
   level Int @default(1)
@@ -54,7 +55,8 @@ model Invitation {
   receiverId Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  uid String
+  uid String @unique
+  sent String
 }
 
 model Ad {

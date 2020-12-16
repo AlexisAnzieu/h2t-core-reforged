@@ -19,6 +19,8 @@ export const User = objectType({
     t.model.poems()
     t.model.ads()
     t.model.level()
+    t.model.description()
+    t.model.invitations()
   }
 })
 
@@ -28,6 +30,7 @@ export const SignupInput = inputObjectType({
     t.nonNull.string('firstName')
     t.nonNull.string('email')
     t.nonNull.string('password')
+    t.nonNull.string('invitation')
     t.string('facebookUrl')
     t.string('birthday')
     t.string('lastName')

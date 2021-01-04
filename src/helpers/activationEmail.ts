@@ -4,7 +4,7 @@ dotenv.config()
 type Token = string;
 
 const transport = createTransport({
-  host: 'smtp.gmail.com',
+  host: process.env.MAIL_HOST,
   port: 465,
   secure: true,
   auth: {

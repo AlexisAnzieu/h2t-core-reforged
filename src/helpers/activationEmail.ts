@@ -40,8 +40,8 @@ export const resetPassword = (token: Token) => {
 
 export const invitationEmail = (uid: string, senderFirstName: string, receiverEmail: string) => {
   const html = `
-    <h1>Tu as été convié par ${senderFirstName} à rejoindre H2T</h1>
-    <a target="_blank" href="http://localhost:3000/login?invitation=${uid}&email=${receiverEmail}">Ici</a>
+    <h3>Tu as été convié par ${senderFirstName} à rejoindre H2T</h3>
+    <a target="_blank" href="http://localhost:3000/login?invitation=${uid}&email=${receiverEmail}">Clique ici afin d'activer ton compte</a>
     <br/><br/>
     `
   return html

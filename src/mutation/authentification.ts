@@ -12,15 +12,20 @@ export const signup = extendType({
   type: 'Mutation',
   definition (t) {
     t.nonNull.field('signup', {
-      type: 'MessagePayload',
+      type: 'AuthPayload',
       args: {
         signupInput: nonNull(arg({ type: 'SignupInput' }))
       },
       resolve: async (_, { signupInput: { firstName, lastName, email, password, birthday, facebookUrl, invitation } }, ctx) => {
         try {
-          if (invitation !== '1234') {
+          const invitationConfirmed = await ctx.prisma.invitation.findUnique({
+            where: {
+              uid: invitation
+            }
+          })
+          if (!invitationConfirmed || invitationConfirmed.sent !== email) {
             return {
-              message: 'Cette invitation n\'est pas valide',
+              message: "Désolé, le code d'invitation et le mail ne correspondent pas",
               code: 409
             }
           }
@@ -36,27 +41,65 @@ export const signup = extendType({
             }
           }
           const hashedPassword = await generateHashPassword(password)
-          const token = generateToken({
-            firstName,
-            email,
-            lastName,
-            password: hashedPassword,
-            birthday,
-            facebookUrl,
-            invitation
-          }, 'signup')
-          const html = activationEmail(token)
-          await sendEmail(
-            '"H2T.CLUB 👻" <foo@example.com>',
-            email,
-            'Activation du compte',
-            html
-          )
+          const user = await ctx.prisma.user.create({
+            data: {
+              firstName,
+              lastName,
+              password: hashedPassword,
+              email,
+              facebookUrl,
+              Invitation: {
+                connect: { uid: invitation }
+              },
+              invitations: {
+                create: [
+                  { uid: generateInviteUid() },
+                  { uid: generateInviteUid() },
+                  { uid: generateInviteUid() },
+                  { uid: generateInviteUid() },
+                  { uid: generateInviteUid() }
+                ]
+              }
+            }
+          })
+          // const token = generateToken({
+          //   firstName,
+          //   email,
+          //   lastName,
+          //   password: hashedPassword,
+          //   birthday,
+          //   facebookUrl,
+          //   invitation
+          // }, 'signup')
+          // const html = activationEmail(token)
+          // await sendEmail(
+          //   '"H2T.CLUB 👻" <foo@example.com>',
+          //   email,
+          //   'Activation du compte',
+          //   html
+          // )
+          // return {
+          //   message: `Afin de nous assurer que ${email} est bien ton email, va dans ta boite mail et suis les instructions`,
+          //   code: 200
+          // }
           return {
-            message: `Afin de nous assurer que ${email} est bien ton email, va dans ta boite mail et suis les instructions`,
-            code: 200
+            code: 200,
+            message: 'Bienvenue sur la plateforme!',
+            user,
+            token: generateToken({ id: user.id }, 'login')
           }
         } catch (error) {
+          if (error.message.includes('Unique constraint failed on the constraint: `email_unique`')) {
+            return {
+              message: 'Cette adresse mail a déjà été enregistrée sur un autre compte',
+              code: 409
+            }
+          } else if (error.message.includes('jwt expired')) {
+            return {
+              message: 'Cette tentative d\'inscription est périmée, essaye de te réinscrire',
+              code: 401
+            }
+          }
           throw new Error(error.message)
         }
       }

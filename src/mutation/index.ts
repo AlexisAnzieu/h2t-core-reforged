@@ -77,7 +77,7 @@ export const Mutation = mutationType({
             html
           )
         }
-        return res;
+        return res
       }
     })
     t.crud.createOneAd()

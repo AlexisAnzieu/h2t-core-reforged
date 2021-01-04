@@ -3,7 +3,6 @@ import { decode, verify } from 'jsonwebtoken'
 import { compare } from 'bcrypt'
 import dotenv from 'dotenv'
 import generateToken from '../helpers/generateToken'
-import { sendEmail, activationEmail } from '../helpers/activationEmail'
 import generateHashPassword from '../helpers/generateHasPassword'
 import { generateInviteUid } from '../helpers/generateInviteUid'
 dotenv.config()

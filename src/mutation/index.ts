@@ -71,7 +71,7 @@ export const Mutation = mutationType({
           })
           const html = invitationEmail(res.uid, senderEmail.firstName, args.data.sent.set)
           await sendEmail(
-            '"H2T.CLUB 👻" <foo@example.com>',
+            'H2T.CLUB 👻 <soundmotionlabel@gmail.com>',
             args.data.sent.set,
             'Activation du compte',
             html

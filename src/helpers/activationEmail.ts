@@ -22,7 +22,7 @@ export const activationEmail = (token: Token) => {
       Please verify your email by clicking the following link:
       <br/>
       On the following page:
-      <a target="_blank" href="http://localhost:3000/login?token=${token}">Ici</a>
+      <a target="_blank" href="${process.env.CLIENT_URL}/login?token=${token}">Ici</a>
       <br/><br/>
       Have a pleasant day.`
   return html
@@ -43,7 +43,7 @@ export const resetPassword = (token: Token) => {
 export const invitationEmail = (uid: string, senderFirstName: string, receiverEmail: string) => {
   const html = `
     <h3>Tu as été convié par ${senderFirstName} à rejoindre H2T</h3>
-    <a target="_blank" href="http://localhost:3000/login?invitation=${uid}&email=${receiverEmail}">Clique ici afin d'activer ton compte</a>
+    <a target="_blank" href="${process.env.CLIENT_URL}/login?invitation=${uid}&email=${receiverEmail}">Clique ici afin d'activer ton compte</a>
     <br/><br/>
     `
   return html

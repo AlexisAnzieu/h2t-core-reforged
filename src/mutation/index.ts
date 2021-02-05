@@ -15,7 +15,7 @@ cloudinary.v2.config({
 
 export const Authentification = auth
 export const Mutation = mutationType({
-  definition (t) {
+  definition(t) {
     t.nonNull.field('uploadPhoto', {
       type: MessagePayload,
       args: {
@@ -34,13 +34,13 @@ export const Mutation = mutationType({
           try {
             if (args.type !== 'ads') {
               await ctx.prisma.user.update({
-                data: { picture: resp.url },
+                data: { picture: resp.secure_url },
                 where: { id: args.userId }
               })
             }
             return {
               code: 200,
-              message: resp.url
+              message: resp.secure_url
             }
           } catch (error) {
             return {
@@ -61,7 +61,7 @@ export const Mutation = mutationType({
     t.crud.createOneEvent()
     t.crud.createOneInvitation()
     t.crud.updateOneInvitation({
-      async resolve (root: any, args: any, ctx: any, info: any, originalResolve: any) {
+      async resolve(root: any, args: any, ctx: any, info: any, originalResolve: any) {
         const res = await originalResolve(root, args, ctx, info)
         if (args.data.sent.set) {
           const senderEmail = await ctx.prisma.user.findUnique({
@@ -82,7 +82,7 @@ export const Mutation = mutationType({
     })
     t.crud.createOneAd()
     t.crud.createOnePoem({
-      async resolve (root: any, args: any, ctx: any, info: any, originalResolve: any) {
+      async resolve(root: any, args: any, ctx: any, info: any, originalResolve: any) {
         if (!args.data.author?.connect?.id) {
           delete args.data.author
         } else if (args.data.author.connect.id !== ctx.user.id) {

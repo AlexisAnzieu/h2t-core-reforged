@@ -1,56 +1,56 @@
 {
-  "name": "h2t-core-reforged",
-  "version": "1.0.0",
-  "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "npm nexus:reflect && tsc",
-    "dev:migrate": "prisma migrate save --experimental -c && prisma migrate up --experimental -c",
-    "dev:typecheck": "tsc --watch --noEmit",
-    "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS=true ts-node --transpile-only ./src/index",
-    "start": "NODE_ENV=prod ts-node-dev --transpile-only ./src/index"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "eslint --fix --ext .ts src/ && npx sort-package-json"
+    "name": "h2t-core-reforged",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [],
+    "license": "ISC",
+    "author": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "npm nexus:reflect && tsc",
+        "dev:migrate": "prisma migrate save --experimental -c && prisma migrate up --experimental -c",
+        "dev:typecheck": "tsc --watch --noEmit",
+        "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS=true ts-node --transpile-only ./src/index",
+        "start": "NODE_ENV=prod ts-node-dev --transpile-only ./src/index"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npx sort-package-json"
+        }
+    },
+    "dependencies": {
+        "@nexus/schema": "^0.19.1",
+        "@prisma/client": "^2.13.0",
+        "@types/bcrypt": "^3.0.0",
+        "@types/jsonwebtoken": "^8.5.0",
+        "@types/nodemailer": "^6.4.0",
+        "apollo-server": "^2.19.0",
+        "bcrypt": "^5.0.0",
+        "cloudinary": "^1.23.0",
+        "dotenv": "^8.2.0",
+        "file-type": "^16.0.1",
+        "graphql": "^15.3.0",
+        "graphql-tag": "^2.11.0",
+        "graphql-upload": "^11.0.0",
+        "install": "^0.13.0",
+        "jsonwebtoken": "^8.5.1",
+        "nexus-plugin-prisma": "^0.26.0",
+        "nodemailer": "^6.4.14",
+        "npm": "^6.14.8",
+        "path": "^0.12.7",
+        "ts-node-dev": "^1.1.1",
+        "typescript": "^4.0.3"
+    },
+    "devDependencies": {
+        "@prisma/cli": "^2.13.0",
+        "@typescript-eslint/eslint-plugin": "^4.4.1",
+        "@typescript-eslint/parser": "^4.4.1",
+        "eslint": "^7.11.0",
+        "eslint-config-standard": "^14.1.1",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.1",
+        "husky": "^4.3.0"
     }
-  },
-  "dependencies": {
-    "@nexus/schema": "^0.19.1",
-    "@prisma/client": "^2.13.0",
-    "@types/bcrypt": "^3.0.0",
-    "@types/jsonwebtoken": "^8.5.0",
-    "@types/nodemailer": "^6.4.0",
-    "apollo-server": "^2.19.0",
-    "bcrypt": "^5.0.0",
-    "cloudinary": "^1.23.0",
-    "dotenv": "^8.2.0",
-    "file-type": "^16.0.1",
-    "graphql": "^15.3.0",
-    "graphql-tag": "^2.11.0",
-    "graphql-upload": "^11.0.0",
-    "install": "^0.13.0",
-    "jsonwebtoken": "^8.5.1",
-    "nexus-plugin-prisma": "^0.26.0",
-    "nodemailer": "^6.4.14",
-    "npm": "^6.14.8",
-    "path": "^0.12.7",
-    "ts-node-dev": "^1.1.1",
-    "typescript": "^4.0.3"
-  },
-  "devDependencies": {
-    "@prisma/cli": "^2.13.0",
-    "@typescript-eslint/eslint-plugin": "^4.4.1",
-    "@typescript-eslint/parser": "^4.4.1",
-    "eslint": "^7.11.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "husky": "^4.3.0"
-  }
 }

@@ -13,6 +13,23 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
+const buildCloudinaryUploadUrl = (type: string, userId: string): cloudinary.UploadApiOptions => {
+  switch (type) {
+    case 'ad':
+      return {
+        folder: `H2T/ads/${userId}`,
+      }
+    case 'profile_picture':
+      return {
+        public_id: `H2T/profile_picture/${userId}`
+      }
+    default:
+      return {
+        public_id: 'H2T/'
+      };
+  }
+}
+
 export const Authentification = auth
 export const Mutation = mutationType({
   definition(t) {
@@ -28,7 +45,7 @@ export const Mutation = mutationType({
       resolve: async (root: any, args: any, ctx: any, info: any) => {
         const data = await args.file
         return await cloudinary.v2.uploader.upload(data, {
-          folder: args.type === 'ads' ? `H2T/ads/${args.userId}` : 'H2T/profile_picture',
+          ...buildCloudinaryUploadUrl(args.type, args.userId),
           overwrite: true
         }).then(async (resp) => {
           try {

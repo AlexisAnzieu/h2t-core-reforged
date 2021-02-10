@@ -3,35 +3,56 @@
 
 
 type Ad {
-  author: User
-  authorId: Int
+  author: User!
+  authorId: Int!
   categories: AdCategory!
   createdAt: DateTime!
   description: String!
   id: Int!
+  picture: String
   title: String!
   updatedAt: DateTime!
   zipCode: String!
 }
 
 enum AdCategory {
-  AUTRE
+  BOARDGAME
   CUISINE
+  DIVERS
   ELECTRONIQUE
+  LIVRE
   MAISON
   SERVICE
   VETEMENT
 }
 
+input AdCreateInput {
+  author: UserCreateOneWithoutAdsInput!
+  categories: AdCategory
+  createdAt: DateTime
+  description: String!
+  picture: String
+  title: String!
+  updatedAt: DateTime
+  zipCode: String!
+}
+
 input AdCreateManyWithoutAuthorInput {
   connect: [AdWhereUniqueInput!]
+  connectOrCreate: [AdCreateOrConnectWithoutauthorInput!]
   create: [AdCreateWithoutAuthorInput!]
+}
+
+input AdCreateOrConnectWithoutauthorInput {
+  create: AdCreateWithoutAuthorInput!
+  where: AdWhereUniqueInput!
 }
 
 input AdCreateWithoutAuthorInput {
   categories: AdCategory
   createdAt: DateTime
   description: String!
+  picture: String
   title: String!
   updatedAt: DateTime
   zipCode: String!
@@ -49,21 +70,87 @@ input AdOrderByInput {
   createdAt: SortOrder
   description: SortOrder
   id: SortOrder
+  picture: SortOrder
   title: SortOrder
   updatedAt: SortOrder
   zipCode: SortOrder
 }
 
+input AdScalarWhereInput {
+  AND: [AdScalarWhereInput!]
+  authorId: IntFilter
+  categories: EnumAdCategoryFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: IntFilter
+  NOT: [AdScalarWhereInput!]
+  OR: [AdScalarWhereInput!]
+  picture: StringNullableFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+  zipCode: StringFilter
+}
+
+input AdUpdateManyMutationInput {
+  categories: EnumAdCategoryFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  picture: NullableStringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  zipCode: StringFieldUpdateOperationsInput
+}
+
+input AdUpdateManyWithoutAuthorInput {
+  connect: [AdWhereUniqueInput!]
+  connectOrCreate: [AdCreateOrConnectWithoutauthorInput!]
+  create: [AdCreateWithoutAuthorInput!]
+  delete: [AdWhereUniqueInput!]
+  deleteMany: [AdScalarWhereInput!]
+  disconnect: [AdWhereUniqueInput!]
+  set: [AdWhereUniqueInput!]
+  update: [AdUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [AdUpdateManyWithWhereWithoutAuthorInput!]
+  upsert: [AdUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input AdUpdateManyWithWhereWithoutAuthorInput {
+  data: AdUpdateManyMutationInput!
+  where: AdScalarWhereInput!
+}
+
+input AdUpdateWithoutAuthorInput {
+  categories: EnumAdCategoryFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  picture: NullableStringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  zipCode: StringFieldUpdateOperationsInput
+}
+
+input AdUpdateWithWhereUniqueWithoutAuthorInput {
+  data: AdUpdateWithoutAuthorInput!
+  where: AdWhereUniqueInput!
+}
+
+input AdUpsertWithWhereUniqueWithoutAuthorInput {
+  create: AdCreateWithoutAuthorInput!
+  update: AdUpdateWithoutAuthorInput!
+  where: AdWhereUniqueInput!
+}
+
 input AdWhereInput {
   AND: [AdWhereInput!]
   author: UserWhereInput
-  authorId: IntNullableFilter
+  authorId: IntFilter
   categories: EnumAdCategoryFilter
   createdAt: DateTimeFilter
   description: StringFilter
   id: IntFilter
   NOT: [AdWhereInput!]
   OR: [AdWhereInput!]
+  picture: StringNullableFilter
   title: StringFilter
   updatedAt: DateTimeFilter
   zipCode: StringFilter
@@ -74,8 +161,10 @@ input AdWhereUniqueInput {
 }
 
 type AuthPayload {
-  token: String!
-  user: User!
+  code: Int
+  message: String!
+  token: String
+  user: User
 }
 
 input BoolFilter {
@@ -84,6 +173,10 @@ input BoolFilter {
 }
 
 scalar DateTime
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
 
 input DateTimeFilter {
   equals: DateTime
@@ -105,6 +198,10 @@ input DateTimeNullableFilter {
   lte: DateTime
   not: NestedDateTimeNullableFilter
   notIn: [DateTime!]
+}
+
+input EnumAdCategoryFieldUpdateOperationsInput {
+  set: AdCategory
 }
 
 input EnumAdCategoryFilter {
@@ -168,6 +265,14 @@ input EventWhereUniqueInput {
   id: Int
 }
 
+input IntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
+  set: Int
+}
+
 input IntFilter {
   equals: Int
   gt: Int
@@ -190,21 +295,211 @@ input IntNullableFilter {
   notIn: [Int!]
 }
 
+type Invitation {
+  id: Int!
+  receiver: User
+  sent: String
+  uid: String!
+}
+
+input InvitationCreateInput {
+  createdAt: DateTime
+  receiver: UserCreateOneWithoutInvitationInput
+  sender: UserCreateOneWithoutInvitationsInput!
+  sent: String
+  uid: String!
+  updatedAt: DateTime
+}
+
+input InvitationCreateManyWithoutReceiverInput {
+  connect: [InvitationWhereUniqueInput!]
+  connectOrCreate: [InvitationCreateOrConnectWithoutreceiverInput!]
+  create: [InvitationCreateWithoutReceiverInput!]
+}
+
+input InvitationCreateManyWithoutSenderInput {
+  connect: [InvitationWhereUniqueInput!]
+  connectOrCreate: [InvitationCreateOrConnectWithoutsenderInput!]
+  create: [InvitationCreateWithoutSenderInput!]
+}
+
+input InvitationCreateOrConnectWithoutreceiverInput {
+  create: InvitationCreateWithoutReceiverInput!
+  where: InvitationWhereUniqueInput!
+}
+
+input InvitationCreateOrConnectWithoutsenderInput {
+  create: InvitationCreateWithoutSenderInput!
+  where: InvitationWhereUniqueInput!
+}
+
+input InvitationCreateWithoutReceiverInput {
+  createdAt: DateTime
+  sender: UserCreateOneWithoutInvitationsInput!
+  sent: String
+  uid: String!
+  updatedAt: DateTime
+}
+
+input InvitationCreateWithoutSenderInput {
+  createdAt: DateTime
+  receiver: UserCreateOneWithoutInvitationInput
+  sent: String
+  uid: String!
+  updatedAt: DateTime
+}
+
+input InvitationListRelationFilter {
+  every: InvitationWhereInput
+  none: InvitationWhereInput
+  some: InvitationWhereInput
+}
+
+input InvitationScalarWhereInput {
+  AND: [InvitationScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: IntFilter
+  NOT: [InvitationScalarWhereInput!]
+  OR: [InvitationScalarWhereInput!]
+  receiverId: IntNullableFilter
+  senderId: IntFilter
+  sent: StringNullableFilter
+  uid: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input InvitationUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  receiver: UserUpdateOneWithoutInvitationInput
+  sender: UserUpdateOneRequiredWithoutInvitationsInput
+  sent: NullableStringFieldUpdateOperationsInput
+  uid: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input InvitationUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  sent: NullableStringFieldUpdateOperationsInput
+  uid: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input InvitationUpdateManyWithoutReceiverInput {
+  connect: [InvitationWhereUniqueInput!]
+  connectOrCreate: [InvitationCreateOrConnectWithoutreceiverInput!]
+  create: [InvitationCreateWithoutReceiverInput!]
+  delete: [InvitationWhereUniqueInput!]
+  deleteMany: [InvitationScalarWhereInput!]
+  disconnect: [InvitationWhereUniqueInput!]
+  set: [InvitationWhereUniqueInput!]
+  update: [InvitationUpdateWithWhereUniqueWithoutReceiverInput!]
+  updateMany: [InvitationUpdateManyWithWhereWithoutReceiverInput!]
+  upsert: [InvitationUpsertWithWhereUniqueWithoutReceiverInput!]
+}
+
+input InvitationUpdateManyWithoutSenderInput {
+  connect: [InvitationWhereUniqueInput!]
+  connectOrCreate: [InvitationCreateOrConnectWithoutsenderInput!]
+  create: [InvitationCreateWithoutSenderInput!]
+  delete: [InvitationWhereUniqueInput!]
+  deleteMany: [InvitationScalarWhereInput!]
+  disconnect: [InvitationWhereUniqueInput!]
+  set: [InvitationWhereUniqueInput!]
+  update: [InvitationUpdateWithWhereUniqueWithoutSenderInput!]
+  updateMany: [InvitationUpdateManyWithWhereWithoutSenderInput!]
+  upsert: [InvitationUpsertWithWhereUniqueWithoutSenderInput!]
+}
+
+input InvitationUpdateManyWithWhereWithoutReceiverInput {
+  data: InvitationUpdateManyMutationInput!
+  where: InvitationScalarWhereInput!
+}
+
+input InvitationUpdateManyWithWhereWithoutSenderInput {
+  data: InvitationUpdateManyMutationInput!
+  where: InvitationScalarWhereInput!
+}
+
+input InvitationUpdateWithoutReceiverInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  sender: UserUpdateOneRequiredWithoutInvitationsInput
+  sent: NullableStringFieldUpdateOperationsInput
+  uid: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input InvitationUpdateWithoutSenderInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  receiver: UserUpdateOneWithoutInvitationInput
+  sent: NullableStringFieldUpdateOperationsInput
+  uid: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input InvitationUpdateWithWhereUniqueWithoutReceiverInput {
+  data: InvitationUpdateWithoutReceiverInput!
+  where: InvitationWhereUniqueInput!
+}
+
+input InvitationUpdateWithWhereUniqueWithoutSenderInput {
+  data: InvitationUpdateWithoutSenderInput!
+  where: InvitationWhereUniqueInput!
+}
+
+input InvitationUpsertWithWhereUniqueWithoutReceiverInput {
+  create: InvitationCreateWithoutReceiverInput!
+  update: InvitationUpdateWithoutReceiverInput!
+  where: InvitationWhereUniqueInput!
+}
+
+input InvitationUpsertWithWhereUniqueWithoutSenderInput {
+  create: InvitationCreateWithoutSenderInput!
+  update: InvitationUpdateWithoutSenderInput!
+  where: InvitationWhereUniqueInput!
+}
+
+input InvitationWhereInput {
+  AND: [InvitationWhereInput!]
+  createdAt: DateTimeFilter
+  id: IntFilter
+  NOT: [InvitationWhereInput!]
+  OR: [InvitationWhereInput!]
+  receiver: UserWhereInput
+  receiverId: IntNullableFilter
+  sender: UserWhereInput
+  senderId: IntFilter
+  sent: StringNullableFilter
+  uid: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input InvitationWhereUniqueInput {
+  id: Int
+  uid: String
+}
+
 input LoginInput {
   email: String!
   password: String!
 }
 
 type MessagePayload {
+  code: Int
   message: String!
 }
 
 type Mutation {
   accountActivation(token: String!): MessagePayload!
+  createOneAd(data: AdCreateInput!): Ad!
   createOneEvent(data: EventCreateInput!): Event!
+  createOneInvitation(data: InvitationCreateInput!): Invitation!
   createOnePoem(data: PoemCreateInput!): Poem!
+  createOneUser(data: UserCreateInput!): User!
   login(loginInput: LoginInput!): AuthPayload!
-  signup(signupInput: SignupInput!): MessagePayload!
+  signup(signupInput: SignupInput!): AuthPayload!
+  updateOneInvitation(data: InvitationUpdateInput!, where: InvitationWhereUniqueInput!): Invitation
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  uploadPhoto(file: Upload!, type: String, userId: Int!): MessagePayload!
 }
 
 input NestedBoolFilter {
@@ -291,6 +586,14 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
 type Poem {
   author: User
   authorId: Int
@@ -303,6 +606,24 @@ type Poem {
 
 input PoemCreateInput {
   author: UserCreateOneWithoutPoemsInput
+  createdAt: DateTime
+  description: String!
+  title: String!
+  updatedAt: DateTime
+}
+
+input PoemCreateManyWithoutAuthorInput {
+  connect: [PoemWhereUniqueInput!]
+  connectOrCreate: [PoemCreateOrConnectWithoutauthorInput!]
+  create: [PoemCreateWithoutAuthorInput!]
+}
+
+input PoemCreateOrConnectWithoutauthorInput {
+  create: PoemCreateWithoutAuthorInput!
+  where: PoemWhereUniqueInput!
+}
+
+input PoemCreateWithoutAuthorInput {
   createdAt: DateTime
   description: String!
   title: String!
@@ -322,6 +643,61 @@ input PoemOrderByInput {
   id: SortOrder
   title: SortOrder
   updatedAt: SortOrder
+}
+
+input PoemScalarWhereInput {
+  AND: [PoemScalarWhereInput!]
+  authorId: IntNullableFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: IntFilter
+  NOT: [PoemScalarWhereInput!]
+  OR: [PoemScalarWhereInput!]
+  title: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input PoemUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input PoemUpdateManyWithoutAuthorInput {
+  connect: [PoemWhereUniqueInput!]
+  connectOrCreate: [PoemCreateOrConnectWithoutauthorInput!]
+  create: [PoemCreateWithoutAuthorInput!]
+  delete: [PoemWhereUniqueInput!]
+  deleteMany: [PoemScalarWhereInput!]
+  disconnect: [PoemWhereUniqueInput!]
+  set: [PoemWhereUniqueInput!]
+  update: [PoemUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [PoemUpdateManyWithWhereWithoutAuthorInput!]
+  upsert: [PoemUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input PoemUpdateManyWithWhereWithoutAuthorInput {
+  data: PoemUpdateManyMutationInput!
+  where: PoemScalarWhereInput!
+}
+
+input PoemUpdateWithoutAuthorInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input PoemUpdateWithWhereUniqueWithoutAuthorInput {
+  data: PoemUpdateWithoutAuthorInput!
+  where: PoemWhereUniqueInput!
+}
+
+input PoemUpsertWithWhereUniqueWithoutAuthorInput {
+  create: PoemCreateWithoutAuthorInput!
+  update: PoemUpdateWithoutAuthorInput!
+  where: PoemWhereUniqueInput!
 }
 
 input PoemWhereInput {
@@ -357,6 +733,7 @@ input SignupInput {
   email: String!
   facebookUrl: String
   firstName: String!
+  invitation: String!
   lastName: String
   password: String!
 }
@@ -364,6 +741,10 @@ input SignupInput {
 enum SortOrder {
   asc
   desc
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
 }
 
 input StringFilter {
@@ -394,36 +775,152 @@ input StringNullableFilter {
   startsWith: String
 }
 
+"""desc"""
+scalar Upload
+
 type User {
   ads(after: AdWhereUniqueInput, before: AdWhereUniqueInput, first: Int, last: Int): [Ad!]!
   birthday: DateTime
   createdAt: DateTime!
+  description: String
   email: String!
   facebookUrl: String
   firstName: String!
   id: Int!
-  lastName: String!
-  loggedCount: Int!
+  invitations(after: InvitationWhereUniqueInput, before: InvitationWhereUniqueInput, first: Int, last: Int): [Invitation!]!
+  lastName: String
+  level: Int!
   password: String!
   picture: String
   poems(after: PoemWhereUniqueInput, before: PoemWhereUniqueInput, first: Int, last: Int): [Poem!]!
   updatedAt: DateTime!
 }
 
+input UserCreateInput {
+  ads: AdCreateManyWithoutAuthorInput
+  birthday: DateTime
+  createdAt: DateTime
+  description: String
+  email: String!
+  facebookUrl: String
+  firstName: String!
+  Invitation: InvitationCreateManyWithoutReceiverInput
+  invitations: InvitationCreateManyWithoutSenderInput
+  lastName: String
+  level: Int
+  password: String!
+  picture: String
+  poems: PoemCreateManyWithoutAuthorInput
+  updatedAt: DateTime
+}
+
+input UserCreateOneWithoutAdsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutadsInput
+  create: UserCreateWithoutAdsInput
+}
+
+input UserCreateOneWithoutInvitationInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutInvitationInput
+  create: UserCreateWithoutInvitationInput
+}
+
+input UserCreateOneWithoutInvitationsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutinvitationsInput
+  create: UserCreateWithoutInvitationsInput
+}
+
 input UserCreateOneWithoutPoemsInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutpoemsInput
   create: UserCreateWithoutPoemsInput
+}
+
+input UserCreateOrConnectWithoutadsInput {
+  create: UserCreateWithoutAdsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutInvitationInput {
+  create: UserCreateWithoutInvitationInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutinvitationsInput {
+  create: UserCreateWithoutInvitationsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutpoemsInput {
+  create: UserCreateWithoutPoemsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutAdsInput {
+  birthday: DateTime
+  createdAt: DateTime
+  description: String
+  email: String!
+  facebookUrl: String
+  firstName: String!
+  Invitation: InvitationCreateManyWithoutReceiverInput
+  invitations: InvitationCreateManyWithoutSenderInput
+  lastName: String
+  level: Int
+  password: String!
+  picture: String
+  poems: PoemCreateManyWithoutAuthorInput
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutInvitationInput {
+  ads: AdCreateManyWithoutAuthorInput
+  birthday: DateTime
+  createdAt: DateTime
+  description: String
+  email: String!
+  facebookUrl: String
+  firstName: String!
+  invitations: InvitationCreateManyWithoutSenderInput
+  lastName: String
+  level: Int
+  password: String!
+  picture: String
+  poems: PoemCreateManyWithoutAuthorInput
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutInvitationsInput {
+  ads: AdCreateManyWithoutAuthorInput
+  birthday: DateTime
+  createdAt: DateTime
+  description: String
+  email: String!
+  facebookUrl: String
+  firstName: String!
+  Invitation: InvitationCreateManyWithoutReceiverInput
+  lastName: String
+  level: Int
+  password: String!
+  picture: String
+  poems: PoemCreateManyWithoutAuthorInput
+  updatedAt: DateTime
 }
 
 input UserCreateWithoutPoemsInput {
   ads: AdCreateManyWithoutAuthorInput
   birthday: DateTime
   createdAt: DateTime
+  description: String
   email: String!
   facebookUrl: String
   firstName: String!
-  lastName: String!
-  loggedCount: Int
+  Invitation: InvitationCreateManyWithoutReceiverInput
+  invitations: InvitationCreateManyWithoutSenderInput
+  lastName: String
+  level: Int
   password: String!
   picture: String
   updatedAt: DateTime
@@ -432,15 +929,96 @@ input UserCreateWithoutPoemsInput {
 input UserOrderByInput {
   birthday: SortOrder
   createdAt: SortOrder
+  description: SortOrder
   email: SortOrder
   facebookUrl: SortOrder
   firstName: SortOrder
   id: SortOrder
   lastName: SortOrder
-  loggedCount: SortOrder
+  level: SortOrder
   password: SortOrder
   picture: SortOrder
   updatedAt: SortOrder
+}
+
+input UserUpdateInput {
+  ads: AdUpdateManyWithoutAuthorInput
+  birthday: NullableDateTimeFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  facebookUrl: NullableStringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  Invitation: InvitationUpdateManyWithoutReceiverInput
+  invitations: InvitationUpdateManyWithoutSenderInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  level: IntFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  picture: NullableStringFieldUpdateOperationsInput
+  poems: PoemUpdateManyWithoutAuthorInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateOneRequiredWithoutInvitationsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutinvitationsInput
+  create: UserCreateWithoutInvitationsInput
+  update: UserUpdateWithoutInvitationsInput
+  upsert: UserUpsertWithoutInvitationsInput
+}
+
+input UserUpdateOneWithoutInvitationInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutInvitationInput
+  create: UserCreateWithoutInvitationInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutInvitationInput
+  upsert: UserUpsertWithoutInvitationInput
+}
+
+input UserUpdateWithoutInvitationInput {
+  ads: AdUpdateManyWithoutAuthorInput
+  birthday: NullableDateTimeFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  facebookUrl: NullableStringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  invitations: InvitationUpdateManyWithoutSenderInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  level: IntFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  picture: NullableStringFieldUpdateOperationsInput
+  poems: PoemUpdateManyWithoutAuthorInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutInvitationsInput {
+  ads: AdUpdateManyWithoutAuthorInput
+  birthday: NullableDateTimeFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  facebookUrl: NullableStringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  Invitation: InvitationUpdateManyWithoutReceiverInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  level: IntFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  picture: NullableStringFieldUpdateOperationsInput
+  poems: PoemUpdateManyWithoutAuthorInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpsertWithoutInvitationInput {
+  create: UserCreateWithoutInvitationInput!
+  update: UserUpdateWithoutInvitationInput!
+}
+
+input UserUpsertWithoutInvitationsInput {
+  create: UserCreateWithoutInvitationsInput!
+  update: UserUpdateWithoutInvitationsInput!
 }
 
 input UserWhereInput {
@@ -448,12 +1026,15 @@ input UserWhereInput {
   AND: [UserWhereInput!]
   birthday: DateTimeNullableFilter
   createdAt: DateTimeFilter
+  description: StringNullableFilter
   email: StringFilter
   facebookUrl: StringNullableFilter
   firstName: StringFilter
   id: IntFilter
-  lastName: StringFilter
-  loggedCount: IntFilter
+  Invitation: InvitationListRelationFilter
+  invitations: InvitationListRelationFilter
+  lastName: StringNullableFilter
+  level: IntFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
   password: StringFilter

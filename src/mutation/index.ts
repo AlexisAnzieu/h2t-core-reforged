@@ -49,7 +49,7 @@ export const Mutation = mutationType({
           overwrite: true
         }).then(async (resp) => {
           try {
-            if (args.type !== 'ads') {
+            if (args.type === 'profile_picture') {
               await ctx.prisma.user.update({
                 data: { picture: resp.secure_url },
                 where: { id: args.userId }

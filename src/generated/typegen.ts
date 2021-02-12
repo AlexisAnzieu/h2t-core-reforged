@@ -38,6 +38,7 @@ export interface NexusGenInputs {
     categories?: NexusGenEnums['AdCategory'] | null; // AdCategory
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
+    id?: string | null; // String
     picture?: string | null; // String
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -56,6 +57,7 @@ export interface NexusGenInputs {
     categories?: NexusGenEnums['AdCategory'] | null; // AdCategory
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
+    id?: string | null; // String
     picture?: string | null; // String
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -83,7 +85,7 @@ export interface NexusGenInputs {
     categories?: NexusGenInputs['EnumAdCategoryFilter'] | null; // EnumAdCategoryFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['AdScalarWhereInput'][] | null; // [AdScalarWhereInput!]
     OR?: NexusGenInputs['AdScalarWhereInput'][] | null; // [AdScalarWhereInput!]
     picture?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
@@ -95,6 +97,7 @@ export interface NexusGenInputs {
     categories?: NexusGenInputs['EnumAdCategoryFieldUpdateOperationsInput'] | null; // EnumAdCategoryFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     picture?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
@@ -124,6 +127,7 @@ export interface NexusGenInputs {
     categories?: NexusGenInputs['EnumAdCategoryFieldUpdateOperationsInput'] | null; // EnumAdCategoryFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     picture?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
@@ -141,7 +145,7 @@ export interface NexusGenInputs {
     categories?: NexusGenInputs['EnumAdCategoryFilter'] | null; // EnumAdCategoryFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['AdWhereInput'][] | null; // [AdWhereInput!]
     OR?: NexusGenInputs['AdWhereInput'][] | null; // [AdWhereInput!]
     picture?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
@@ -150,7 +154,7 @@ export interface NexusGenInputs {
     zipCode?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   AdWhereUniqueInput: { // input type
-    id?: number | null; // Int
+    id?: string | null; // String
   }
   BoolFilter: { // input type
     equals?: boolean | null; // Boolean
@@ -880,7 +884,7 @@ export interface NexusGenObjects {
     categories: NexusGenEnums['AdCategory']; // AdCategory!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
-    id: number; // Int!
+    id: string; // String!
     picture?: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -955,7 +959,7 @@ export interface NexusGenFieldTypes {
     categories: NexusGenEnums['AdCategory']; // AdCategory!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
-    id: number; // Int!
+    id: string; // String!
     picture: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -1015,6 +1019,7 @@ export interface NexusGenFieldTypes {
     ads: NexusGenRootTypes['Ad'][]; // [Ad!]!
     event: NexusGenRootTypes['Event'] | null; // Event
     events: NexusGenRootTypes['Event'][]; // [Event!]!
+    generateSignature: NexusGenRootTypes['MessagePayload'] | null; // MessagePayload
     poem: NexusGenRootTypes['Poem'] | null; // Poem
     poems: NexusGenRootTypes['Poem'][]; // [Poem!]!
     user: NexusGenRootTypes['User'] | null; // User
@@ -1046,7 +1051,7 @@ export interface NexusGenFieldTypeNames {
     categories: 'AdCategory'
     createdAt: 'DateTime'
     description: 'String'
-    id: 'Int'
+    id: 'String'
     picture: 'String'
     title: 'String'
     updatedAt: 'DateTime'
@@ -1106,6 +1111,7 @@ export interface NexusGenFieldTypeNames {
     ads: 'Ad'
     event: 'Event'
     events: 'Event'
+    generateSignature: 'MessagePayload'
     poem: 'Poem'
     poems: 'Poem'
     user: 'User'
@@ -1192,6 +1198,12 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       orderBy?: NexusGenInputs['EventOrderByInput'][] | null; // [EventOrderByInput!]
       where?: NexusGenInputs['EventWhereInput'] | null; // EventWhereInput
+    }
+    generateSignature: { // args
+      folder?: string | null; // String
+      public_id?: string | null; // String
+      source: string; // String!
+      timestamp: number; // Int!
     }
     poem: { // args
       where: NexusGenInputs['PoemWhereUniqueInput']; // PoemWhereUniqueInput!

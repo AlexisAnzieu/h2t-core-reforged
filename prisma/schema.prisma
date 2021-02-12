@@ -8,68 +8,69 @@ datasource db {
 }
 
 model Event {
-  id   Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
-  title String
-  date String
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+  title       String
+  date        String
   description String
-  image String
-  locations String
+  image       String
+  locations   String
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  password String
+  id          Int          @id @default(autoincrement())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  password    String
   description String?
-  email String @unique
+  email       String       @unique
   facebookUrl String?
-  level Int @default(1)
-  firstName String
-  lastName String?
-  birthday DateTime?
-  picture String?
-  poems Poem[]
-  ads Ad[]
+  level       Int          @default(1)
+  firstName   String
+  lastName    String?
+  birthday    DateTime?
+  picture     String?
+  poems       Poem[]
+  ads         Ad[]
   invitations Invitation[] @relation("InviteSent")
+  Invitation  Invitation[]
 }
 
 model Poem {
-  id Int @id @default(autoincrement())
-  author User?  @relation(fields: [authorId], references: [id])
-  authorId Int?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title String
+  id          Int      @id @default(autoincrement())
+  author      User?    @relation(fields: [authorId], references: [id])
+  authorId    Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
   description String
 }
 
 model Invitation {
-  id Int @id @default(autoincrement())
-  sender User @relation("InviteSent", fields: [senderId], references: [id])
-  senderId Int
-  receiver User? @relation(fields: [receiverId], references: [id])
+  id         Int      @id @default(autoincrement())
+  sender     User     @relation("InviteSent", fields: [senderId], references: [id])
+  senderId   Int
+  receiver   User?    @relation(fields: [receiverId], references: [id])
   receiverId Int?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  uid String @unique
-  sent String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  uid        String   @unique
+  sent       String?
 }
 
 model Ad {
-  id Int @id @default(autoincrement())
-  author User  @relation(fields: [authorId], references: [id])
-  authorId Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title String
+  id          String     @id @default(uuid())
+  author      User       @relation(fields: [authorId], references: [id])
+  authorId    Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  title       String
   description String
-  zipCode String
-  categories AdCategory @default(DIVERS)
-  picture String?
+  zipCode     String
+  categories  AdCategory @default(DIVERS)
+  picture     String?
 }
 
 enum AdCategory {

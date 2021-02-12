@@ -8,7 +8,7 @@ type Ad {
   categories: AdCategory!
   createdAt: DateTime!
   description: String!
-  id: Int!
+  id: String!
   picture: String
   title: String!
   updatedAt: DateTime!
@@ -31,6 +31,7 @@ input AdCreateInput {
   categories: AdCategory
   createdAt: DateTime
   description: String!
+  id: String
   picture: String
   title: String!
   updatedAt: DateTime
@@ -52,6 +53,7 @@ input AdCreateWithoutAuthorInput {
   categories: AdCategory
   createdAt: DateTime
   description: String!
+  id: String
   picture: String
   title: String!
   updatedAt: DateTime
@@ -82,7 +84,7 @@ input AdScalarWhereInput {
   categories: EnumAdCategoryFilter
   createdAt: DateTimeFilter
   description: StringFilter
-  id: IntFilter
+  id: StringFilter
   NOT: [AdScalarWhereInput!]
   OR: [AdScalarWhereInput!]
   picture: StringNullableFilter
@@ -95,6 +97,7 @@ input AdUpdateManyMutationInput {
   categories: EnumAdCategoryFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   picture: NullableStringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -123,6 +126,7 @@ input AdUpdateWithoutAuthorInput {
   categories: EnumAdCategoryFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   picture: NullableStringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -147,7 +151,7 @@ input AdWhereInput {
   categories: EnumAdCategoryFilter
   createdAt: DateTimeFilter
   description: StringFilter
-  id: IntFilter
+  id: StringFilter
   NOT: [AdWhereInput!]
   OR: [AdWhereInput!]
   picture: StringNullableFilter
@@ -157,7 +161,7 @@ input AdWhereInput {
 }
 
 input AdWhereUniqueInput {
-  id: Int
+  id: String
 }
 
 type AuthPayload {
@@ -722,6 +726,7 @@ type Query {
   ads(after: AdWhereUniqueInput, before: AdWhereUniqueInput, first: Int, last: Int, orderBy: [AdOrderByInput!], where: AdWhereInput): [Ad!]!
   event(where: EventWhereUniqueInput!): Event
   events(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, orderBy: [EventOrderByInput!], where: EventWhereInput): [Event!]!
+  generateSignature(folder: String, public_id: String, source: String!, timestamp: Int!): MessagePayload
   poem(where: PoemWhereUniqueInput!): Poem
   poems(after: PoemWhereUniqueInput, before: PoemWhereUniqueInput, first: Int, last: Int, orderBy: [PoemOrderByInput!], where: PoemWhereInput): [Poem!]!
   user(where: UserWhereUniqueInput!): User

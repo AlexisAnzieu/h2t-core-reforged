@@ -8,7 +8,7 @@
     "main": "index.js",
     "scripts": {
         "build": "npm run nexus:reflect && tsc",
-        "dev:migrate": "prisma migrate save --experimental -c && prisma migrate up --experimental -c",
+        "dev:migrate": "prisma migrate dev --preview-feature",
         "dev:typecheck": "tsc --watch --noEmit",
         "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS=true ts-node --transpile-only ./src/index",
         "start": "NODE_ENV=prod ts-node-dev --transpile-only ./src/index"

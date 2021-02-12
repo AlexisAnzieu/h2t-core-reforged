@@ -81,7 +81,7 @@ export interface NexusGenInputs {
   }
   AdScalarWhereInput: { // input type
     AND?: NexusGenInputs['AdScalarWhereInput'][] | null; // [AdScalarWhereInput!]
-    authorId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    authorId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     categories?: NexusGenInputs['EnumAdCategoryFilter'] | null; // EnumAdCategoryFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -141,7 +141,7 @@ export interface NexusGenInputs {
   AdWhereInput: { // input type
     AND?: NexusGenInputs['AdWhereInput'][] | null; // [AdWhereInput!]
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    authorId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    authorId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     categories?: NexusGenInputs['EnumAdCategoryFilter'] | null; // EnumAdCategoryFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -196,6 +196,7 @@ export interface NexusGenInputs {
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     date: string; // String!
     description: string; // String!
+    id?: string | null; // String
     image: string; // String!
     locations: string; // String!
     published?: boolean | null; // Boolean
@@ -218,7 +219,7 @@ export interface NexusGenInputs {
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     date?: NexusGenInputs['StringFilter'] | null; // StringFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     image?: NexusGenInputs['StringFilter'] | null; // StringFilter
     locations?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['EventWhereInput'][] | null; // [EventWhereInput!]
@@ -228,7 +229,7 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
   EventWhereUniqueInput: { // input type
-    id?: number | null; // Int
+    id?: string | null; // String
   }
   IntFieldUpdateOperationsInput: { // input type
     decrement?: number | null; // Int
@@ -247,18 +248,9 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
     notIn?: number[] | null; // [Int!]
   }
-  IntNullableFilter: { // input type
-    equals?: number | null; // Int
-    gt?: number | null; // Int
-    gte?: number | null; // Int
-    in?: number[] | null; // [Int!]
-    lt?: number | null; // Int
-    lte?: number | null; // Int
-    not?: NexusGenInputs['NestedIntNullableFilter'] | null; // NestedIntNullableFilter
-    notIn?: number[] | null; // [Int!]
-  }
   InvitationCreateInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
     receiver?: NexusGenInputs['UserCreateOneWithoutInvitationInput'] | null; // UserCreateOneWithoutInvitationInput
     sender: NexusGenInputs['UserCreateOneWithoutInvitationsInput']; // UserCreateOneWithoutInvitationsInput!
     sent?: string | null; // String
@@ -285,6 +277,7 @@ export interface NexusGenInputs {
   }
   InvitationCreateWithoutReceiverInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
     sender: NexusGenInputs['UserCreateOneWithoutInvitationsInput']; // UserCreateOneWithoutInvitationsInput!
     sent?: string | null; // String
     uid: string; // String!
@@ -292,6 +285,7 @@ export interface NexusGenInputs {
   }
   InvitationCreateWithoutSenderInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
     receiver?: NexusGenInputs['UserCreateOneWithoutInvitationInput'] | null; // UserCreateOneWithoutInvitationInput
     sent?: string | null; // String
     uid: string; // String!
@@ -305,17 +299,18 @@ export interface NexusGenInputs {
   InvitationScalarWhereInput: { // input type
     AND?: NexusGenInputs['InvitationScalarWhereInput'][] | null; // [InvitationScalarWhereInput!]
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['InvitationScalarWhereInput'][] | null; // [InvitationScalarWhereInput!]
     OR?: NexusGenInputs['InvitationScalarWhereInput'][] | null; // [InvitationScalarWhereInput!]
-    receiverId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
-    senderId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    receiverId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    senderId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     sent?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     uid?: NexusGenInputs['StringFilter'] | null; // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
   InvitationUpdateInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     receiver?: NexusGenInputs['UserUpdateOneWithoutInvitationInput'] | null; // UserUpdateOneWithoutInvitationInput
     sender?: NexusGenInputs['UserUpdateOneRequiredWithoutInvitationsInput'] | null; // UserUpdateOneRequiredWithoutInvitationsInput
     sent?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
@@ -324,6 +319,7 @@ export interface NexusGenInputs {
   }
   InvitationUpdateManyMutationInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     sent?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     uid?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
@@ -370,6 +366,7 @@ export interface NexusGenInputs {
   }
   InvitationUpdateWithoutReceiverInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     sender?: NexusGenInputs['UserUpdateOneRequiredWithoutInvitationsInput'] | null; // UserUpdateOneRequiredWithoutInvitationsInput
     sent?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     uid?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -377,6 +374,7 @@ export interface NexusGenInputs {
   }
   InvitationUpdateWithoutSenderInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     receiver?: NexusGenInputs['UserUpdateOneWithoutInvitationInput'] | null; // UserUpdateOneWithoutInvitationInput
     sent?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     uid?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -395,19 +393,19 @@ export interface NexusGenInputs {
   InvitationWhereInput: { // input type
     AND?: NexusGenInputs['InvitationWhereInput'][] | null; // [InvitationWhereInput!]
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['InvitationWhereInput'][] | null; // [InvitationWhereInput!]
     OR?: NexusGenInputs['InvitationWhereInput'][] | null; // [InvitationWhereInput!]
     receiver?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    receiverId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
+    receiverId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     sender?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    senderId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    senderId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     sent?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     uid?: NexusGenInputs['StringFilter'] | null; // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
   InvitationWhereUniqueInput: { // input type
-    id?: number | null; // Int
+    id?: string | null; // String
     uid?: string | null; // String
   }
   LoginInput: { // input type
@@ -454,16 +452,6 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
     notIn?: number[] | null; // [Int!]
   }
-  NestedIntNullableFilter: { // input type
-    equals?: number | null; // Int
-    gt?: number | null; // Int
-    gte?: number | null; // Int
-    in?: number[] | null; // [Int!]
-    lt?: number | null; // Int
-    lte?: number | null; // Int
-    not?: NexusGenInputs['NestedIntNullableFilter'] | null; // NestedIntNullableFilter
-    notIn?: number[] | null; // [Int!]
-  }
   NestedStringFilter: { // input type
     contains?: string | null; // String
     endsWith?: string | null; // String
@@ -500,6 +488,7 @@ export interface NexusGenInputs {
     author?: NexusGenInputs['UserCreateOneWithoutPoemsInput'] | null; // UserCreateOneWithoutPoemsInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
+    id?: string | null; // String
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -515,6 +504,7 @@ export interface NexusGenInputs {
   PoemCreateWithoutAuthorInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
+    id?: string | null; // String
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -533,10 +523,10 @@ export interface NexusGenInputs {
   }
   PoemScalarWhereInput: { // input type
     AND?: NexusGenInputs['PoemScalarWhereInput'][] | null; // [PoemScalarWhereInput!]
-    authorId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
+    authorId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['PoemScalarWhereInput'][] | null; // [PoemScalarWhereInput!]
     OR?: NexusGenInputs['PoemScalarWhereInput'][] | null; // [PoemScalarWhereInput!]
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -545,6 +535,7 @@ export interface NexusGenInputs {
   PoemUpdateManyMutationInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
@@ -571,6 +562,7 @@ export interface NexusGenInputs {
   PoemUpdateWithoutAuthorInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
@@ -582,17 +574,17 @@ export interface NexusGenInputs {
   PoemWhereInput: { // input type
     AND?: NexusGenInputs['PoemWhereInput'][] | null; // [PoemWhereInput!]
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    authorId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
+    authorId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['PoemWhereInput'][] | null; // [PoemWhereInput!]
     OR?: NexusGenInputs['PoemWhereInput'][] | null; // [PoemWhereInput!]
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
   PoemWhereUniqueInput: { // input type
-    id?: number | null; // Int
+    id?: string | null; // String
   }
   SignupInput: { // input type
     birthday?: string | null; // String
@@ -640,6 +632,7 @@ export interface NexusGenInputs {
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
+    id?: string | null; // String
     Invitation?: NexusGenInputs['InvitationCreateManyWithoutReceiverInput'] | null; // InvitationCreateManyWithoutReceiverInput
     invitations?: NexusGenInputs['InvitationCreateManyWithoutSenderInput'] | null; // InvitationCreateManyWithoutSenderInput
     lastName?: string | null; // String
@@ -692,6 +685,7 @@ export interface NexusGenInputs {
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
+    id?: string | null; // String
     Invitation?: NexusGenInputs['InvitationCreateManyWithoutReceiverInput'] | null; // InvitationCreateManyWithoutReceiverInput
     invitations?: NexusGenInputs['InvitationCreateManyWithoutSenderInput'] | null; // InvitationCreateManyWithoutSenderInput
     lastName?: string | null; // String
@@ -709,6 +703,7 @@ export interface NexusGenInputs {
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
+    id?: string | null; // String
     invitations?: NexusGenInputs['InvitationCreateManyWithoutSenderInput'] | null; // InvitationCreateManyWithoutSenderInput
     lastName?: string | null; // String
     level?: number | null; // Int
@@ -725,6 +720,7 @@ export interface NexusGenInputs {
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
+    id?: string | null; // String
     Invitation?: NexusGenInputs['InvitationCreateManyWithoutReceiverInput'] | null; // InvitationCreateManyWithoutReceiverInput
     lastName?: string | null; // String
     level?: number | null; // Int
@@ -741,6 +737,7 @@ export interface NexusGenInputs {
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
+    id?: string | null; // String
     Invitation?: NexusGenInputs['InvitationCreateManyWithoutReceiverInput'] | null; // InvitationCreateManyWithoutReceiverInput
     invitations?: NexusGenInputs['InvitationCreateManyWithoutSenderInput'] | null; // InvitationCreateManyWithoutSenderInput
     lastName?: string | null; // String
@@ -771,6 +768,7 @@ export interface NexusGenInputs {
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     facebookUrl?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     Invitation?: NexusGenInputs['InvitationUpdateManyWithoutReceiverInput'] | null; // InvitationUpdateManyWithoutReceiverInput
     invitations?: NexusGenInputs['InvitationUpdateManyWithoutSenderInput'] | null; // InvitationUpdateManyWithoutSenderInput
     lastName?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
@@ -804,6 +802,7 @@ export interface NexusGenInputs {
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     facebookUrl?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     invitations?: NexusGenInputs['InvitationUpdateManyWithoutSenderInput'] | null; // InvitationUpdateManyWithoutSenderInput
     lastName?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     level?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
@@ -820,6 +819,7 @@ export interface NexusGenInputs {
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     facebookUrl?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     Invitation?: NexusGenInputs['InvitationUpdateManyWithoutReceiverInput'] | null; // InvitationUpdateManyWithoutReceiverInput
     lastName?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     level?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
@@ -845,7 +845,7 @@ export interface NexusGenInputs {
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     facebookUrl?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     firstName?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     Invitation?: NexusGenInputs['InvitationListRelationFilter'] | null; // InvitationListRelationFilter
     invitations?: NexusGenInputs['InvitationListRelationFilter'] | null; // InvitationListRelationFilter
     lastName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
@@ -859,7 +859,7 @@ export interface NexusGenInputs {
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
-    id?: number | null; // Int
+    id?: string | null; // String
   }
 }
 
@@ -880,7 +880,7 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Ad: { // root type
-    authorId: number; // Int!
+    authorId: string; // String!
     categories: NexusGenEnums['AdCategory']; // AdCategory!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
@@ -900,7 +900,7 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     date: string; // String!
     description: string; // String!
-    id: number; // Int!
+    id: string; // String!
     image: string; // String!
     locations: string; // String!
     published: boolean; // Boolean!
@@ -908,7 +908,7 @@ export interface NexusGenObjects {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Invitation: { // root type
-    id: number; // Int!
+    id: string; // String!
     sent?: string | null; // String
     uid: string; // String!
   }
@@ -918,10 +918,10 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Poem: { // root type
-    authorId?: number | null; // Int
+    authorId?: string | null; // String
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
-    id: number; // Int!
+    id: string; // String!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -933,7 +933,7 @@ export interface NexusGenObjects {
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
-    id: number; // Int!
+    id: string; // String!
     lastName?: string | null; // String
     level: number; // Int!
     password: string; // String!
@@ -955,7 +955,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnu
 export interface NexusGenFieldTypes {
   Ad: { // field return type
     author: NexusGenRootTypes['User']; // User!
-    authorId: number; // Int!
+    authorId: string; // String!
     categories: NexusGenEnums['AdCategory']; // AdCategory!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
@@ -975,7 +975,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     date: string; // String!
     description: string; // String!
-    id: number; // Int!
+    id: string; // String!
     image: string; // String!
     locations: string; // String!
     published: boolean; // Boolean!
@@ -983,7 +983,7 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Invitation: { // field return type
-    id: number; // Int!
+    id: string; // String!
     receiver: NexusGenRootTypes['User'] | null; // User
     sent: string | null; // String
     uid: string; // String!
@@ -1007,10 +1007,10 @@ export interface NexusGenFieldTypes {
   }
   Poem: { // field return type
     author: NexusGenRootTypes['User'] | null; // User
-    authorId: number | null; // Int
+    authorId: string | null; // String
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
-    id: number; // Int!
+    id: string; // String!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -1033,7 +1033,7 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     facebookUrl: string | null; // String
     firstName: string; // String!
-    id: number; // Int!
+    id: string; // String!
     invitations: NexusGenRootTypes['Invitation'][]; // [Invitation!]!
     lastName: string | null; // String
     level: number; // Int!
@@ -1047,7 +1047,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Ad: { // field return type name
     author: 'User'
-    authorId: 'Int'
+    authorId: 'String'
     categories: 'AdCategory'
     createdAt: 'DateTime'
     description: 'String'
@@ -1067,7 +1067,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     date: 'String'
     description: 'String'
-    id: 'Int'
+    id: 'String'
     image: 'String'
     locations: 'String'
     published: 'Boolean'
@@ -1075,7 +1075,7 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
   }
   Invitation: { // field return type name
-    id: 'Int'
+    id: 'String'
     receiver: 'User'
     sent: 'String'
     uid: 'String'
@@ -1099,10 +1099,10 @@ export interface NexusGenFieldTypeNames {
   }
   Poem: { // field return type name
     author: 'User'
-    authorId: 'Int'
+    authorId: 'String'
     createdAt: 'DateTime'
     description: 'String'
-    id: 'Int'
+    id: 'String'
     title: 'String'
     updatedAt: 'DateTime'
   }
@@ -1125,7 +1125,7 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     facebookUrl: 'String'
     firstName: 'String'
-    id: 'Int'
+    id: 'String'
     invitations: 'Invitation'
     lastName: 'String'
     level: 'Int'

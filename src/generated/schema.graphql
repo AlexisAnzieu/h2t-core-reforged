@@ -4,7 +4,7 @@
 
 type Ad {
   author: User!
-  authorId: Int!
+  authorId: String!
   categories: AdCategory!
   createdAt: DateTime!
   description: String!
@@ -80,7 +80,7 @@ input AdOrderByInput {
 
 input AdScalarWhereInput {
   AND: [AdScalarWhereInput!]
-  authorId: IntFilter
+  authorId: StringFilter
   categories: EnumAdCategoryFilter
   createdAt: DateTimeFilter
   description: StringFilter
@@ -147,7 +147,7 @@ input AdUpsertWithWhereUniqueWithoutAuthorInput {
 input AdWhereInput {
   AND: [AdWhereInput!]
   author: UserWhereInput
-  authorId: IntFilter
+  authorId: StringFilter
   categories: EnumAdCategoryFilter
   createdAt: DateTimeFilter
   description: StringFilter
@@ -219,7 +219,7 @@ type Event {
   createdAt: DateTime!
   date: String!
   description: String!
-  id: Int!
+  id: String!
   image: String!
   locations: String!
   published: Boolean!
@@ -231,6 +231,7 @@ input EventCreateInput {
   createdAt: DateTime
   date: String!
   description: String!
+  id: String
   image: String!
   locations: String!
   published: Boolean
@@ -255,7 +256,7 @@ input EventWhereInput {
   createdAt: DateTimeFilter
   date: StringFilter
   description: StringFilter
-  id: IntFilter
+  id: StringFilter
   image: StringFilter
   locations: StringFilter
   NOT: [EventWhereInput!]
@@ -266,7 +267,7 @@ input EventWhereInput {
 }
 
 input EventWhereUniqueInput {
-  id: Int
+  id: String
 }
 
 input IntFieldUpdateOperationsInput {
@@ -288,19 +289,8 @@ input IntFilter {
   notIn: [Int!]
 }
 
-input IntNullableFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int!]
-  lt: Int
-  lte: Int
-  not: NestedIntNullableFilter
-  notIn: [Int!]
-}
-
 type Invitation {
-  id: Int!
+  id: String!
   receiver: User
   sent: String
   uid: String!
@@ -308,6 +298,7 @@ type Invitation {
 
 input InvitationCreateInput {
   createdAt: DateTime
+  id: String
   receiver: UserCreateOneWithoutInvitationInput
   sender: UserCreateOneWithoutInvitationsInput!
   sent: String
@@ -339,6 +330,7 @@ input InvitationCreateOrConnectWithoutsenderInput {
 
 input InvitationCreateWithoutReceiverInput {
   createdAt: DateTime
+  id: String
   sender: UserCreateOneWithoutInvitationsInput!
   sent: String
   uid: String!
@@ -347,6 +339,7 @@ input InvitationCreateWithoutReceiverInput {
 
 input InvitationCreateWithoutSenderInput {
   createdAt: DateTime
+  id: String
   receiver: UserCreateOneWithoutInvitationInput
   sent: String
   uid: String!
@@ -362,11 +355,11 @@ input InvitationListRelationFilter {
 input InvitationScalarWhereInput {
   AND: [InvitationScalarWhereInput!]
   createdAt: DateTimeFilter
-  id: IntFilter
+  id: StringFilter
   NOT: [InvitationScalarWhereInput!]
   OR: [InvitationScalarWhereInput!]
-  receiverId: IntNullableFilter
-  senderId: IntFilter
+  receiverId: StringNullableFilter
+  senderId: StringFilter
   sent: StringNullableFilter
   uid: StringFilter
   updatedAt: DateTimeFilter
@@ -374,6 +367,7 @@ input InvitationScalarWhereInput {
 
 input InvitationUpdateInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   receiver: UserUpdateOneWithoutInvitationInput
   sender: UserUpdateOneRequiredWithoutInvitationsInput
   sent: NullableStringFieldUpdateOperationsInput
@@ -383,6 +377,7 @@ input InvitationUpdateInput {
 
 input InvitationUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   sent: NullableStringFieldUpdateOperationsInput
   uid: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -426,6 +421,7 @@ input InvitationUpdateManyWithWhereWithoutSenderInput {
 
 input InvitationUpdateWithoutReceiverInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   sender: UserUpdateOneRequiredWithoutInvitationsInput
   sent: NullableStringFieldUpdateOperationsInput
   uid: StringFieldUpdateOperationsInput
@@ -434,6 +430,7 @@ input InvitationUpdateWithoutReceiverInput {
 
 input InvitationUpdateWithoutSenderInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   receiver: UserUpdateOneWithoutInvitationInput
   sent: NullableStringFieldUpdateOperationsInput
   uid: StringFieldUpdateOperationsInput
@@ -465,20 +462,20 @@ input InvitationUpsertWithWhereUniqueWithoutSenderInput {
 input InvitationWhereInput {
   AND: [InvitationWhereInput!]
   createdAt: DateTimeFilter
-  id: IntFilter
+  id: StringFilter
   NOT: [InvitationWhereInput!]
   OR: [InvitationWhereInput!]
   receiver: UserWhereInput
-  receiverId: IntNullableFilter
+  receiverId: StringNullableFilter
   sender: UserWhereInput
-  senderId: IntFilter
+  senderId: StringFilter
   sent: StringNullableFilter
   uid: StringFilter
   updatedAt: DateTimeFilter
 }
 
 input InvitationWhereUniqueInput {
-  id: Int
+  id: String
   uid: String
 }
 
@@ -551,17 +548,6 @@ input NestedIntFilter {
   notIn: [Int!]
 }
 
-input NestedIntNullableFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int!]
-  lt: Int
-  lte: Int
-  not: NestedIntNullableFilter
-  notIn: [Int!]
-}
-
 input NestedStringFilter {
   contains: String
   endsWith: String
@@ -600,10 +586,10 @@ input NullableStringFieldUpdateOperationsInput {
 
 type Poem {
   author: User
-  authorId: Int
+  authorId: String
   createdAt: DateTime!
   description: String!
-  id: Int!
+  id: String!
   title: String!
   updatedAt: DateTime!
 }
@@ -612,6 +598,7 @@ input PoemCreateInput {
   author: UserCreateOneWithoutPoemsInput
   createdAt: DateTime
   description: String!
+  id: String
   title: String!
   updatedAt: DateTime
 }
@@ -630,6 +617,7 @@ input PoemCreateOrConnectWithoutauthorInput {
 input PoemCreateWithoutAuthorInput {
   createdAt: DateTime
   description: String!
+  id: String
   title: String!
   updatedAt: DateTime
 }
@@ -651,10 +639,10 @@ input PoemOrderByInput {
 
 input PoemScalarWhereInput {
   AND: [PoemScalarWhereInput!]
-  authorId: IntNullableFilter
+  authorId: StringNullableFilter
   createdAt: DateTimeFilter
   description: StringFilter
-  id: IntFilter
+  id: StringFilter
   NOT: [PoemScalarWhereInput!]
   OR: [PoemScalarWhereInput!]
   title: StringFilter
@@ -664,6 +652,7 @@ input PoemScalarWhereInput {
 input PoemUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -689,6 +678,7 @@ input PoemUpdateManyWithWhereWithoutAuthorInput {
 input PoemUpdateWithoutAuthorInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -707,10 +697,10 @@ input PoemUpsertWithWhereUniqueWithoutAuthorInput {
 input PoemWhereInput {
   AND: [PoemWhereInput!]
   author: UserWhereInput
-  authorId: IntNullableFilter
+  authorId: StringNullableFilter
   createdAt: DateTimeFilter
   description: StringFilter
-  id: IntFilter
+  id: StringFilter
   NOT: [PoemWhereInput!]
   OR: [PoemWhereInput!]
   title: StringFilter
@@ -718,7 +708,7 @@ input PoemWhereInput {
 }
 
 input PoemWhereUniqueInput {
-  id: Int
+  id: String
 }
 
 type Query {
@@ -791,7 +781,7 @@ type User {
   email: String!
   facebookUrl: String
   firstName: String!
-  id: Int!
+  id: String!
   invitations(after: InvitationWhereUniqueInput, before: InvitationWhereUniqueInput, first: Int, last: Int): [Invitation!]!
   lastName: String
   level: Int!
@@ -809,6 +799,7 @@ input UserCreateInput {
   email: String!
   facebookUrl: String
   firstName: String!
+  id: String
   Invitation: InvitationCreateManyWithoutReceiverInput
   invitations: InvitationCreateManyWithoutSenderInput
   lastName: String
@@ -870,6 +861,7 @@ input UserCreateWithoutAdsInput {
   email: String!
   facebookUrl: String
   firstName: String!
+  id: String
   Invitation: InvitationCreateManyWithoutReceiverInput
   invitations: InvitationCreateManyWithoutSenderInput
   lastName: String
@@ -888,6 +880,7 @@ input UserCreateWithoutInvitationInput {
   email: String!
   facebookUrl: String
   firstName: String!
+  id: String
   invitations: InvitationCreateManyWithoutSenderInput
   lastName: String
   level: Int
@@ -905,6 +898,7 @@ input UserCreateWithoutInvitationsInput {
   email: String!
   facebookUrl: String
   firstName: String!
+  id: String
   Invitation: InvitationCreateManyWithoutReceiverInput
   lastName: String
   level: Int
@@ -922,6 +916,7 @@ input UserCreateWithoutPoemsInput {
   email: String!
   facebookUrl: String
   firstName: String!
+  id: String
   Invitation: InvitationCreateManyWithoutReceiverInput
   invitations: InvitationCreateManyWithoutSenderInput
   lastName: String
@@ -954,6 +949,7 @@ input UserUpdateInput {
   email: StringFieldUpdateOperationsInput
   facebookUrl: NullableStringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   Invitation: InvitationUpdateManyWithoutReceiverInput
   invitations: InvitationUpdateManyWithoutSenderInput
   lastName: NullableStringFieldUpdateOperationsInput
@@ -990,6 +986,7 @@ input UserUpdateWithoutInvitationInput {
   email: StringFieldUpdateOperationsInput
   facebookUrl: NullableStringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   invitations: InvitationUpdateManyWithoutSenderInput
   lastName: NullableStringFieldUpdateOperationsInput
   level: IntFieldUpdateOperationsInput
@@ -1007,6 +1004,7 @@ input UserUpdateWithoutInvitationsInput {
   email: StringFieldUpdateOperationsInput
   facebookUrl: NullableStringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   Invitation: InvitationUpdateManyWithoutReceiverInput
   lastName: NullableStringFieldUpdateOperationsInput
   level: IntFieldUpdateOperationsInput
@@ -1035,7 +1033,7 @@ input UserWhereInput {
   email: StringFilter
   facebookUrl: StringNullableFilter
   firstName: StringFilter
-  id: IntFilter
+  id: StringFilter
   Invitation: InvitationListRelationFilter
   invitations: InvitationListRelationFilter
   lastName: StringNullableFilter
@@ -1050,5 +1048,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   email: String
-  id: Int
+  id: String
 }

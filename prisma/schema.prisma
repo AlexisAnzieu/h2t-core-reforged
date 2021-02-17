@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["nativeTypes"]
 }
 
 datasource db {
@@ -24,7 +25,7 @@ model User {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   password    String
-  description String?
+  description String?      @db.Text
   email       String       @unique
   facebookUrl String?
   level       Int          @default(1)

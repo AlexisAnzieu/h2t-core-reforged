@@ -9,7 +9,7 @@ dotenv.config()
 
 export const signup = extendType({
   type: 'Mutation',
-  definition (t) {
+  definition(t) {
     t.nonNull.field('signup', {
       type: 'AuthPayload',
       args: {
@@ -108,7 +108,7 @@ export const signup = extendType({
 
 export const accountActivation = extendType({
   type: 'Mutation',
-  definition (t) {
+  definition(t) {
     t.nonNull.field('accountActivation', {
       type: 'MessagePayload',
       args: {
@@ -118,14 +118,14 @@ export const accountActivation = extendType({
         try {
           verify(token, process.env.SIGNUP_TOKEN as string)
           const { firstName, email, password, lastName, facebookUrl, invitation } = decode(token) as {
-                  firstName: string;
-                  lastName: string;
-                  email: string;
-                  password: string;
-                  birthday: string;
-                  facebookUrl: string;
-                  invitation: string;
-                }
+            firstName: string;
+            lastName: string;
+            email: string;
+            password: string;
+            birthday: string;
+            facebookUrl: string;
+            invitation: string;
+          }
 
           await ctx.prisma.user.create({
             data: {
@@ -141,9 +141,6 @@ export const accountActivation = extendType({
                 create: [
                   { uid: generateInviteUid() },
                   { uid: generateInviteUid() },
-                  { uid: generateInviteUid() },
-                  { uid: generateInviteUid() },
-                  { uid: generateInviteUid() }
                 ]
               }
             }
@@ -173,7 +170,7 @@ export const accountActivation = extendType({
 
 export const login = extendType({
   type: 'Mutation',
-  definition (t) {
+  definition(t) {
     t.nonNull.field('login', {
       type: 'AuthPayload',
       args: {

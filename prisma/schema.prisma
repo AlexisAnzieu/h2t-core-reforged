@@ -61,16 +61,18 @@ model Invitation {
 }
 
 model Ad {
-  id          String     @id @default(uuid())
-  author      User       @relation(fields: [authorId], references: [id])
-  authorId    String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  title       String
-  description String
-  zipCode     String
-  categories  AdCategory @default(DIVERS)
-  picture     String?
+  id             String     @id @default(uuid())
+  author         User       @relation(fields: [authorId], references: [id])
+  authorId       String
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  title          String
+  description    String
+  zipCode        String
+  categories     AdCategory @default(DIVERS)
+  picture        String?
+  additionalData Json?
+  available      Boolean    @default(true)
 }
 
 enum AdCategory {

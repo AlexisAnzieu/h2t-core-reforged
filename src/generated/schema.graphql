@@ -3,8 +3,10 @@
 
 
 type Ad {
+  additionalData: Json
   author: User!
   authorId: String!
+  available: Boolean!
   categories: AdCategory!
   createdAt: DateTime!
   description: String!
@@ -27,7 +29,9 @@ enum AdCategory {
 }
 
 input AdCreateInput {
+  additionalData: Json
   author: UserCreateOneWithoutAdsInput!
+  available: Boolean
   categories: AdCategory
   createdAt: DateTime
   description: String!
@@ -50,6 +54,8 @@ input AdCreateOrConnectWithoutauthorInput {
 }
 
 input AdCreateWithoutAuthorInput {
+  additionalData: Json
+  available: Boolean
   categories: AdCategory
   createdAt: DateTime
   description: String!
@@ -67,7 +73,9 @@ input AdListRelationFilter {
 }
 
 input AdOrderByInput {
+  additionalData: SortOrder
   authorId: SortOrder
+  available: SortOrder
   categories: SortOrder
   createdAt: SortOrder
   description: SortOrder
@@ -79,8 +87,10 @@ input AdOrderByInput {
 }
 
 input AdScalarWhereInput {
+  additionalData: JsonNullableFilter
   AND: [AdScalarWhereInput!]
   authorId: StringFilter
+  available: BoolFilter
   categories: EnumAdCategoryFilter
   createdAt: DateTimeFilter
   description: StringFilter
@@ -93,7 +103,23 @@ input AdScalarWhereInput {
   zipCode: StringFilter
 }
 
+input AdUpdateInput {
+  additionalData: Json
+  author: UserUpdateOneRequiredWithoutAdsInput
+  available: BoolFieldUpdateOperationsInput
+  categories: EnumAdCategoryFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  picture: NullableStringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  zipCode: StringFieldUpdateOperationsInput
+}
+
 input AdUpdateManyMutationInput {
+  additionalData: Json
+  available: BoolFieldUpdateOperationsInput
   categories: EnumAdCategoryFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
@@ -123,6 +149,8 @@ input AdUpdateManyWithWhereWithoutAuthorInput {
 }
 
 input AdUpdateWithoutAuthorInput {
+  additionalData: Json
+  available: BoolFieldUpdateOperationsInput
   categories: EnumAdCategoryFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
@@ -145,9 +173,11 @@ input AdUpsertWithWhereUniqueWithoutAuthorInput {
 }
 
 input AdWhereInput {
+  additionalData: JsonNullableFilter
   AND: [AdWhereInput!]
   author: UserWhereInput
   authorId: StringFilter
+  available: BoolFilter
   categories: EnumAdCategoryFilter
   createdAt: DateTimeFilter
   description: StringFilter
@@ -169,6 +199,10 @@ type AuthPayload {
   message: String!
   token: String
   user: User
+}
+
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
 }
 
 input BoolFilter {
@@ -479,6 +513,13 @@ input InvitationWhereUniqueInput {
   uid: String
 }
 
+scalar Json
+
+input JsonNullableFilter {
+  equals: Json
+  not: Json
+}
+
 input LoginInput {
   email: String!
   password: String!
@@ -498,6 +539,7 @@ type Mutation {
   createOneUser(data: UserCreateInput!): User!
   login(loginInput: LoginInput!): AuthPayload!
   signup(signupInput: SignupInput!): AuthPayload!
+  updateOneAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad
   updateOneInvitation(data: InvitationUpdateInput!, where: InvitationWhereUniqueInput!): Invitation
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   uploadPhoto(file: Upload!, type: String, userId: Int!): MessagePayload!
@@ -960,6 +1002,14 @@ input UserUpdateInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
+input UserUpdateOneRequiredWithoutAdsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutadsInput
+  create: UserCreateWithoutAdsInput
+  update: UserUpdateWithoutAdsInput
+  upsert: UserUpsertWithoutAdsInput
+}
+
 input UserUpdateOneRequiredWithoutInvitationsInput {
   connect: UserWhereUniqueInput
   connectOrCreate: UserCreateOrConnectWithoutinvitationsInput
@@ -976,6 +1026,24 @@ input UserUpdateOneWithoutInvitationInput {
   disconnect: Boolean
   update: UserUpdateWithoutInvitationInput
   upsert: UserUpsertWithoutInvitationInput
+}
+
+input UserUpdateWithoutAdsInput {
+  birthday: NullableDateTimeFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  facebookUrl: NullableStringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  Invitation: InvitationUpdateManyWithoutReceiverInput
+  invitations: InvitationUpdateManyWithoutSenderInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  level: IntFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  picture: NullableStringFieldUpdateOperationsInput
+  poems: PoemUpdateManyWithoutAuthorInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutInvitationInput {
@@ -1012,6 +1080,11 @@ input UserUpdateWithoutInvitationsInput {
   picture: NullableStringFieldUpdateOperationsInput
   poems: PoemUpdateManyWithoutAuthorInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpsertWithoutAdsInput {
+  create: UserCreateWithoutAdsInput!
+  update: UserUpdateWithoutAdsInput!
 }
 
 input UserUpsertWithoutInvitationInput {

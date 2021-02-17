@@ -4,7 +4,7 @@ import {
 
 export const Ad = objectType({
   name: 'Ad',
-  definition (t) {
+  definition(t) {
     t.model.id()
     t.model.createdAt()
     t.model.description()
@@ -15,5 +15,7 @@ export const Ad = objectType({
     t.model.title()
     t.model.updatedAt()
     t.model.picture()
+    t.model.additionalData()
+    t.model.available()
   }
 })

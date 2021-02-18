@@ -21,6 +21,21 @@ export const User = objectType({
     t.model.level()
     t.model.description()
     t.model.invitations()
+    t.field('invitedBy', {
+      type: 'User',
+      resolve: async (root, args, ctx) => {
+        const invitation = await ctx.prisma.invitation.findUnique({
+          where: {
+            sent: root.email
+          }
+        })
+        return !invitation?.senderId ? null : await ctx.prisma.user.findUnique({
+          where: {
+            id: invitation.senderId
+          }
+        })
+      }
+    })
   }
 })
 

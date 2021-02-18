@@ -511,6 +511,8 @@ input InvitationWhereInput {
 
 input InvitationWhereUniqueInput {
   id: String
+  receiverId: String
+  sent: String
   uid: String
 }
 
@@ -827,6 +829,7 @@ type User {
   firstName: String!
   id: String!
   invitations(after: InvitationWhereUniqueInput, before: InvitationWhereUniqueInput, first: Int, last: Int): [Invitation!]!
+  invitedBy: User
   lastName: String
   level: Int!
   password: String!

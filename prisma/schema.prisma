@@ -53,11 +53,11 @@ model Invitation {
   sender     User     @relation("InviteSent", fields: [senderId], references: [id])
   senderId   String
   receiver   User?    @relation(fields: [receiverId], references: [id])
-  receiverId String?
+  receiverId String?  @unique
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   uid        String   @unique
-  sent       String?
+  sent       String?  @unique
 }
 
 model Ad {

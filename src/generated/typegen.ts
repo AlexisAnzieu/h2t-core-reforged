@@ -437,6 +437,8 @@ export interface NexusGenInputs {
   }
   InvitationWhereUniqueInput: { // input type
     id?: string | null; // String
+    receiverId?: string | null; // String
+    sent?: string | null; // String
     uid?: string | null; // String
   }
   JsonNullableFilter: { // input type
@@ -1105,6 +1107,7 @@ export interface NexusGenFieldTypes {
     firstName: string; // String!
     id: string; // String!
     invitations: NexusGenRootTypes['Invitation'][]; // [Invitation!]!
+    invitedBy: NexusGenRootTypes['User'] | null; // User
     lastName: string | null; // String
     level: number; // Int!
     password: string; // String!
@@ -1200,6 +1203,7 @@ export interface NexusGenFieldTypeNames {
     firstName: 'String'
     id: 'String'
     invitations: 'Invitation'
+    invitedBy: 'User'
     lastName: 'String'
     level: 'Int'
     password: 'String'

@@ -1,10 +1,10 @@
 import {
   objectType
-} from '@nexus/schema'
+} from 'nexus'
 
 export const Invitation = objectType({
   name: 'Invitation',
-  definition (t) {
+  definition(t) {
     t.model.id()
     t.model.uid()
     t.model.receiver()

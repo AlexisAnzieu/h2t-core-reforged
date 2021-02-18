@@ -1,5 +1,5 @@
 import './generated/typegen'
-import { makeSchema } from '@nexus/schema'
+import { makeSchema } from 'nexus'
 import { ApolloServer, AuthenticationError } from 'apollo-server'
 import { verify } from 'jsonwebtoken'
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'

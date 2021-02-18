@@ -1,4 +1,4 @@
-import { arg, extendType, nonNull, stringArg } from '@nexus/schema'
+import { arg, extendType, nonNull, stringArg } from 'nexus'
 import { decode, verify } from 'jsonwebtoken'
 import { compare } from 'bcrypt'
 import dotenv from 'dotenv'

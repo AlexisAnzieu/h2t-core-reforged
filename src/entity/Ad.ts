@@ -1,6 +1,6 @@
 import {
   objectType
-} from '@nexus/schema'
+} from 'nexus'
 
 export const Ad = objectType({
   name: 'Ad',

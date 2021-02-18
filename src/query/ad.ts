@@ -1,6 +1,6 @@
 import {
   extendType, intArg, nonNull, stringArg
-} from '@nexus/schema'
+} from 'nexus'
 import cloudinary from 'cloudinary'
 
 export default extendType({

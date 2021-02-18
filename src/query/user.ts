@@ -1,10 +1,10 @@
 import {
   extendType
-} from '@nexus/schema'
+} from 'nexus'
 
 export default extendType({
   type: 'Query',
-  definition (t) {
+  definition(t) {
     t.crud.users({
       filtering: true,
       ordering: true

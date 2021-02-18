@@ -1,4 +1,4 @@
-import { objectType, scalarType } from '@nexus/schema'
+import { objectType, scalarType } from 'nexus'
 import { GraphQLError } from 'graphql'
 
 export const Upload = scalarType({
@@ -19,7 +19,7 @@ export const Upload = scalarType({
 
 export const File = objectType({
   name: 'File',
-  definition (t) {
+  definition(t) {
     t.id('id')
     t.string('path')
     t.string('filename')

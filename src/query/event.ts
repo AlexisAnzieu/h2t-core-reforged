@@ -1,9 +1,9 @@
 import {
   queryType
-} from '@nexus/schema'
+} from 'nexus'
 
 export default queryType({
-  definition (t) {
+  definition(t) {
     t.crud.event()
     t.crud.events({
       filtering: true,

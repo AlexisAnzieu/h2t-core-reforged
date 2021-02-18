@@ -1,10 +1,10 @@
 import {
   objectType
-} from '@nexus/schema'
+} from 'nexus'
 
 export const Event = objectType({
   name: 'Event',
-  definition (t) {
+  definition(t) {
     t.model.id()
     t.model.createdAt()
     t.model.date()

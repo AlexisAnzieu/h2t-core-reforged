@@ -1,11 +1,11 @@
 import {
   inputObjectType,
   objectType
-} from '@nexus/schema'
+} from 'nexus'
 
 export const User = objectType({
   name: 'User',
-  definition (t) {
+  definition(t) {
     t.model.id()
     t.model.birthday()
     t.model.facebookUrl()
@@ -26,7 +26,7 @@ export const User = objectType({
 
 export const SignupInput = inputObjectType({
   name: 'SignupInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('firstName')
     t.nonNull.string('email')
     t.nonNull.string('password')
@@ -39,7 +39,7 @@ export const SignupInput = inputObjectType({
 
 export const LoginInput = inputObjectType({
   name: 'LoginInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('email')
     t.nonNull.string('password')
   }
@@ -47,7 +47,7 @@ export const LoginInput = inputObjectType({
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
-  definition (t) {
+  definition(t) {
     t.string('token')
     t.nonNull.string('message')
     t.int('code')
@@ -59,7 +59,7 @@ export const AuthPayload = objectType({
 
 export const MessagePayload = objectType({
   name: 'MessagePayload',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('message')
     t.int('code')
   }

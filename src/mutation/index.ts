@@ -1,4 +1,4 @@
-import { arg, intArg, mutationType, nonNull, stringArg } from '@nexus/schema'
+import { arg, intArg, mutationType, nonNull, stringArg } from 'nexus'
 import { ForbiddenError } from 'apollo-server'
 import dotenv from 'dotenv'
 import { MessagePayload } from '../entity/User'

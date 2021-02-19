@@ -1070,6 +1070,7 @@ export interface NexusGenFieldTypes {
     createOneInvitation: NexusGenRootTypes['Invitation']; // Invitation!
     createOnePoem: NexusGenRootTypes['Poem']; // Poem!
     createOneUser: NexusGenRootTypes['User']; // User!
+    deleteOneAd: NexusGenRootTypes['Ad'] | null; // Ad
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateOneAd: NexusGenRootTypes['Ad'] | null; // Ad
@@ -1166,6 +1167,7 @@ export interface NexusGenFieldTypeNames {
     createOneInvitation: 'Invitation'
     createOnePoem: 'Poem'
     createOneUser: 'User'
+    deleteOneAd: 'Ad'
     login: 'AuthPayload'
     signup: 'AuthPayload'
     updateOneAd: 'Ad'
@@ -1232,6 +1234,9 @@ export interface NexusGenArgTypes {
     }
     createOneUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+    }
+    deleteOneAd: { // args
+      where: NexusGenInputs['AdWhereUniqueInput']; // AdWhereUniqueInput!
     }
     login: { // args
       loginInput: NexusGenInputs['LoginInput']; // LoginInput!

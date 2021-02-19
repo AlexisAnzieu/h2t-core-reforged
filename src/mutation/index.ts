@@ -99,6 +99,7 @@ export const Mutation = mutationType({
     })
     t.crud.createOneAd()
     t.crud.updateOneAd()
+    t.crud.deleteOneAd()
     t.crud.createOnePoem({
       async resolve(root: any, args: any, ctx: any, info: any, originalResolve: any) {
         if (!args.data.author?.connect?.id) {

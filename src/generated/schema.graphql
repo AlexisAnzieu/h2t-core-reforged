@@ -540,6 +540,7 @@ type Mutation {
   createOneInvitation(data: InvitationCreateInput!): Invitation!
   createOnePoem(data: PoemCreateInput!): Poem!
   createOneUser(data: UserCreateInput!): User!
+  deleteOneAd(where: AdWhereUniqueInput!): Ad
   login(loginInput: LoginInput!): AuthPayload!
   signup(signupInput: SignupInput!): AuthPayload!
   updateOneAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad

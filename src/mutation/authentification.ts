@@ -39,6 +39,27 @@ export const signup = extendType({
               code: 409
             }
           }
+
+          const invitationMatch = await ctx.prisma.invitation.findUnique({
+            where: {
+              uid: invitation
+            }
+          })
+
+          const invitedBy = await ctx.prisma.user.findUnique({
+            where: {
+              id: invitationMatch.senderId
+            }
+          })
+
+          const invitations = invitedBy.email === 'alexis.anzieu@gmail.com' ? {
+            create: [
+              { uid: generateInviteUid() },
+              { uid: generateInviteUid() },
+              { uid: generateInviteUid() },
+            ]
+          }: {}
+
           const hashedPassword = await generateHashPassword(password)
           const user = await ctx.prisma.user.create({
             data: {
@@ -50,15 +71,7 @@ export const signup = extendType({
               Invitation: {
                 connect: { uid: invitation }
               },
-              invitations: {
-                create: [
-                  { uid: generateInviteUid() },
-                  { uid: generateInviteUid() },
-                  { uid: generateInviteUid() },
-                  { uid: generateInviteUid() },
-                  { uid: generateInviteUid() }
-                ]
-              }
+              invitations
             }
           })
           // const token = generateToken({

@@ -150,12 +150,7 @@ export const accountActivation = extendType({
               Invitation: {
                 connect: { uid: invitation }
               },
-              invitations: {
-                create: [
-                  { uid: generateInviteUid() },
-                  { uid: generateInviteUid() },
-                ]
-              }
+              invitations
             }
           })
           return {

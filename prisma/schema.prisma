@@ -24,7 +24,7 @@ model User {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   password    String
-  description String?      @db.Text
+  description Json?
   email       String       @unique
   facebookUrl String?
   level       Int          @default(1)
@@ -67,7 +67,7 @@ model Ad {
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
   title          String
-  description    String
+  description    String?
   zipCode        String
   categories     AdCategory @default(DIVERS)
   picture        String?

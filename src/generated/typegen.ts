@@ -39,7 +39,7 @@ export interface NexusGenInputs {
     available?: boolean | null; // Boolean
     categories?: NexusGenEnums['AdCategory'] | null; // AdCategory
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description: string; // String!
+    description?: string | null; // String
     id?: string | null; // String
     picture?: string | null; // String
     title: string; // String!
@@ -60,7 +60,7 @@ export interface NexusGenInputs {
     available?: boolean | null; // Boolean
     categories?: NexusGenEnums['AdCategory'] | null; // AdCategory
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description: string; // String!
+    description?: string | null; // String
     id?: string | null; // String
     picture?: string | null; // String
     title: string; // String!
@@ -95,7 +95,7 @@ export interface NexusGenInputs {
     available?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     categories?: NexusGenInputs['EnumAdCategoryFilter'] | null; // EnumAdCategoryFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    description?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    description?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     picture?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -108,7 +108,7 @@ export interface NexusGenInputs {
     available?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     categories?: NexusGenInputs['EnumAdCategoryFieldUpdateOperationsInput'] | null; // EnumAdCategoryFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     picture?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -120,7 +120,7 @@ export interface NexusGenInputs {
     available?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     categories?: NexusGenInputs['EnumAdCategoryFieldUpdateOperationsInput'] | null; // EnumAdCategoryFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     picture?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -152,7 +152,7 @@ export interface NexusGenInputs {
     available?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     categories?: NexusGenInputs['EnumAdCategoryFieldUpdateOperationsInput'] | null; // EnumAdCategoryFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     picture?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -174,7 +174,7 @@ export interface NexusGenInputs {
     available?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     categories?: NexusGenInputs['EnumAdCategoryFilter'] | null; // EnumAdCategoryFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    description?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    description?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     picture?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -667,7 +667,7 @@ export interface NexusGenInputs {
     ads?: NexusGenInputs['AdCreateNestedManyWithoutAuthorInput'] | null; // AdCreateNestedManyWithoutAuthorInput
     birthday?: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description?: string | null; // String
+    description?: NexusGenScalars['Json'] | null; // Json
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
@@ -720,7 +720,7 @@ export interface NexusGenInputs {
     Invitation?: NexusGenInputs['InvitationCreateNestedManyWithoutReceiverInput'] | null; // InvitationCreateNestedManyWithoutReceiverInput
     birthday?: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description?: string | null; // String
+    description?: NexusGenScalars['Json'] | null; // Json
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
@@ -737,7 +737,7 @@ export interface NexusGenInputs {
     ads?: NexusGenInputs['AdCreateNestedManyWithoutAuthorInput'] | null; // AdCreateNestedManyWithoutAuthorInput
     birthday?: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description?: string | null; // String
+    description?: NexusGenScalars['Json'] | null; // Json
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
@@ -755,7 +755,7 @@ export interface NexusGenInputs {
     ads?: NexusGenInputs['AdCreateNestedManyWithoutAuthorInput'] | null; // AdCreateNestedManyWithoutAuthorInput
     birthday?: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description?: string | null; // String
+    description?: NexusGenScalars['Json'] | null; // Json
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
@@ -772,7 +772,7 @@ export interface NexusGenInputs {
     ads?: NexusGenInputs['AdCreateNestedManyWithoutAuthorInput'] | null; // AdCreateNestedManyWithoutAuthorInput
     birthday?: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description?: string | null; // String
+    description?: NexusGenScalars['Json'] | null; // Json
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
@@ -803,7 +803,7 @@ export interface NexusGenInputs {
     ads?: NexusGenInputs['AdUpdateManyWithoutAuthorInput'] | null; // AdUpdateManyWithoutAuthorInput
     birthday?: NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput'] | null; // NullableDateTimeFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    description?: NexusGenScalars['Json'] | null; // Json
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     facebookUrl?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -843,7 +843,7 @@ export interface NexusGenInputs {
     Invitation?: NexusGenInputs['InvitationUpdateManyWithoutReceiverInput'] | null; // InvitationUpdateManyWithoutReceiverInput
     birthday?: NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput'] | null; // NullableDateTimeFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    description?: NexusGenScalars['Json'] | null; // Json
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     facebookUrl?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -860,7 +860,7 @@ export interface NexusGenInputs {
     ads?: NexusGenInputs['AdUpdateManyWithoutAuthorInput'] | null; // AdUpdateManyWithoutAuthorInput
     birthday?: NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput'] | null; // NullableDateTimeFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    description?: NexusGenScalars['Json'] | null; // Json
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     facebookUrl?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -878,7 +878,7 @@ export interface NexusGenInputs {
     ads?: NexusGenInputs['AdUpdateManyWithoutAuthorInput'] | null; // AdUpdateManyWithoutAuthorInput
     birthday?: NexusGenInputs['NullableDateTimeFieldUpdateOperationsInput'] | null; // NullableDateTimeFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    description?: NexusGenScalars['Json'] | null; // Json
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     facebookUrl?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -910,7 +910,7 @@ export interface NexusGenInputs {
     ads?: NexusGenInputs['AdListRelationFilter'] | null; // AdListRelationFilter
     birthday?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    description?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    description?: NexusGenInputs['JsonNullableFilter'] | null; // JsonNullableFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     facebookUrl?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     firstName?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -952,7 +952,7 @@ export interface NexusGenObjects {
     available: boolean; // Boolean!
     categories: NexusGenEnums['AdCategory']; // AdCategory!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    description: string; // String!
+    description?: string | null; // String
     id: string; // String!
     picture?: string | null; // String
     title: string; // String!
@@ -998,7 +998,7 @@ export interface NexusGenObjects {
   User: { // root type
     birthday?: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    description?: string | null; // String
+    description?: NexusGenScalars['Json'] | null; // Json
     email: string; // String!
     facebookUrl?: string | null; // String
     firstName: string; // String!
@@ -1029,7 +1029,7 @@ export interface NexusGenFieldTypes {
     available: boolean; // Boolean!
     categories: NexusGenEnums['AdCategory']; // AdCategory!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    description: string; // String!
+    description: string | null; // String
     id: string; // String!
     picture: string | null; // String
     title: string; // String!
@@ -1102,7 +1102,7 @@ export interface NexusGenFieldTypes {
     ads: NexusGenRootTypes['Ad'][]; // [Ad!]!
     birthday: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    description: string | null; // String
+    description: NexusGenScalars['Json'] | null; // Json
     email: string; // String!
     facebookUrl: string | null; // String
     firstName: string; // String!
@@ -1199,7 +1199,7 @@ export interface NexusGenFieldTypeNames {
     ads: 'Ad'
     birthday: 'DateTime'
     createdAt: 'DateTime'
-    description: 'String'
+    description: 'Json'
     email: 'String'
     facebookUrl: 'String'
     firstName: 'String'

@@ -9,7 +9,7 @@ type Ad {
   available: Boolean!
   categories: AdCategory!
   createdAt: DateTime!
-  description: String!
+  description: String
   id: String!
   picture: String
   title: String!
@@ -34,7 +34,7 @@ input AdCreateInput {
   available: Boolean
   categories: AdCategory
   createdAt: DateTime
-  description: String!
+  description: String
   id: String
   picture: String
   title: String!
@@ -58,7 +58,7 @@ input AdCreateWithoutAuthorInput {
   available: Boolean
   categories: AdCategory
   createdAt: DateTime
-  description: String!
+  description: String
   id: String
   picture: String
   title: String!
@@ -96,7 +96,7 @@ input AdScalarWhereInput {
   available: BoolFilter
   categories: EnumAdCategoryFilter
   createdAt: DateTimeFilter
-  description: StringFilter
+  description: StringNullableFilter
   id: StringFilter
   picture: StringNullableFilter
   title: StringFilter
@@ -110,7 +110,7 @@ input AdUpdateInput {
   available: BoolFieldUpdateOperationsInput
   categories: EnumAdCategoryFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  description: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   picture: NullableStringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -123,7 +123,7 @@ input AdUpdateManyMutationInput {
   available: BoolFieldUpdateOperationsInput
   categories: EnumAdCategoryFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  description: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   picture: NullableStringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -159,7 +159,7 @@ input AdUpdateWithoutAuthorInput {
   available: BoolFieldUpdateOperationsInput
   categories: EnumAdCategoryFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  description: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   picture: NullableStringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -183,7 +183,7 @@ input AdWhereInput {
   available: BoolFilter
   categories: EnumAdCategoryFilter
   createdAt: DateTimeFilter
-  description: StringFilter
+  description: StringNullableFilter
   id: StringFilter
   picture: StringNullableFilter
   title: StringFilter
@@ -824,7 +824,7 @@ type User {
   ads(after: AdWhereUniqueInput, before: AdWhereUniqueInput, first: Int, last: Int): [Ad!]!
   birthday: DateTime
   createdAt: DateTime!
-  description: String
+  description: Json
   email: String!
   facebookUrl: String
   firstName: String!
@@ -844,7 +844,7 @@ input UserCreateInput {
   ads: AdCreateNestedManyWithoutAuthorInput
   birthday: DateTime
   createdAt: DateTime
-  description: String
+  description: Json
   email: String!
   facebookUrl: String
   firstName: String!
@@ -906,7 +906,7 @@ input UserCreateWithoutAdsInput {
   Invitation: InvitationCreateNestedManyWithoutReceiverInput
   birthday: DateTime
   createdAt: DateTime
-  description: String
+  description: Json
   email: String!
   facebookUrl: String
   firstName: String!
@@ -924,7 +924,7 @@ input UserCreateWithoutInvitationInput {
   ads: AdCreateNestedManyWithoutAuthorInput
   birthday: DateTime
   createdAt: DateTime
-  description: String
+  description: Json
   email: String!
   facebookUrl: String
   firstName: String!
@@ -943,7 +943,7 @@ input UserCreateWithoutInvitationsInput {
   ads: AdCreateNestedManyWithoutAuthorInput
   birthday: DateTime
   createdAt: DateTime
-  description: String
+  description: Json
   email: String!
   facebookUrl: String
   firstName: String!
@@ -961,7 +961,7 @@ input UserCreateWithoutPoemsInput {
   ads: AdCreateNestedManyWithoutAuthorInput
   birthday: DateTime
   createdAt: DateTime
-  description: String
+  description: Json
   email: String!
   facebookUrl: String
   firstName: String!
@@ -994,7 +994,7 @@ input UserUpdateInput {
   ads: AdUpdateManyWithoutAuthorInput
   birthday: NullableDateTimeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
+  description: Json
   email: StringFieldUpdateOperationsInput
   facebookUrl: NullableStringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
@@ -1038,7 +1038,7 @@ input UserUpdateWithoutAdsInput {
   Invitation: InvitationUpdateManyWithoutReceiverInput
   birthday: NullableDateTimeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
+  description: Json
   email: StringFieldUpdateOperationsInput
   facebookUrl: NullableStringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
@@ -1056,7 +1056,7 @@ input UserUpdateWithoutInvitationInput {
   ads: AdUpdateManyWithoutAuthorInput
   birthday: NullableDateTimeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
+  description: Json
   email: StringFieldUpdateOperationsInput
   facebookUrl: NullableStringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
@@ -1075,7 +1075,7 @@ input UserUpdateWithoutInvitationsInput {
   ads: AdUpdateManyWithoutAuthorInput
   birthday: NullableDateTimeFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
+  description: Json
   email: StringFieldUpdateOperationsInput
   facebookUrl: NullableStringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
@@ -1111,7 +1111,7 @@ input UserWhereInput {
   ads: AdListRelationFilter
   birthday: DateTimeNullableFilter
   createdAt: DateTimeFilter
-  description: StringNullableFilter
+  description: JsonNullableFilter
   email: StringFilter
   facebookUrl: StringNullableFilter
   firstName: StringFilter

@@ -18,10 +18,10 @@ type Ad {
 }
 
 enum AdCategory {
-  BOARDGAME
   CUISINE
   DIVERS
   ELECTRONIQUE
+  JEU
   LIVRE
   MAISON
   SERVICE

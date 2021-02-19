@@ -76,7 +76,7 @@ model Ad {
 }
 
 enum AdCategory {
-  BOARDGAME
+  JEU
   CUISINE
   DIVERS
   ELECTRONIQUE

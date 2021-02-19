@@ -930,7 +930,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  AdCategory: "BOARDGAME" | "CUISINE" | "DIVERS" | "ELECTRONIQUE" | "LIVRE" | "MAISON" | "SERVICE" | "VETEMENT"
+  AdCategory: "CUISINE" | "DIVERS" | "ELECTRONIQUE" | "JEU" | "LIVRE" | "MAISON" | "SERVICE" | "VETEMENT"
   SortOrder: "asc" | "desc"
 }
 

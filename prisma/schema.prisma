@@ -24,7 +24,7 @@ model User {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   password    String
-  description Json?
+  description String?      @db.Text
   email       String       @unique
   facebookUrl String?
   level       Int          @default(1)

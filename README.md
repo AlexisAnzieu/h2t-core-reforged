@@ -2,4 +2,4 @@
 
 update `schema.prisma`
 
-`npx prisma migrate dev --preview-feature`
+`npx prisma migrate dev`

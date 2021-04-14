@@ -87,12 +87,16 @@ export const Mutation = mutationType({
             }
           })
           const html = invitationEmail(res.uid, senderEmail.firstName, args.data.sent.set)
-          await sendEmail(
-            'H2T.CLUB 👻 <contact@h2t.club>',
-            args.data.sent.set,
-            'Activation du compte',
-            html
-          )
+          try {
+            await sendEmail(
+              'H2T.CLUB 👻 <contact@h2t.club>',
+              args.data.sent.set,
+              'Activation du compte',
+              html
+            )
+          } catch (error) {
+            console.log(error)
+          }
         }
         return res
       }

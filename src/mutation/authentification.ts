@@ -28,27 +28,21 @@ export const signup = extendType({
               code: 409
             }
           }
-          const isUserExist = await ctx.prisma.user.findUnique({
+          const isUserUnique = await ctx.prisma.user.findUnique({
             where: {
               email
             }
           })
-          if (isUserExist) {
+          if (!isUserUnique) {
             return {
               message: 'Cette adresse mail a déjà été enregistrée sur un autre compte',
               code: 409
             }
           }
 
-          const invitationMatch = await ctx.prisma.invitation.findUnique({
-            where: {
-              uid: invitation
-            }
-          })
-
           const invitedBy = await ctx.prisma.user.findUnique({
             where: {
-              id: invitationMatch.senderId
+              id: invitationConfirmed.senderId
             }
           })
 

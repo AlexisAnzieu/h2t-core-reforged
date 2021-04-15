@@ -28,12 +28,13 @@ export const signup = extendType({
               code: 409
             }
           }
-          const isUserUnique = await ctx.prisma.user.findUnique({
+          const isDuplicatedUser = await ctx.prisma.user.findUnique({
             where: {
               email
             }
           })
-          if (!isUserUnique) {
+          
+          if (isDuplicatedUser) {
             return {
               message: 'Cette adresse mail a déjà été enregistrée sur un autre compte',
               code: 409

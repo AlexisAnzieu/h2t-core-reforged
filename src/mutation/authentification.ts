@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import generateToken from '../helpers/generateToken'
 import generateHashPassword from '../helpers/generateHasPassword'
 import { generateInviteUid } from '../helpers/generateInviteUid'
+import { addContactSIB } from '../helpers/activationEmailsSIB'
 dotenv.config()
 
 export const signup = extendType({
@@ -33,7 +34,7 @@ export const signup = extendType({
               email
             }
           })
-          
+
           if (isDuplicatedUser) {
             return {
               message: 'Cette adresse mail a déjà été enregistrée sur un autre compte',
@@ -53,7 +54,7 @@ export const signup = extendType({
               { uid: generateInviteUid() },
               { uid: generateInviteUid() },
             ]
-          }: {}
+          } : {}
 
           const hashedPassword = await generateHashPassword(password)
           const user = await ctx.prisma.user.create({
@@ -69,6 +70,9 @@ export const signup = extendType({
               invitations
             }
           })
+
+          await addContactSIB(email, firstName, lastName || undefined);
+
           // const token = generateToken({
           //   firstName,
           //   email,

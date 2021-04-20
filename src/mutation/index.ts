@@ -4,7 +4,8 @@ import dotenv from 'dotenv'
 import { MessagePayload } from '../entity/User'
 import * as auth from './authentification'
 import cloudinary from 'cloudinary'
-import { invitationEmail, sendEmail } from '../helpers/activationEmail'
+import { invitationEmailSIB } from '../helpers/activationEmailsSIB'
+
 dotenv.config()
 
 cloudinary.v2.config({
@@ -86,14 +87,8 @@ export const Mutation = mutationType({
               id: ctx.user.id
             }
           })
-          const html = invitationEmail(res.uid, senderEmail.firstName, args.data.sent.set)
           try {
-            await sendEmail(
-              'H2T.CLUB 👻 <contact@h2t.club>',
-              args.data.sent.set,
-              'Activation du compte',
-              html
-            )
+            await invitationEmailSIB(res.uid, senderEmail.firstName, args.data.sent.set)
           } catch (error) {
             console.log(error)
           }

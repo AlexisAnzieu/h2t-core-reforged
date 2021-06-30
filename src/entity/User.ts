@@ -9,6 +9,7 @@ export const User = objectType({
     t.model.id()
     t.model.birthday()
     t.model.facebookUrl()
+    t.model.hasDoorAccess()
     t.model.firstName()
     t.model.createdAt()
     t.model.updatedAt()

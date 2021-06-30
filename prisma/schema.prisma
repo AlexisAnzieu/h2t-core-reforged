@@ -20,22 +20,23 @@ model Event {
 }
 
 model User {
-  id          String       @id @default(uuid())
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  password    String
-  description String?      @db.Text
-  email       String       @unique
-  facebookUrl String?
-  level       Int          @default(1)
-  firstName   String
-  lastName    String?
-  birthday    DateTime?
-  picture     String?
-  poems       Poem[]
-  ads         Ad[]
-  invitations Invitation[] @relation("InviteSent")
-  Invitation  Invitation[]
+  id            String       @id @default(uuid())
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  password      String
+  description   String?      @db.Text
+  email         String       @unique
+  facebookUrl   String?
+  level         Int          @default(1)
+  firstName     String
+  lastName      String?
+  birthday      DateTime?
+  picture       String?
+  hasDoorAccess Boolean      @default(false)
+  poems         Poem[]
+  ads           Ad[]
+  invitations   Invitation[] @relation("InviteSent")
+  Invitation    Invitation[]
 }
 
 model Poem {

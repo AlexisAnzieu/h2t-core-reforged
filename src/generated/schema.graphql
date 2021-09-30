@@ -10,7 +10,7 @@ type Ad {
   categories: AdCategory!
   createdAt: DateTime!
   description: String
-  id: String!
+  id: ID!
   picture: String
   title: String!
   updatedAt: DateTime!
@@ -28,173 +28,6 @@ enum AdCategory {
   VETEMENT
 }
 
-input AdCreateInput {
-  additionalData: Json
-  author: UserCreateNestedOneWithoutAdsInput!
-  available: Boolean
-  categories: AdCategory
-  createdAt: DateTime
-  description: String
-  id: String
-  picture: String
-  title: String!
-  updatedAt: DateTime
-  zipCode: String!
-}
-
-input AdCreateNestedManyWithoutAuthorInput {
-  connect: [AdWhereUniqueInput!]
-  connectOrCreate: [AdCreateOrConnectWithoutAuthorInput!]
-  create: [AdCreateWithoutAuthorInput!]
-}
-
-input AdCreateOrConnectWithoutAuthorInput {
-  create: AdCreateWithoutAuthorInput!
-  where: AdWhereUniqueInput!
-}
-
-input AdCreateWithoutAuthorInput {
-  additionalData: Json
-  available: Boolean
-  categories: AdCategory
-  createdAt: DateTime
-  description: String
-  id: String
-  picture: String
-  title: String!
-  updatedAt: DateTime
-  zipCode: String!
-}
-
-input AdListRelationFilter {
-  every: AdWhereInput
-  none: AdWhereInput
-  some: AdWhereInput
-}
-
-input AdOrderByInput {
-  additionalData: SortOrder
-  author: UserOrderByInput
-  authorId: SortOrder
-  available: SortOrder
-  categories: SortOrder
-  createdAt: SortOrder
-  description: SortOrder
-  id: SortOrder
-  picture: SortOrder
-  title: SortOrder
-  updatedAt: SortOrder
-  zipCode: SortOrder
-}
-
-input AdScalarWhereInput {
-  AND: [AdScalarWhereInput!]
-  NOT: [AdScalarWhereInput!]
-  OR: [AdScalarWhereInput!]
-  additionalData: JsonNullableFilter
-  authorId: StringFilter
-  available: BoolFilter
-  categories: EnumAdCategoryFilter
-  createdAt: DateTimeFilter
-  description: StringNullableFilter
-  id: StringFilter
-  picture: StringNullableFilter
-  title: StringFilter
-  updatedAt: DateTimeFilter
-  zipCode: StringFilter
-}
-
-input AdUpdateInput {
-  additionalData: Json
-  author: UserUpdateOneRequiredWithoutAdsInput
-  available: BoolFieldUpdateOperationsInput
-  categories: EnumAdCategoryFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  picture: NullableStringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  zipCode: StringFieldUpdateOperationsInput
-}
-
-input AdUpdateManyMutationInput {
-  additionalData: Json
-  available: BoolFieldUpdateOperationsInput
-  categories: EnumAdCategoryFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  picture: NullableStringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  zipCode: StringFieldUpdateOperationsInput
-}
-
-input AdUpdateManyWithWhereWithoutAuthorInput {
-  data: AdUpdateManyMutationInput!
-  where: AdScalarWhereInput!
-}
-
-input AdUpdateManyWithoutAuthorInput {
-  connect: [AdWhereUniqueInput!]
-  connectOrCreate: [AdCreateOrConnectWithoutAuthorInput!]
-  create: [AdCreateWithoutAuthorInput!]
-  delete: [AdWhereUniqueInput!]
-  deleteMany: [AdScalarWhereInput!]
-  disconnect: [AdWhereUniqueInput!]
-  set: [AdWhereUniqueInput!]
-  update: [AdUpdateWithWhereUniqueWithoutAuthorInput!]
-  updateMany: [AdUpdateManyWithWhereWithoutAuthorInput!]
-  upsert: [AdUpsertWithWhereUniqueWithoutAuthorInput!]
-}
-
-input AdUpdateWithWhereUniqueWithoutAuthorInput {
-  data: AdUpdateWithoutAuthorInput!
-  where: AdWhereUniqueInput!
-}
-
-input AdUpdateWithoutAuthorInput {
-  additionalData: Json
-  available: BoolFieldUpdateOperationsInput
-  categories: EnumAdCategoryFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  picture: NullableStringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-  zipCode: StringFieldUpdateOperationsInput
-}
-
-input AdUpsertWithWhereUniqueWithoutAuthorInput {
-  create: AdCreateWithoutAuthorInput!
-  update: AdUpdateWithoutAuthorInput!
-  where: AdWhereUniqueInput!
-}
-
-input AdWhereInput {
-  AND: [AdWhereInput!]
-  NOT: [AdWhereInput!]
-  OR: [AdWhereInput!]
-  additionalData: JsonNullableFilter
-  author: UserWhereInput
-  authorId: StringFilter
-  available: BoolFilter
-  categories: EnumAdCategoryFilter
-  createdAt: DateTimeFilter
-  description: StringNullableFilter
-  id: StringFilter
-  picture: StringNullableFilter
-  title: StringFilter
-  updatedAt: DateTimeFilter
-  zipCode: StringFilter
-}
-
-input AdWhereUniqueInput {
-  id: String
-}
-
 type AuthPayload {
   code: Int
   message: String!
@@ -202,59 +35,28 @@ type AuthPayload {
   user: User
 }
 
-input BoolFieldUpdateOperationsInput {
-  set: Boolean
-}
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
+"""
+scalar BigInt
 
-input BoolFilter {
-  equals: Boolean
-  not: NestedBoolFilter
-}
+"""The `Byte` scalar type represents byte value as a Buffer"""
+scalar Bytes
 
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
 scalar DateTime
 
-input DateTimeFieldUpdateOperationsInput {
-  set: DateTime
-}
-
-input DateTimeFilter {
-  equals: DateTime
-  gt: DateTime
-  gte: DateTime
-  in: [DateTime!]
-  lt: DateTime
-  lte: DateTime
-  not: NestedDateTimeFilter
-  notIn: [DateTime!]
-}
-
-input DateTimeNullableFilter {
-  equals: DateTime
-  gt: DateTime
-  gte: DateTime
-  in: [DateTime!]
-  lt: DateTime
-  lte: DateTime
-  not: NestedDateTimeNullableFilter
-  notIn: [DateTime!]
-}
-
-input EnumAdCategoryFieldUpdateOperationsInput {
-  set: AdCategory
-}
-
-input EnumAdCategoryFilter {
-  equals: AdCategory
-  in: [AdCategory!]
-  not: NestedEnumAdCategoryFilter
-  notIn: [AdCategory!]
-}
+"""An arbitrary-precision Decimal type"""
+scalar Decimal
 
 type Event {
   createdAt: DateTime!
   date: String!
   description: String!
-  id: String!
+  id: ID!
   image: String!
   locations: String!
   published: Boolean!
@@ -262,266 +64,17 @@ type Event {
   updatedAt: DateTime!
 }
 
-input EventCreateInput {
-  createdAt: DateTime
-  date: String!
-  description: String!
-  id: String
-  image: String!
-  locations: String!
-  published: Boolean
-  title: String!
-  updatedAt: DateTime
-}
-
-input EventOrderByInput {
-  createdAt: SortOrder
-  date: SortOrder
-  description: SortOrder
-  id: SortOrder
-  image: SortOrder
-  locations: SortOrder
-  published: SortOrder
-  title: SortOrder
-  updatedAt: SortOrder
-}
-
-input EventWhereInput {
-  AND: [EventWhereInput!]
-  NOT: [EventWhereInput!]
-  OR: [EventWhereInput!]
-  createdAt: DateTimeFilter
-  date: StringFilter
-  description: StringFilter
-  id: StringFilter
-  image: StringFilter
-  locations: StringFilter
-  published: BoolFilter
-  title: StringFilter
-  updatedAt: DateTimeFilter
-}
-
-input EventWhereUniqueInput {
-  id: String
-}
-
-input IntFieldUpdateOperationsInput {
-  decrement: Int
-  divide: Int
-  increment: Int
-  multiply: Int
-  set: Int
-}
-
-input IntFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int!]
-  lt: Int
-  lte: Int
-  not: NestedIntFilter
-  notIn: [Int!]
-}
-
 type Invitation {
-  id: String!
+  id: ID!
   receiver: User
   sent: String
   uid: String!
 }
 
-input InvitationCreateInput {
-  createdAt: DateTime
-  id: String
-  receiver: UserCreateNestedOneWithoutInvitationInput
-  sender: UserCreateNestedOneWithoutInvitationsInput!
-  sent: String
-  uid: String!
-  updatedAt: DateTime
-}
-
-input InvitationCreateNestedManyWithoutReceiverInput {
-  connect: [InvitationWhereUniqueInput!]
-  connectOrCreate: [InvitationCreateOrConnectWithoutReceiverInput!]
-  create: [InvitationCreateWithoutReceiverInput!]
-}
-
-input InvitationCreateNestedManyWithoutSenderInput {
-  connect: [InvitationWhereUniqueInput!]
-  connectOrCreate: [InvitationCreateOrConnectWithoutSenderInput!]
-  create: [InvitationCreateWithoutSenderInput!]
-}
-
-input InvitationCreateOrConnectWithoutReceiverInput {
-  create: InvitationCreateWithoutReceiverInput!
-  where: InvitationWhereUniqueInput!
-}
-
-input InvitationCreateOrConnectWithoutSenderInput {
-  create: InvitationCreateWithoutSenderInput!
-  where: InvitationWhereUniqueInput!
-}
-
-input InvitationCreateWithoutReceiverInput {
-  createdAt: DateTime
-  id: String
-  sender: UserCreateNestedOneWithoutInvitationsInput!
-  sent: String
-  uid: String!
-  updatedAt: DateTime
-}
-
-input InvitationCreateWithoutSenderInput {
-  createdAt: DateTime
-  id: String
-  receiver: UserCreateNestedOneWithoutInvitationInput
-  sent: String
-  uid: String!
-  updatedAt: DateTime
-}
-
-input InvitationListRelationFilter {
-  every: InvitationWhereInput
-  none: InvitationWhereInput
-  some: InvitationWhereInput
-}
-
-input InvitationScalarWhereInput {
-  AND: [InvitationScalarWhereInput!]
-  NOT: [InvitationScalarWhereInput!]
-  OR: [InvitationScalarWhereInput!]
-  createdAt: DateTimeFilter
-  id: StringFilter
-  receiverId: StringNullableFilter
-  senderId: StringFilter
-  sent: StringNullableFilter
-  uid: StringFilter
-  updatedAt: DateTimeFilter
-}
-
-input InvitationUpdateInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  receiver: UserUpdateOneWithoutInvitationInput
-  sender: UserUpdateOneRequiredWithoutInvitationsInput
-  sent: NullableStringFieldUpdateOperationsInput
-  uid: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input InvitationUpdateManyMutationInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  sent: NullableStringFieldUpdateOperationsInput
-  uid: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input InvitationUpdateManyWithWhereWithoutReceiverInput {
-  data: InvitationUpdateManyMutationInput!
-  where: InvitationScalarWhereInput!
-}
-
-input InvitationUpdateManyWithWhereWithoutSenderInput {
-  data: InvitationUpdateManyMutationInput!
-  where: InvitationScalarWhereInput!
-}
-
-input InvitationUpdateManyWithoutReceiverInput {
-  connect: [InvitationWhereUniqueInput!]
-  connectOrCreate: [InvitationCreateOrConnectWithoutReceiverInput!]
-  create: [InvitationCreateWithoutReceiverInput!]
-  delete: [InvitationWhereUniqueInput!]
-  deleteMany: [InvitationScalarWhereInput!]
-  disconnect: [InvitationWhereUniqueInput!]
-  set: [InvitationWhereUniqueInput!]
-  update: [InvitationUpdateWithWhereUniqueWithoutReceiverInput!]
-  updateMany: [InvitationUpdateManyWithWhereWithoutReceiverInput!]
-  upsert: [InvitationUpsertWithWhereUniqueWithoutReceiverInput!]
-}
-
-input InvitationUpdateManyWithoutSenderInput {
-  connect: [InvitationWhereUniqueInput!]
-  connectOrCreate: [InvitationCreateOrConnectWithoutSenderInput!]
-  create: [InvitationCreateWithoutSenderInput!]
-  delete: [InvitationWhereUniqueInput!]
-  deleteMany: [InvitationScalarWhereInput!]
-  disconnect: [InvitationWhereUniqueInput!]
-  set: [InvitationWhereUniqueInput!]
-  update: [InvitationUpdateWithWhereUniqueWithoutSenderInput!]
-  updateMany: [InvitationUpdateManyWithWhereWithoutSenderInput!]
-  upsert: [InvitationUpsertWithWhereUniqueWithoutSenderInput!]
-}
-
-input InvitationUpdateWithWhereUniqueWithoutReceiverInput {
-  data: InvitationUpdateWithoutReceiverInput!
-  where: InvitationWhereUniqueInput!
-}
-
-input InvitationUpdateWithWhereUniqueWithoutSenderInput {
-  data: InvitationUpdateWithoutSenderInput!
-  where: InvitationWhereUniqueInput!
-}
-
-input InvitationUpdateWithoutReceiverInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  sender: UserUpdateOneRequiredWithoutInvitationsInput
-  sent: NullableStringFieldUpdateOperationsInput
-  uid: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input InvitationUpdateWithoutSenderInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  receiver: UserUpdateOneWithoutInvitationInput
-  sent: NullableStringFieldUpdateOperationsInput
-  uid: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input InvitationUpsertWithWhereUniqueWithoutReceiverInput {
-  create: InvitationCreateWithoutReceiverInput!
-  update: InvitationUpdateWithoutReceiverInput!
-  where: InvitationWhereUniqueInput!
-}
-
-input InvitationUpsertWithWhereUniqueWithoutSenderInput {
-  create: InvitationCreateWithoutSenderInput!
-  update: InvitationUpdateWithoutSenderInput!
-  where: InvitationWhereUniqueInput!
-}
-
-input InvitationWhereInput {
-  AND: [InvitationWhereInput!]
-  NOT: [InvitationWhereInput!]
-  OR: [InvitationWhereInput!]
-  createdAt: DateTimeFilter
-  id: StringFilter
-  receiver: UserWhereInput
-  receiverId: StringNullableFilter
-  sender: UserWhereInput
-  senderId: StringFilter
-  sent: StringNullableFilter
-  uid: StringFilter
-  updatedAt: DateTimeFilter
-}
-
-input InvitationWhereUniqueInput {
-  id: String
-  receiverId: String
-  sent: String
-  uid: String
-}
-
-scalar Json
-
-input JsonNullableFilter {
-  equals: Json
-  not: Json
-}
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 input LoginInput {
   email: String!
@@ -535,99 +88,8 @@ type MessagePayload {
 
 type Mutation {
   accountActivation(token: String!): MessagePayload!
-  createOneAd(data: AdCreateInput!): Ad!
-  createOneEvent(data: EventCreateInput!): Event!
-  createOneInvitation(data: InvitationCreateInput!): Invitation!
-  createOnePoem(data: PoemCreateInput!): Poem!
-  createOneUser(data: UserCreateInput!): User!
-  deleteOneAd(where: AdWhereUniqueInput!): Ad
   login(loginInput: LoginInput!): AuthPayload!
   signup(signupInput: SignupInput!): AuthPayload!
-  updateOneAd(data: AdUpdateInput!, where: AdWhereUniqueInput!): Ad
-  updateOneInvitation(data: InvitationUpdateInput!, where: InvitationWhereUniqueInput!): Invitation
-  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  uploadPhoto(file: Upload!, type: String, userId: Int!): MessagePayload!
-}
-
-input NestedBoolFilter {
-  equals: Boolean
-  not: NestedBoolFilter
-}
-
-input NestedDateTimeFilter {
-  equals: DateTime
-  gt: DateTime
-  gte: DateTime
-  in: [DateTime!]
-  lt: DateTime
-  lte: DateTime
-  not: NestedDateTimeFilter
-  notIn: [DateTime!]
-}
-
-input NestedDateTimeNullableFilter {
-  equals: DateTime
-  gt: DateTime
-  gte: DateTime
-  in: [DateTime!]
-  lt: DateTime
-  lte: DateTime
-  not: NestedDateTimeNullableFilter
-  notIn: [DateTime!]
-}
-
-input NestedEnumAdCategoryFilter {
-  equals: AdCategory
-  in: [AdCategory!]
-  not: NestedEnumAdCategoryFilter
-  notIn: [AdCategory!]
-}
-
-input NestedIntFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int!]
-  lt: Int
-  lte: Int
-  not: NestedIntFilter
-  notIn: [Int!]
-}
-
-input NestedStringFilter {
-  contains: String
-  endsWith: String
-  equals: String
-  gt: String
-  gte: String
-  in: [String!]
-  lt: String
-  lte: String
-  not: NestedStringFilter
-  notIn: [String!]
-  startsWith: String
-}
-
-input NestedStringNullableFilter {
-  contains: String
-  endsWith: String
-  equals: String
-  gt: String
-  gte: String
-  in: [String!]
-  lt: String
-  lte: String
-  not: NestedStringNullableFilter
-  notIn: [String!]
-  startsWith: String
-}
-
-input NullableDateTimeFieldUpdateOperationsInput {
-  set: DateTime
-}
-
-input NullableStringFieldUpdateOperationsInput {
-  set: String
 }
 
 type Poem {
@@ -635,139 +97,20 @@ type Poem {
   authorId: String
   createdAt: DateTime!
   description: String!
-  id: String!
+  id: ID!
   title: String!
   updatedAt: DateTime!
 }
 
-input PoemCreateInput {
-  author: UserCreateNestedOneWithoutPoemsInput
-  createdAt: DateTime
-  description: String!
-  id: String
-  title: String!
-  updatedAt: DateTime
-}
-
-input PoemCreateNestedManyWithoutAuthorInput {
-  connect: [PoemWhereUniqueInput!]
-  connectOrCreate: [PoemCreateOrConnectWithoutAuthorInput!]
-  create: [PoemCreateWithoutAuthorInput!]
-}
-
-input PoemCreateOrConnectWithoutAuthorInput {
-  create: PoemCreateWithoutAuthorInput!
-  where: PoemWhereUniqueInput!
-}
-
-input PoemCreateWithoutAuthorInput {
-  createdAt: DateTime
-  description: String!
-  id: String
-  title: String!
-  updatedAt: DateTime
-}
-
-input PoemListRelationFilter {
-  every: PoemWhereInput
-  none: PoemWhereInput
-  some: PoemWhereInput
-}
-
-input PoemOrderByInput {
-  author: UserOrderByInput
-  authorId: SortOrder
-  createdAt: SortOrder
-  description: SortOrder
-  id: SortOrder
-  title: SortOrder
-  updatedAt: SortOrder
-}
-
-input PoemScalarWhereInput {
-  AND: [PoemScalarWhereInput!]
-  NOT: [PoemScalarWhereInput!]
-  OR: [PoemScalarWhereInput!]
-  authorId: StringNullableFilter
-  createdAt: DateTimeFilter
-  description: StringFilter
-  id: StringFilter
-  title: StringFilter
-  updatedAt: DateTimeFilter
-}
-
-input PoemUpdateManyMutationInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input PoemUpdateManyWithWhereWithoutAuthorInput {
-  data: PoemUpdateManyMutationInput!
-  where: PoemScalarWhereInput!
-}
-
-input PoemUpdateManyWithoutAuthorInput {
-  connect: [PoemWhereUniqueInput!]
-  connectOrCreate: [PoemCreateOrConnectWithoutAuthorInput!]
-  create: [PoemCreateWithoutAuthorInput!]
-  delete: [PoemWhereUniqueInput!]
-  deleteMany: [PoemScalarWhereInput!]
-  disconnect: [PoemWhereUniqueInput!]
-  set: [PoemWhereUniqueInput!]
-  update: [PoemUpdateWithWhereUniqueWithoutAuthorInput!]
-  updateMany: [PoemUpdateManyWithWhereWithoutAuthorInput!]
-  upsert: [PoemUpsertWithWhereUniqueWithoutAuthorInput!]
-}
-
-input PoemUpdateWithWhereUniqueWithoutAuthorInput {
-  data: PoemUpdateWithoutAuthorInput!
-  where: PoemWhereUniqueInput!
-}
-
-input PoemUpdateWithoutAuthorInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  title: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input PoemUpsertWithWhereUniqueWithoutAuthorInput {
-  create: PoemCreateWithoutAuthorInput!
-  update: PoemUpdateWithoutAuthorInput!
-  where: PoemWhereUniqueInput!
-}
-
-input PoemWhereInput {
-  AND: [PoemWhereInput!]
-  NOT: [PoemWhereInput!]
-  OR: [PoemWhereInput!]
-  author: UserWhereInput
-  authorId: StringNullableFilter
-  createdAt: DateTimeFilter
-  description: StringFilter
-  id: StringFilter
-  title: StringFilter
-  updatedAt: DateTimeFilter
-}
-
-input PoemWhereUniqueInput {
-  id: String
-}
-
 type Query {
-  ad(where: AdWhereUniqueInput!): Ad
-  ads(after: AdWhereUniqueInput, before: AdWhereUniqueInput, first: Int, last: Int, orderBy: [AdOrderByInput!], where: AdWhereInput): [Ad!]!
-  event(where: EventWhereUniqueInput!): Event
-  events(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, orderBy: [EventOrderByInput!], where: EventWhereInput): [Event!]!
+  ad: Ad
+  ads: [Ad]
+  event: [Event]
   generateSignature(folder: String, public_id: String, source: String!, timestamp: Int!): MessagePayload
-  poem(where: PoemWhereUniqueInput!): Poem
-  poems(after: PoemWhereUniqueInput, before: PoemWhereUniqueInput, first: Int, last: Int, orderBy: [PoemOrderByInput!], where: PoemWhereInput): [Poem!]!
-  user(where: UserWhereUniqueInput!): User
-  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): [User!]!
+  poem: Poem
+  poems: [Poem]
+  user(id: String!): User
+  users: [User]
 }
 
 input SignupInput {
@@ -780,352 +123,22 @@ input SignupInput {
   password: String!
 }
 
-enum SortOrder {
-  asc
-  desc
-}
-
-input StringFieldUpdateOperationsInput {
-  set: String
-}
-
-input StringFilter {
-  contains: String
-  endsWith: String
-  equals: String
-  gt: String
-  gte: String
-  in: [String!]
-  lt: String
-  lte: String
-  not: NestedStringFilter
-  notIn: [String!]
-  startsWith: String
-}
-
-input StringNullableFilter {
-  contains: String
-  endsWith: String
-  equals: String
-  gt: String
-  gte: String
-  in: [String!]
-  lt: String
-  lte: String
-  not: NestedStringNullableFilter
-  notIn: [String!]
-  startsWith: String
-}
-
-"""desc"""
-scalar Upload
-
 type User {
-  ads(after: AdWhereUniqueInput, before: AdWhereUniqueInput, first: Int, last: Int): [Ad!]!
+  ads: [Ad!]!
   birthday: DateTime
   createdAt: DateTime!
   description: String
   email: String!
   facebookUrl: String
   firstName: String!
-  id: String!
-  invitations(after: InvitationWhereUniqueInput, before: InvitationWhereUniqueInput, first: Int, last: Int): [Invitation!]!
+  hasDoorAccess: Boolean!
+  id: ID!
+  invitations: [Invitation!]!
   invitedBy: User
   lastName: String
   level: Int!
   password: String!
   picture: String
-  poems(after: PoemWhereUniqueInput, before: PoemWhereUniqueInput, first: Int, last: Int): [Poem!]!
+  poems: [Poem!]!
   updatedAt: DateTime!
-}
-
-input UserCreateInput {
-  Invitation: InvitationCreateNestedManyWithoutReceiverInput
-  ads: AdCreateNestedManyWithoutAuthorInput
-  birthday: DateTime
-  createdAt: DateTime
-  description: String
-  email: String!
-  facebookUrl: String
-  firstName: String!
-  id: String
-  invitations: InvitationCreateNestedManyWithoutSenderInput
-  lastName: String
-  level: Int
-  password: String!
-  picture: String
-  poems: PoemCreateNestedManyWithoutAuthorInput
-  updatedAt: DateTime
-}
-
-input UserCreateNestedOneWithoutAdsInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutAdsInput
-  create: UserCreateWithoutAdsInput
-}
-
-input UserCreateNestedOneWithoutInvitationInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutInvitationInput
-  create: UserCreateWithoutInvitationInput
-}
-
-input UserCreateNestedOneWithoutInvitationsInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutInvitationsInput
-  create: UserCreateWithoutInvitationsInput
-}
-
-input UserCreateNestedOneWithoutPoemsInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutPoemsInput
-  create: UserCreateWithoutPoemsInput
-}
-
-input UserCreateOrConnectWithoutAdsInput {
-  create: UserCreateWithoutAdsInput!
-  where: UserWhereUniqueInput!
-}
-
-input UserCreateOrConnectWithoutInvitationInput {
-  create: UserCreateWithoutInvitationInput!
-  where: UserWhereUniqueInput!
-}
-
-input UserCreateOrConnectWithoutInvitationsInput {
-  create: UserCreateWithoutInvitationsInput!
-  where: UserWhereUniqueInput!
-}
-
-input UserCreateOrConnectWithoutPoemsInput {
-  create: UserCreateWithoutPoemsInput!
-  where: UserWhereUniqueInput!
-}
-
-input UserCreateWithoutAdsInput {
-  Invitation: InvitationCreateNestedManyWithoutReceiverInput
-  birthday: DateTime
-  createdAt: DateTime
-  description: String
-  email: String!
-  facebookUrl: String
-  firstName: String!
-  id: String
-  invitations: InvitationCreateNestedManyWithoutSenderInput
-  lastName: String
-  level: Int
-  password: String!
-  picture: String
-  poems: PoemCreateNestedManyWithoutAuthorInput
-  updatedAt: DateTime
-}
-
-input UserCreateWithoutInvitationInput {
-  ads: AdCreateNestedManyWithoutAuthorInput
-  birthday: DateTime
-  createdAt: DateTime
-  description: String
-  email: String!
-  facebookUrl: String
-  firstName: String!
-  id: String
-  invitations: InvitationCreateNestedManyWithoutSenderInput
-  lastName: String
-  level: Int
-  password: String!
-  picture: String
-  poems: PoemCreateNestedManyWithoutAuthorInput
-  updatedAt: DateTime
-}
-
-input UserCreateWithoutInvitationsInput {
-  Invitation: InvitationCreateNestedManyWithoutReceiverInput
-  ads: AdCreateNestedManyWithoutAuthorInput
-  birthday: DateTime
-  createdAt: DateTime
-  description: String
-  email: String!
-  facebookUrl: String
-  firstName: String!
-  id: String
-  lastName: String
-  level: Int
-  password: String!
-  picture: String
-  poems: PoemCreateNestedManyWithoutAuthorInput
-  updatedAt: DateTime
-}
-
-input UserCreateWithoutPoemsInput {
-  Invitation: InvitationCreateNestedManyWithoutReceiverInput
-  ads: AdCreateNestedManyWithoutAuthorInput
-  birthday: DateTime
-  createdAt: DateTime
-  description: String
-  email: String!
-  facebookUrl: String
-  firstName: String!
-  id: String
-  invitations: InvitationCreateNestedManyWithoutSenderInput
-  lastName: String
-  level: Int
-  password: String!
-  picture: String
-  updatedAt: DateTime
-}
-
-input UserOrderByInput {
-  birthday: SortOrder
-  createdAt: SortOrder
-  description: SortOrder
-  email: SortOrder
-  facebookUrl: SortOrder
-  firstName: SortOrder
-  id: SortOrder
-  lastName: SortOrder
-  level: SortOrder
-  password: SortOrder
-  picture: SortOrder
-  updatedAt: SortOrder
-}
-
-input UserUpdateInput {
-  Invitation: InvitationUpdateManyWithoutReceiverInput
-  ads: AdUpdateManyWithoutAuthorInput
-  birthday: NullableDateTimeFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  facebookUrl: NullableStringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  invitations: InvitationUpdateManyWithoutSenderInput
-  lastName: NullableStringFieldUpdateOperationsInput
-  level: IntFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
-  picture: NullableStringFieldUpdateOperationsInput
-  poems: PoemUpdateManyWithoutAuthorInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input UserUpdateOneRequiredWithoutAdsInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutAdsInput
-  create: UserCreateWithoutAdsInput
-  update: UserUpdateWithoutAdsInput
-  upsert: UserUpsertWithoutAdsInput
-}
-
-input UserUpdateOneRequiredWithoutInvitationsInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutInvitationsInput
-  create: UserCreateWithoutInvitationsInput
-  update: UserUpdateWithoutInvitationsInput
-  upsert: UserUpsertWithoutInvitationsInput
-}
-
-input UserUpdateOneWithoutInvitationInput {
-  connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutInvitationInput
-  create: UserCreateWithoutInvitationInput
-  delete: Boolean
-  disconnect: Boolean
-  update: UserUpdateWithoutInvitationInput
-  upsert: UserUpsertWithoutInvitationInput
-}
-
-input UserUpdateWithoutAdsInput {
-  Invitation: InvitationUpdateManyWithoutReceiverInput
-  birthday: NullableDateTimeFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  facebookUrl: NullableStringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  invitations: InvitationUpdateManyWithoutSenderInput
-  lastName: NullableStringFieldUpdateOperationsInput
-  level: IntFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
-  picture: NullableStringFieldUpdateOperationsInput
-  poems: PoemUpdateManyWithoutAuthorInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input UserUpdateWithoutInvitationInput {
-  ads: AdUpdateManyWithoutAuthorInput
-  birthday: NullableDateTimeFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  facebookUrl: NullableStringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  invitations: InvitationUpdateManyWithoutSenderInput
-  lastName: NullableStringFieldUpdateOperationsInput
-  level: IntFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
-  picture: NullableStringFieldUpdateOperationsInput
-  poems: PoemUpdateManyWithoutAuthorInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input UserUpdateWithoutInvitationsInput {
-  Invitation: InvitationUpdateManyWithoutReceiverInput
-  ads: AdUpdateManyWithoutAuthorInput
-  birthday: NullableDateTimeFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  facebookUrl: NullableStringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  lastName: NullableStringFieldUpdateOperationsInput
-  level: IntFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
-  picture: NullableStringFieldUpdateOperationsInput
-  poems: PoemUpdateManyWithoutAuthorInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input UserUpsertWithoutAdsInput {
-  create: UserCreateWithoutAdsInput!
-  update: UserUpdateWithoutAdsInput!
-}
-
-input UserUpsertWithoutInvitationInput {
-  create: UserCreateWithoutInvitationInput!
-  update: UserUpdateWithoutInvitationInput!
-}
-
-input UserUpsertWithoutInvitationsInput {
-  create: UserCreateWithoutInvitationsInput!
-  update: UserUpdateWithoutInvitationsInput!
-}
-
-input UserWhereInput {
-  AND: [UserWhereInput!]
-  Invitation: InvitationListRelationFilter
-  NOT: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  ads: AdListRelationFilter
-  birthday: DateTimeNullableFilter
-  createdAt: DateTimeFilter
-  description: StringNullableFilter
-  email: StringFilter
-  facebookUrl: StringNullableFilter
-  firstName: StringFilter
-  id: StringFilter
-  invitations: InvitationListRelationFilter
-  lastName: StringNullableFilter
-  level: IntFilter
-  password: StringFilter
-  picture: StringNullableFilter
-  poems: PoemListRelationFilter
-  updatedAt: DateTimeFilter
-}
-
-input UserWhereUniqueInput {
-  email: String
-  id: String
 }

@@ -2,15 +2,17 @@ import {
   extendType, intArg, nonNull, stringArg
 } from 'nexus'
 import cloudinary from 'cloudinary'
+import { Ad } from '../entity/Ad'
 
 export default extendType({
   type: 'Query',
   definition(t) {
-    t.crud.ads({
-      filtering: true,
-      ordering: true
+    t.list.field('ads', {
+      type: Ad
     })
-    t.crud.ad()
+    t.field('ad', {
+      type: Ad
+    })
     t.field('generateSignature', {
       type: 'MessagePayload',
       args: {

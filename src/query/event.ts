@@ -1,13 +1,15 @@
 import {
   queryType
 } from 'nexus'
+import { Event } from '../entity/Event'
 
 export default queryType({
   definition(t) {
-    t.crud.event()
-    t.crud.events({
-      filtering: true,
-      ordering: true
+    t.field('event', {
+      type: Event
+    })
+    t.list.field('event', {
+      type: Event
     })
   }
 })

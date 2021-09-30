@@ -1,14 +1,16 @@
 import {
   extendType
 } from 'nexus'
+import { Poem } from '../entity/Poem'
 
 export default extendType({
   type: 'Query',
   definition(t) {
-    t.crud.poems({
-      filtering: true,
-      ordering: true
+    t.list.field('poems', {
+      type: Poem
     })
-    t.crud.poem()
+    t.field('poem', {
+      type: Poem
+    })
   }
 })

@@ -6,13 +6,14 @@ import generateToken from '../helpers/generateToken'
 import generateHashPassword from '../helpers/generateHasPassword'
 import { generateInviteUid } from '../helpers/generateInviteUid'
 import { addContactSIB } from '../helpers/activationEmailsSIB'
+import { AuthPayload } from '../entity/User'
 dotenv.config()
 
 export const signup = extendType({
   type: 'Mutation',
   definition(t) {
     t.nonNull.field('signup', {
-      type: 'AuthPayload',
+      type: AuthPayload,
       args: {
         signupInput: nonNull(arg({ type: 'SignupInput' }))
       },
@@ -149,7 +150,7 @@ export const accountActivation = extendType({
               Invitation: {
                 connect: { uid: invitation }
               },
-              invitations
+              invitation
             }
           })
           return {

@@ -2,35 +2,36 @@ import {
   inputObjectType,
   objectType
 } from 'nexus'
+import { User as GeneratedUser } from 'nexus-prisma'
 
 export const User = objectType({
-  name: 'User',
+  name: GeneratedUser.$name,
   definition(t) {
-    t.model.id()
-    t.model.birthday()
-    t.model.facebookUrl()
-    t.model.hasDoorAccess()
-    t.model.firstName()
-    t.model.createdAt()
-    t.model.updatedAt()
-    t.model.email()
-    t.model.lastName()
-    t.model.password()
-    t.model.picture()
-    t.model.poems()
-    t.model.ads()
-    t.model.level()
-    t.model.description()
-    t.model.invitations()
+    t.field(GeneratedUser.id);
+    t.field(GeneratedUser.birthday);
+    t.field(GeneratedUser.facebookUrl)
+    t.field(GeneratedUser.hasDoorAccess)
+    t.field(GeneratedUser.firstName)
+    t.field(GeneratedUser.createdAt)
+    t.field(GeneratedUser.updatedAt)
+    t.field(GeneratedUser.email)
+    t.field(GeneratedUser.lastName)
+    t.field(GeneratedUser.password)
+    t.field(GeneratedUser.picture)
+    t.field(GeneratedUser.poems)
+    t.field(GeneratedUser.ads)
+    t.field(GeneratedUser.level)
+    t.field(GeneratedUser.description)
+    t.field(GeneratedUser.invitations)
     t.field('invitedBy', {
-      type: 'User',
+      type: User,
       resolve: async (root, args, ctx) => {
         const invitation = await ctx.prisma.invitation.findUnique({
           where: {
             sent: root.email
           }
         })
-        return !invitation?.senderId ? null : await ctx.prisma.user.findUnique({
+        return !invitation?.senderId ? null : ctx.prisma.user.findUnique({
           where: {
             id: invitation.senderId
           }
@@ -68,7 +69,7 @@ export const AuthPayload = objectType({
     t.nonNull.string('message')
     t.int('code')
     t.field('user', {
-      type: 'User'
+      type: User
     })
   }
 })

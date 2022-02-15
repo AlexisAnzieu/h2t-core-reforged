@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:12-slim
 EXPOSE 4000
 
 ENV NPM_CONFIG_LOGLEVEL=warn

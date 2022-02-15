@@ -29,6 +29,7 @@ const schema = makeSchema({
 })
 
 const server = new ApolloServer({
+  cors: false,
   uploads: false,
   context: async ({ req }) => {
     const token = req.headers.authorization

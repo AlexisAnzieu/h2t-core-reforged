@@ -33,6 +33,7 @@ model User {
   birthday      DateTime?
   picture       String?
   hasDoorAccess Boolean      @default(false)
+  hasActivitiesAccess Boolean      @default(false)
   poems         Poem[]
   ads           Ad[]
   invitations   Invitation[] @relation("InviteSent")

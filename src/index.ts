@@ -29,10 +29,10 @@ const schema = makeSchema({
 })
 
 const server = new ApolloServer({
-  cors: {
-    origin: '*',			// <- allow request from all domains
-    methods: ['GET', 'PUT', 'POST']
-  },
+  // cors: {
+  //   origin: '*',			// <- allow request from all domains
+  //   methods: ['GET', 'PUT', 'POST']
+  // },
   uploads: false,
   context: async ({ req }) => {
     const token = req.headers.authorization

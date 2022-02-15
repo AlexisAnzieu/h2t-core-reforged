@@ -7,10 +7,10 @@
     "author": "",
     "main": "index.js",
     "scripts": {
-        "generate": "prisma generate",
         "build": "npm run nexus:reflect && tsc",
         "dev:migrate": "prisma migrate dev --preview-feature",
         "dev:typecheck": "tsc --watch --noEmit",
+        "generate": "prisma generate",
         "nexus:reflect": "NEXUS_SHOULD_EXIT_AFTER_GENERATE_ARTIFACTS=true ts-node --transpile-only ./src/index",
         "start": "NODE_ENV=prod ts-node-dev --transpile-only ./src/index"
     },
